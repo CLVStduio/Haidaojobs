@@ -1,10 +1,26 @@
-#!/bin/sh  
-exec 2>&1  
-echo 'git-daemon starting.'  
-#exec chpst -ugitdaemon \  
-# "$(git --exec-path)"/git-daemon --verbose\  
-#  --base-path=/var/lib /var/lib/git  
-#exec chpst -ugitdaemon  
-  "$(git --exec-path)"/git-daemon --verbose\  
-    --export-all  --base-path=$HOME/repo --enable=receive-pack  
-/build/
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
