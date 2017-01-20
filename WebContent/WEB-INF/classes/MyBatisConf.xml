@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+   <!-- 配置映射类的别名 -->  
+    <typeAliases>  
+      <typeAlias alias="User" type="com.clv.user.model.User"/>   
+      <typeAlias alias="Code" type="com.clv.user.model.Code"/>   
+      <typeAlias alias="Skill" type="com.clv.model.resume.Skill"/>
+   </typeAliases>    
+   
+   <!-- 配置Mapper文件的路径 -->  
+   <mappers>  
+       <mapper resource="mapper/UserMapper.xml"/>  
+       <mapper resource="mapper/ResumeMapper.xml"/>  
+   </mappers>  
+</configuration>  

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.clv.mapper.UserMapper">    
+    <!--  查询单条记录  -->    
+    <select id="selectUserById" parameterType="int" resultType="User">    
+       select * from user where user_id = #{user_id}    
+    </select>    
+    <select id="selectUserByPhoneNo" parameterType="String" resultType="User">    
+       select * from user where user_phoneNo = #{phone}    
+    </select>    
+    <select  id="addUser" >
+    	INSERT INTO user(user_password,registered_date,user_phoneNo,security_key,complement_key)VALUES(#{password},#{date},#{phone},#{security_key},#{complement_key});
+    </select>
+    <select id="storageCode">
+    	INSERT INTO code(phone,code,time)VALUES(#{phone},#{code},#{time})
+    </select>
+     <select id="getCode" parameterType="String" resultType="Code">    
+       select * from code where phone = #{phone}
+    </select> 
+    <select id="deleteCode" parameterType="String" >
+       delete from code where phone = #{phone}
+    </select>
+    <select id="signIn" parameterType="String" resultType="String">    
+       select user_password from user where user_phoneNo = #{phone};
+    </select> 
+    <select id="modifySecurity" >    
+       UPDATE user SET security_key = #{security_key},complement_key = #{complement_key} where user_phoneNo = #{phone};
+    </select> 
+    <select id="modifyUserName">
+    	UPDATE user SET user_name = #{user_name} WHERE user_id = #{user_id}
+    </select>
+    <select id="modifyUserPhone">
+    	UPDATE user SET user_phoneNo = #{user_phoneNo} WHERE user_id = #{user_id}
+    </select>
+    <select id="modifyUserPassword">
+    	UPDATE user SET user_password = #{user_password} WHERE user_id = #{user_id}
+    </select>
+    
+     <select id="modifyUserHeadPortrait">
+    	UPDATE user SET HeadPortraitPath = #{path} WHERE user_id = #{user_id}
+    </select>
+</mapper>

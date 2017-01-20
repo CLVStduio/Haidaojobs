@@ -1,0 +1,10 @@
+#!/bin/sh  
+exec 2>&1  
+echo 'git-daemon starting.'  
+#exec chpst -ugitdaemon \  
+# "$(git --exec-path)"/git-daemon --verbose\  
+#  --base-path=/var/lib /var/lib/git  
+#exec chpst -ugitdaemon  
+  "$(git --exec-path)"/git-daemon --verbose\  
+    --export-all  --base-path=$HOME/repo --enable=receive-pack  
+/build/
