@@ -26,5 +26,12 @@ public class ResumeController {
 	public String selectSkill(){
 		return "selectSkill";
 	}
-	
+	@RequestMapping(value="/user/resume/deleteSkill",method = RequestMethod.POST)
+	public String deleteSkill(){
+		return "deleteSkill";
+	}
+	@RequestMapping(value="/user/resume/modifySkill",method = RequestMethod.POST)
+	public String modifySkill(){
+		return "modifySkill";
+	}
 }

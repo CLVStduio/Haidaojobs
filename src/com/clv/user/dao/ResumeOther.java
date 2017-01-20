@@ -61,7 +61,7 @@ public interface ResumeOther {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String deleteSkill(int skill_id) throws JSONException;
+	public String deleteSkill(int user_id,String skill_id) throws JSONException;
 	/**
 	 * 获取指定用户所有技能信息
 	 * @param user_id
@@ -79,5 +79,5 @@ public interface ResumeOther {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String modifySkill(int skill_id,String skill_content) throws JSONException;
+	public String modifySkill(int user_id,String enskill_id, String skill_content) throws JSONException;
 }

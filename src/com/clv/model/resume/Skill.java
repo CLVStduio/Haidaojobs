@@ -31,5 +31,9 @@ public class Skill {
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
+	@Override
+	public String toString() {
+		return "Skill [skill_id=" + skill_id + ", user_id=" + user_id + ", skill_content=" + skill_content + "]";
+	}
 	
 }

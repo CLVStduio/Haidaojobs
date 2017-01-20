@@ -21,7 +21,7 @@ public interface ResumeMapper {
     public User selectUserById(int user_id); 
 	public Integer addSkill(Skill skill);
 	
-	public void delectSkill(@Param("skill_id")int skillId);
+	public void deleteSkill(@Param("skill_id")int skillId);
 	
 	public void modifySkill(@Param("skill_id")int skillId,@Param("skill_content")String sksillText);
 	
