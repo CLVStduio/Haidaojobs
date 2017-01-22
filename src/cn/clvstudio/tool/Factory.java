@@ -19,5 +19,7 @@ public class Factory {
 	public BuilderKey getBKey() {
 		return new BuilderKey();
 	}
-		
+	public SignInTool getReadDate(){
+		return new SignInTool();
+	}
 }
