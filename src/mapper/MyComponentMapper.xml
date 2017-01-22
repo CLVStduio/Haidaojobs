@@ -10,10 +10,10 @@
 	    <insert id="addSignIn" statementType="STATEMENT">    
 	       INSERT INTO ${tableName} (month,signIn_date,user_id)VALUES(${month},${signIn_date},${user_id});
 	    </insert>
-	     <select id="modifySignIn">
+	     <select id="modifySignIn" statementType="STATEMENT">
 	    	UPDATE ${tableName} SET signIn_date = ${signIn_date} WHERE signIn_id = ${signIn_id};
 	    </select>
-	    <select id="selectSignIn" resultMap="com.clv.model.mycomponent.SignIn ">
+	    <select id="selectSignIn" statementType="STATEMENT" resultType="com.clv.model.mycomponent.SignIn ">
 	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
 	    </select>
  	<!-- sign in end -->
