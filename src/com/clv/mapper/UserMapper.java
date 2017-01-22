@@ -12,6 +12,31 @@ import com.clv.user.model.User;
  * @time 2016.12.31
  */  
 public interface UserMapper {  
+    /**
+     * 保存验证码
+     * @param phone
+     * @param code
+     * @param time
+     */
+    public void addCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
+    /**
+     * 删除指定验证码
+     * @param phone
+     */
+    public void deleteCode(@Param("phone")String phone);
+    /**
+     * 更新验证码
+     * @param phone
+     * @param code
+     * @param time
+     */
+    public void modifyCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
+    /**
+     * 查询指定验证码
+     * @param phone
+     * @return
+     */
+    public Code selectCode(@Param("phone")String phone);
 	/**
 	 * 根据用户ID查询用户信息
 	 * @param user_id
@@ -38,12 +63,6 @@ public interface UserMapper {
      * @return
      */
     public void addUser(@Param("password") String password,@Param("phone") String phone,@Param("security_key") String security_key,@Param("complement_key") String complement_key,@Param("date") Date date);
-    //保存验证码
-    public void storageCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
-    //查询指定验证码
-    public Code getCode(@Param("phone")String phone);
-    //删除指定验证码
-    public void deleteCode(@Param("phone")String phone);
     /**
      * 查询指定密码
      * @param phone
