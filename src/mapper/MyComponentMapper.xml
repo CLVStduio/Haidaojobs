@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.clv.mapper.MyComponentMapper">
+    <select id="selectUserById" parameterType="int" resultType="com.clv.user.model.User">    
+       select * from user where user_id = #{user_id}    
+    </select>  
+
+	<!-- sign in strat-->
+	    <insert id="addSignIn" statementType="STATEMENT">    
+	       INSERT INTO ${tableName} (month,signIn_date,user_id)VALUES(${month},${signIn_date},${user_id});
+	    </insert>
+	     <select id="modifySignIn">
+	    	UPDATE ${tableName} SET signIn_date = ${signIn_date} WHERE signIn_id = ${signIn_id};
+	    </select>
+	    <select id="selectSignIn" resultMap="String">
+	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
+	    </select>
+ 	<!-- sign in end -->
+</mapper>
