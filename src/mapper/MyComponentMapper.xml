@@ -13,7 +13,7 @@
 	     <select id="modifySignIn">
 	    	UPDATE ${tableName} SET signIn_date = ${signIn_date} WHERE signIn_id = ${signIn_id};
 	    </select>
-	    <select id="selectSignIn" resultMap="String">
+	    <select id="selectSignIn" resultMap="com.clv.model.mycomponent.SignIn ">
 	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
 	    </select>
  	<!-- sign in end -->
