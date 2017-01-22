@@ -46,7 +46,7 @@ public class ResumeOtherImpl implements ResumeOther {
 				String photoName = Long.valueOf(System.currentTimeMillis()).toString()+"_"+id+"."+imageName;
 				String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+""+user.getUser_id();
 				factory.getPhotoProcessing().savefile(photoName, path, file);
-				return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/",new JSONArray().put(new JSONObject().put("photoName",photoName))).toString();
+				return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/"+id+"/",new JSONArray().put(new JSONObject().put("photoName",photoName))).toString();
 			}else{
 				return new JsonFormat("301","fail").toString();//格式不符
 			}
