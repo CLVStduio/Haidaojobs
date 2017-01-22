@@ -1,6 +1,9 @@
 package com.clv.model.resume;
-
-
+/**
+ * 特长映射类
+ * @author evanglist
+ * 
+ */
 public class Skill {
 	private Integer skill_id;
 	private Integer user_id;
