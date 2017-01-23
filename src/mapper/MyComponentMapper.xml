@@ -7,13 +7,13 @@
     </select>  
 
 	<!-- sign in strat-->
-	    <insert id="addSignIn" statementType="STATEMENT">    
+	    <insert id="addSignIn">    
 	       INSERT INTO ${tableName} (month,signIn_date,user_id)VALUES(${month},${signIn_date},${user_id});
 	    </insert>
-	     <select id="modifySignIn" statementType="STATEMENT">
+	     <select id="modifySignIn">
 	    	UPDATE ${tableName} SET signIn_date = ${signIn_date} WHERE signIn_id = ${signIn_id};
 	    </select>
-	    <select id="selectSignIn" statementType="STATEMENT" resultType="com.clv.model.mycomponent.SignIn ">
+	    <select id="selectSignIn" resultType="com.clv.model.mycomponent.Signin">
 	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
 	    </select>
  	<!-- sign in end -->

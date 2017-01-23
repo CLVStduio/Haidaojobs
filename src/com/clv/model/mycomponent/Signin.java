@@ -5,7 +5,7 @@ package com.clv.model.mycomponent;
  * @author evanglist
  *
  */
-public class SignIn {
+public class Signin {
 	private int signIn_id;
 	private String month;
 	private String signIn_date;

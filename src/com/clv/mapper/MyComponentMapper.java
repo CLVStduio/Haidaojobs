@@ -2,7 +2,7 @@ package com.clv.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.clv.model.mycomponent.SignIn;
+import com.clv.model.mycomponent.Signin;
 
 /**
  * “我的”小板块数据库操作映射类
@@ -23,13 +23,13 @@ public interface MyComponentMapper {
 	 * @param id
 	 * @param date
 	 */
-	public void modifySignIn(@Param("tableName")String tableName,@Param("signIn_id") int id,@Param("singIn_date") String date);
+	public void modifySignIn(@Param("tableName")String tableName,@Param("signIn_id") int id,@Param("signIn_date") String date);
 	/**
 	 * 查询签到信息
 	 * @param user_id
 	 * @param month
 	 * @return
 	 */
-	public SignIn selectSignIn(@Param("tableName")String tableName,@Param("user_id")int user_id,@Param("month")String month);
+	public Signin selectSignIn(@Param("tableName")String tableName,@Param("user_id")int user_id,@Param("month")String month);
 	/*****************签到相关****************/
 }

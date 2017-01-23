@@ -9,15 +9,6 @@ import org.json.JSONException;
  */
 public interface MyComponent {
 	/**
-	 * 	签到
-	 * @param user_id
-	 * 			用户id
-	 * @return
-	 * @throws JSONException
-	 */
-	//public String signIn(int user_id) throws JSONException;
-	
-	/**
 	 * 补签
 	 * @param user_id
 	 * 			用户id
