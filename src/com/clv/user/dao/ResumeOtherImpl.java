@@ -116,8 +116,11 @@ public class ResumeOtherImpl implements ResumeOther {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
 			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUser_phoneNo(), user.getSecurity_key());
-			resumeMapper.deleteSkill(Integer.parseInt(skill_id));
-			return new JsonFormat("success").toString();
+			if(skill_id != null){
+				resumeMapper.deleteSkill(Integer.parseInt(skill_id));
+				return new JsonFormat("success").toString();
+			}
+			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 	}
@@ -127,8 +130,14 @@ public class ResumeOtherImpl implements ResumeOther {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
 			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUser_phoneNo(), user.getSecurity_key());
-			resumeMapper.modifySkill(Integer.parseInt(skill_id), skill_content);
-			return new JsonFormat("success").toString();
+			if(skill_id!=null){
+				if(skill_content !=null){
+					resumeMapper.modifySkill(Integer.parseInt(skill_id), skill_content);
+					return new JsonFormat("success").toString();
+				}
+				return new JsonFormat("102","fail").toString();
+			}
+			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 	}
