@@ -31,28 +31,28 @@ public class ResumeOtherImpl implements ResumeOther {
 	@Override
 	public String addPhoto(int id, MultipartFile file, HttpServletRequest request) throws JSONException {
 		//获得物理路径webapp所在路径
-		if(id<=0){
-			return new JsonFormat("20"+Math.abs(id),"fail").toString();
-		}
-		User user = resumeMapper.selectUserById(id);
-		
-		if(!file.isEmpty()){
-			//生成uuid作为文件名称
-			//获得文件类型（可以判断如果不是图片，禁止上传）
-			String contentType=file.getContentType();
-				//获得文件后缀名称
-				String imageName=contentType.substring(contentType.indexOf("/")+1);
-			if(factory.getPhotoProcessing().isImage(imageName)){
-				String photoName = Long.valueOf(System.currentTimeMillis()).toString()+"_"+id+"."+imageName;
-				String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+""+user.getUser_id();
-				factory.getPhotoProcessing().savefile(photoName, path, file);
-				return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/",new JSONArray().put(new JSONObject().put("photoName",photoName))).toString();
-			}else{
+		if(id>0){
+			User user = resumeMapper.selectUserById(id);
+			
+			if(!file.isEmpty()){
+				//生成uuid作为文件名称
+				//获得文件类型（可以判断如果不是图片，禁止上传）
+				String contentType=file.getContentType();
+					//获得文件后缀名称
+					String imageName=contentType.substring(contentType.indexOf("/")+1);
+				if(factory.getPhotoProcessing().isImage(imageName)){
+					String photoName = Long.valueOf(System.currentTimeMillis()).toString()+"_"+id+"."+imageName;
+					String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+""+user.getUser_id();
+					factory.getPhotoProcessing().savefile(photoName, path, file);
+					return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/"+id+"/",new JSONArray().put(new JSONObject().put("photoName",photoName))).toString();
+				}
+				
 				return new JsonFormat("301","fail").toString();//格式不符
 			}
-		}else{
+			
 			return new JsonFormat("302","fail").toString();//上传的图片为空
 		}
+		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
 
 	@Override
@@ -67,16 +67,15 @@ public class ResumeOtherImpl implements ResumeOther {
 
 	@Override
 	public String selectPhoto(int id) throws JSONException {
-		if(id<0){
-			return new JsonFormat("20"+Math.abs(id),"fail").toString();
-		}
-		String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+Integer.valueOf(id).toString();
-		JSONArray jArray = factory.getPhotoProcessing().selectFileForDir(path,"Image");
-		if(jArray != null){
-			return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/"+id+"/",jArray).toString();
-		}else{
+		if(id>0){
+			String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+Integer.valueOf(id).toString();
+			JSONArray jArray = factory.getPhotoProcessing().selectFileForDir(path,"Image");
+			if(jArray != null){
+				return new JsonFormat("http://images.haidaojobs.cn/photoAlhum/"+id+"/",jArray).toString();
+			}
 			return new JsonFormat("101","fail").toString();
 		}
+		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
 
 	@Override
@@ -117,8 +116,11 @@ public class ResumeOtherImpl implements ResumeOther {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
 			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUser_phoneNo(), user.getSecurity_key());
-			resumeMapper.deleteSkill(Integer.parseInt(skill_id));
-			return new JsonFormat("success").toString();
+			if(skill_id != null){
+				resumeMapper.deleteSkill(Integer.parseInt(skill_id));
+				return new JsonFormat("success").toString();
+			}
+			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 	}
@@ -128,8 +130,14 @@ public class ResumeOtherImpl implements ResumeOther {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
 			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUser_phoneNo(), user.getSecurity_key());
-			resumeMapper.modifySkill(Integer.parseInt(skill_id), skill_content);
-			return new JsonFormat("success").toString();
+			if(skill_id!=null){
+				if(skill_content !=null){
+					resumeMapper.modifySkill(Integer.parseInt(skill_id), skill_content);
+					return new JsonFormat("success").toString();
+				}
+				return new JsonFormat("102","fail").toString();
+			}
+			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 	}

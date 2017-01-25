@@ -12,13 +12,40 @@ import com.clv.user.model.User;
  * @time 2016.12.31
  */  
 public interface UserMapper {  
+	/*****************验证码相关****************/
+    /**
+     * 保存验证码
+     * @param phone
+     * @param code
+     * @param time
+     */
+    public void addCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
+    /**
+     * 删除指定验证码
+     * @param phone
+     */
+    public void deleteCode(@Param("phone")String phone);
+    /**
+     * 更新验证码
+     * @param phone
+     * @param code
+     * @param time
+     */
+    public void modifyCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
+    /**
+     * 查询指定验证码
+     * @param phone
+     * @return
+     */
+    public Code selectCode(@Param("phone")String phone);
+    /*****************验证码相关****************/
+    /*****************用户信息****************/
 	/**
 	 * 根据用户ID查询用户信息
 	 * @param user_id
 	 * @return
 	 */
     public User selectUserById(int user_id);  
-    
     /**
      *根据用户phone查询用户信息
      * @param phone
@@ -38,20 +65,22 @@ public interface UserMapper {
      * @return
      */
     public void addUser(@Param("password") String password,@Param("phone") String phone,@Param("security_key") String security_key,@Param("complement_key") String complement_key,@Param("date") Date date);
-    //保存验证码
-    public void storageCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
-    //查询指定验证码
-    public Code getCode(@Param("phone")String phone);
-    //删除指定验证码
-    public void deleteCode(@Param("phone")String phone);
     /**
      * 查询指定密码
      * @param phone
      * @return
      */
     public String signIn(@Param("phone") String phone);
-    //更新安全码
+    /**
+     * 更新安全码
+     * @param phone
+     * @param security_key
+     * @param complement_key
+     * @return
+     */
     public String modifySecurity(@Param("phone") String phone,@Param("security_key") String security_key,@Param("complement_key") String complement_key);
+    /*****************用户信息****************/
+    /*****************用户信息修改****************/
     /**
      * 修改昵称
      * @param id
@@ -59,12 +88,23 @@ public interface UserMapper {
      * @return
      */
     public void modifyUserName(@Param("user_id")int id,@Param("user_name")String name);
-    
+    /**
+     * 修改用户手机号
+     * @param id
+     * @param phone
+     */
     public void modifyUserPhone(@Param("user_id")int id,@Param("user_phoneNo")String phone);
-    
+    /**
+     * 修改用户密码
+     * @param id
+     * @param password
+     */
     public void modifyUserPassword(@Param("user_id")int id,@Param("user_password")String password);
-    //public void resetUserPassword(@Param("user_phoneNo")String phone,@Param("user_password")String password);
-    
+    /**
+     * 修改用户头像
+     * @param id
+     * @param path
+     */
     public void modifyUserHeadPortrait(@Param("user_id")int id,@Param("path")String path);
-    
+    /*****************用户信息修改****************/
 }  

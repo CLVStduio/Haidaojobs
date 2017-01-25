@@ -58,46 +58,44 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public String getCode(String phone) throws ApiException, JSONException {
-		//获取验证码
-		 if(userMapper.getCode(phone) != null){
-			 userMapper.deleteCode(phone);
-		 }
-			
-			StringBuilder sb = new StringBuilder();
-			for(int i = 0;i<6;i++){
-				int code = (int)(Math.random()*8+1);
-				sb.append(Integer.valueOf(code).toString());
-			}
-			sb.delete(0, 1);
-			
-			String strcode = sb.toString();
-			System.out.println("code:"+strcode);
-			String url = "http://gw.api.taobao.com/router/rest";
-			String appkey = " 23561829";
-			String secret = "370a9c1e0532706b4857be11cd64f6f7";
-			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-			AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-			req.setExtend(phone);
-			req.setSmsType("normal");
-			req.setSmsFreeSignName("蠢驴工作室");
-			req.setSmsParam("{\"code\":\""+strcode+"\"}");
-			req.setRecNum(phone);
-			req.setSmsTemplateCode("SMS_33605394");
-			AlibabaAliqinFcSmsNumSendResponse response = client.execute(req);
-			String str = response.getBody();
-			
-			int a = str.indexOf("error_response");
-			if(a==-1){
-				String time = Long.valueOf(System.currentTimeMillis()).toString();
-				userMapper.storageCode(phone, strcode,time);
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i<6;i++){
+			int code = (int)(Math.random()*8+1);
+			sb.append(Integer.valueOf(code).toString());
+		}
+		sb.delete(0, 1);
+		
+		String strcode = sb.toString();
+		System.out.println("code:"+strcode);
+		String url = "http://gw.api.taobao.com/router/rest";
+		String appkey = " 23561829";
+		String secret = "370a9c1e0532706b4857be11cd64f6f7";
+		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+		req.setExtend(phone);
+		req.setSmsType("normal");
+		req.setSmsFreeSignName("蠢驴工作室");
+		req.setSmsParam("{\"code\":\""+strcode+"\"}");
+		req.setRecNum(phone);
+		req.setSmsTemplateCode("SMS_33605394");
+		AlibabaAliqinFcSmsNumSendResponse response = client.execute(req);
+		String str = response.getBody();
+		
+		int a = str.indexOf("error_response");
+		if(a==-1){
+			String time = Long.valueOf(System.currentTimeMillis()).toString();
+			if(userMapper.selectCode(phone) !=null){
+				userMapper.modifyCode(phone, strcode, time);
 				return new JsonFormat("success").toString();
-			}else{
-				return new JsonFormat("101","fail").toString();
 			}
-			
+			userMapper.addCode(phone, strcode,time);
+			return new JsonFormat("success").toString();
+		}else{
+			return new JsonFormat("101","fail").toString();
+		}
 	}
 	public String checkCode(String phone,String code) throws JSONException{
-		 Code Code = userMapper.getCode(phone);
+		 Code Code = userMapper.selectCode(phone);
 		 if(Code == null){
 			 System.out.println("验证码不存在");
 			 return new JsonFormat("103","fail").toString();
@@ -126,14 +124,13 @@ public class UserDaoImpl implements UserDao{
 			return new JsonFormat("204","fail").toString();
 		}
 		if(userMapper.selectUserByPhoneNo(phone) == null){
-			
 			Date date = new Date(System.currentTimeMillis());
 			userMapper.addUser(password,phone,factory.getBKey().builderSecurityKey(phone),factory.getBKey().builderComplementKey(phone),date);
 			return new JsonFormat("success").toString();
-		}else{
-			System.out.println("手机号已经 注册");
-			return new JsonFormat("101","fail").toString();
 		}
+		
+		System.out.println(phone+"  手机号已经 注册");
+		return new JsonFormat("101","fail").toString();
 	}
 
 	@Override
@@ -153,7 +150,7 @@ public class UserDaoImpl implements UserDao{
 			return new JsonFormat("101","fail").toString();
 		}
 		if(user.getUser_password().equals(dePassword)){
-			System.out.println(":登录");
+			System.out.println(dePhone+":登录");
 			String securityKey = factory.getBKey().builderSecurityKey(dePhone);
 			userMapper.modifySecurity(dePhone, securityKey,factory.getBKey().builderComplementKey(dePhone));
 			user.setSecurity_key(securityKey);

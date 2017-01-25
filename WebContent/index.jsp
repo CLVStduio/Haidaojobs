@@ -22,7 +22,6 @@
 		</form>
 	</center>
 	
-	
 	<center>
 		<form action="user/isUserPhoneNo" method="post">
 			输入手机号判断是否已经注册:<input type="text" name="isphoneNo">
