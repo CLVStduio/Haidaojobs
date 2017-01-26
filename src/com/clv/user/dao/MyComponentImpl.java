@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.clv.mapper.MyComponentMapper;
 import com.clv.model.format.JsonFormat;
 import com.clv.model.mycomponent.Signin;
+import com.clv.model.mycomponent.SigninGift;
 
 import cn.clvstudio.tool.Factory;
 
@@ -27,8 +28,8 @@ public class MyComponentImpl implements MyComponent {
 	public MyComponentImpl(){
 		System.out.println("调用“我的”小部件类……");
 		this.nowtime = Calendar.getInstance(); 
-		this.tableNameSignIn = "my_signIn_"+this.nowtime.get(Calendar.YEAR);
-		this.tableNameSignInGift = "my_signInGift_"+this.nowtime.get(Calendar.YEAR);
+		this.tableNameSignIn = "my_signin_"+this.nowtime.get(Calendar.YEAR);
+		this.tableNameSignInGift = "my_signingift_"+this.nowtime.get(Calendar.YEAR);
 	}
 	@Override
 	public String retroactive(int user_id, int date) throws JSONException {
@@ -61,7 +62,7 @@ public class MyComponentImpl implements MyComponent {
 	public String selectSignIn(int user_id,int year, String month) throws JSONException {
 		if(year>=2017){
 			if(user_id>0){
-				tableNameSignIn = "my_signIn_"+year;
+				tableNameSignIn = "my_signin_"+year;
 				Signin signIn = myCMapper.selectSignIn(tableNameSignIn, user_id, month);
 				if(signIn != null)
 					return new JsonFormat("success",factory.getSignIn().getDate(signIn.getSignIn_date())).toString();
@@ -76,10 +77,10 @@ public class MyComponentImpl implements MyComponent {
 	public String selectGiftBag(int user_id,int year,String month) throws JSONException{
 		if(year>=2017){
 			if(user_id>0){
-				tableNameSignInGift = "my_signInGift_"+year;
-				String signIn = myCMapper.selectSignInGiftBag(tableNameSignInGift, user_id, month);
-				if(signIn != null)
-					return new JsonFormat("success",factory.getSignIn().getDate(signIn)).toString();
+				tableNameSignInGift = "my_signingift_"+year;
+				SigninGift signinGift = myCMapper.selectSignInGiftBag(tableNameSignInGift, user_id, month);
+				if(signinGift != null)
+					return new JsonFormat("success",factory.getSignIn().getDate(signinGift.getSignInGift_date())).toString();
 				
 				return new JsonFormat("101","fail").toString();
 			}
@@ -95,14 +96,14 @@ public class MyComponentImpl implements MyComponent {
 				String month = Integer.valueOf(nowtime.get(Calendar.MONTH)+1).toString();
 				Signin signIn = myCMapper.selectSignIn(tableNameSignIn, user_id, month);		
 				if(signIn !=null){
-					String giftRecord = myCMapper.selectSignInGiftBag(tableNameSignInGift, user_id, month);
-					long giftRLong = giftRecord == null ? 0L : Long.parseLong(giftRecord, 16);
+					SigninGift giftRecord = myCMapper.selectSignInGiftBag(tableNameSignInGift, user_id, month);
+					long giftRLong = giftRecord == null ? 0L : Long.parseLong(giftRecord.getSignInGift_date(), 16);
 					if(factory.getSignIn().isGift(signIn.getSignIn_date(),giftRLong, date)){
 						giftRLong += (long)Math.pow(2, 32-date);
 						if(giftRecord == null)
 							myCMapper.addSignInGiftBag(tableNameSignInGift, month, Long.toHexString(giftRLong), user_id);
 						else
-							myCMapper.modifySignInGiftBag(tableNameSignInGift, user_id, Long.toHexString(giftRLong));
+							myCMapper.modifySignInGiftBag(tableNameSignInGift, giftRecord.getSignIn_id(), Long.toHexString(giftRLong));
 						return new JsonFormat("success",new JSONArray().put(new JSONObject().put("gift", (int)(Math.random()*13)+3))).toString();
 					}
 					return new JsonFormat("101","fail").toString();

@@ -14,4 +14,12 @@ public class MyController {
 	public String selectSignIn(){
 		return "selectSignIn";
 	}
+	@RequestMapping(value="/user/my/getSignInGift",method = RequestMethod.POST)
+	public String getSignInGift(){
+		return "getSignInGift";
+	}
+	@RequestMapping(value="/user/my/selectSignInGift",method = RequestMethod.POST)
+	public String selectSignInGift(){
+		return "selectSignInGift";
+	}
 }

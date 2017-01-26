@@ -30,4 +30,23 @@
 			 <input type="submit" value="确定">  
 		</form>
 	</center>
+	<center>
+	************************************************************
+	签到礼包相关
+	</center>
+	<center>
+		<form action="user/my/getSignInGift" method="post">
+			用户id:<input type="text" name="enId">
+			领取日期：<input type="text" name="date">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
+	<center>
+		<form action="user/my/selectSignInGift" method="post">
+			用户id:<input type="text" name="enId">
+			查询年份：<input type="text" name="year">
+			查询月份：<input type="text" name="month">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
 </body>

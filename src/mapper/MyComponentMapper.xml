@@ -16,5 +16,16 @@
 	    <select id="selectSignIn" resultType="com.clv.model.mycomponent.Signin">
 	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
 	    </select>
+	    <!-- gift strat -->
+	    <insert id="addSignInGiftBag">    
+	       INSERT INTO ${tableName} (month,signInGift_date,user_id)VALUES(${month},${signInGift_date},${user_id});
+	    </insert>
+	     <select id="modifySignInGiftBag">
+	    	UPDATE ${tableName} SET signInGift_date = ${signInGift_date} WHERE signIn_id = ${signIn_id};
+	    </select>
+	    <select id="selectSignInGiftBag" resultType="com.clv.model.mycomponent.SigninGift">
+	    	select * from ${tableName} WHERE user_id = ${user_id} AND month = ${month};
+	    </select>
+	    <!-- gift  end  -->
  	<!-- sign in end -->
 </mapper>

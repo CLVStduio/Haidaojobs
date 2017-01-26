@@ -3,6 +3,7 @@ package com.clv.mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.clv.model.mycomponent.Signin;
+import com.clv.model.mycomponent.SigninGift;
 
 /**
  * “我的”小板块数据库操作映射类
@@ -53,6 +54,6 @@ public interface MyComponentMapper {
 	 * @param month
 	 * @return
 	 */
-	public String selectSignInGiftBag(@Param("tableName")String tableName,@Param("user_id")int user_id,@Param("month")String month);
+	public SigninGift selectSignInGiftBag(@Param("tableName")String tableName,@Param("user_id")int user_id,@Param("month")String month);
 	/*****************签到相关****************/
 }
