@@ -7,6 +7,7 @@
       <typeAlias alias="Code" type="com.clv.user.model.Code"/>   
       <typeAlias alias="Skill" type="com.clv.model.resume.Skill"/>
       <typeAlias alias="Signin" type="com.clv.model.mycomponent.Signin"/>
+      <typeAlias alias="SigninGift" type="com.clv.model.mycomponent.SigninGift"/>
    </typeAliases>    
    
    <!-- 配置Mapper文件的路径 -->  

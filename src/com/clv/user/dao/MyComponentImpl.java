@@ -26,7 +26,6 @@ public class MyComponentImpl implements MyComponent {
 	private Calendar nowtime;
 	
 	public MyComponentImpl(){
-		System.out.println("调用“我的”小部件类……");
 		this.nowtime = Calendar.getInstance(); 
 		this.tableNameSignIn = "my_signin_"+this.nowtime.get(Calendar.YEAR);
 		this.tableNameSignInGift = "my_signingift_"+this.nowtime.get(Calendar.YEAR);
