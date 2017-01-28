@@ -33,6 +33,7 @@ public class MyComponentImpl implements MyComponent {
 	@Override
 	public String retroactive(int user_id, int date) throws JSONException {
 		if(user_id>0){
+			nowtime = Calendar.getInstance(); 
 			int day = nowtime.get(Calendar.DAY_OF_MONTH);
 			if(day-date<=7 && day-date>=0){
 				String month = Integer.valueOf(nowtime.get(Calendar.MONTH)+1).toString();
