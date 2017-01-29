@@ -67,12 +67,12 @@ public class MyComponentImpl implements MyComponent {
 				if(signIn != null)
 					return new JsonFormat("success",factory.getSignIn().getDate(signIn.getSignIn_date())).toString();
 //				System.out.println("无该年月记录");
-				return new JsonFormat("101","fail").toString();
+				return new JsonFormat("success",factory.getSignIn().getDate("0")).toString();
 			}
 			return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 		}
 //		System.out.println("无该年月记录");
-		return new JsonFormat("101","fail").toString();
+		return new JsonFormat("success",factory.getSignIn().getDate("0")).toString();
 	}
 	public String selectGiftBag(int user_id,int year,String month) throws JSONException{
 		if(year>=2017){
@@ -82,12 +82,12 @@ public class MyComponentImpl implements MyComponent {
 				if(signinGift != null)
 					return new JsonFormat("success",factory.getSignIn().getDate(signinGift.getSignInGift_date())).toString();
 				
-				return new JsonFormat("101","fail").toString();
+				return new JsonFormat("success",factory.getSignIn().getDate("0")).toString();
 			}
 			return new JsonFormat("20"+Math.abs(user_id),"fail").toString();
 		}
 //		System.out.println("无该年月记录");
-		return new JsonFormat("101","fail").toString();
+		return new JsonFormat("success",factory.getSignIn().getDate("0")).toString();
 	}
 	@Override
 	public String skillGiftBag(int user_id, int date) throws JSONException {
