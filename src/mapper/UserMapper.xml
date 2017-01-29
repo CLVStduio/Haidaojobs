@@ -30,10 +30,10 @@
        select user_password from user where userPhoneNo = #{phone};
     </select> 
     <select id="modifySecurity" >    
-       UPDATE user SET security_key = #{securityKey},complement_key = #{complementKey} where userPhoneNo = #{phone};
+       UPDATE user SET securityKey = #{securityKey},complementKey = #{complementKey} where userPhoneNo = #{phone};
     </select> 
     <select id="modifyUserName">
-    	UPDATE user SET user_name = #{userName} WHERE user_id = #{userId}
+    	UPDATE user SET userName = #{userName} WHERE userId = #{userId}
     </select>
     <select id="modifyUserPhone">
     	UPDATE user SET userPhoneNo = #{userPhoneNo} WHERE userId = #{userId}
