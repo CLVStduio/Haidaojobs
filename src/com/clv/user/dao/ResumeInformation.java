@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 public interface ResumeInformation {
+	//用户提交身份认证相关
 	/**
 	 * 身份认证基本信息填写
 	 * @param id
@@ -25,6 +26,19 @@ public interface ResumeInformation {
 	 * @throws JSONException
 	 */
 	public String identityAuthentication(int id,String name,String gender,String idNum) throws JSONException;
+	/**
+	 * 重新提交身份验证信息
+		 * @param id
+	 * 		用户id
+	 * @param name
+	 * 		真实姓名
+	 * @param gender
+	 * 		用户性别
+	 * @param idNum
+	 * 		身份证号
+	 * @return
+	 * @throws JSONException
+	 */
 	public String modifyIdentityAuthentication(int id,String name,String gender,String idNum) throws JSONException;
 	/**
 	 * 证件照片上传
@@ -43,8 +57,7 @@ public interface ResumeInformation {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String uploadCertificatePhoto(int id,int type,MultipartFile file,HttpServletRequest reques) throws JSONException;
-	
+	public String uploadCertificatePhoto(int id,int type,MultipartFile file,HttpServletRequest reques) throws JSONException;	
 	/**
 	 * 查询用户身份审核结论
 	 * @param id
@@ -81,4 +94,35 @@ public interface ResumeInformation {
 	 * @throws JSONException
 	 */
 	public String getInformation(int id) throws JSONException;
+	//用户身份审核相关
+	/**
+	 * 获取待审核队列
+	 * @param adminId
+	 * 			管理员id
+	 * @return
+	 * @throws JSONException
+	 */
+	public String getAuditQueue(int adminId) throws JSONException;
+	/**
+	 * 查询用户提交的身份认证信息
+	 * @param adminId
+	 * 		管理员id
+	 * @param user_id
+	 * 		用户id
+	 * @return
+	 * @throws JSONException
+	 */
+	public String selectIdentity(int adminId,int user_id) throws JSONException;
+	/**
+	 * 给出用户认证结果
+	 * @param adminId
+	 * 		管理员id
+	 * @param user_id
+	 * 		用户id
+	 * @param auditType
+	 * 		认证情况结果
+	 * @return
+	 * @throws JSONException
+	 */
+	public String setAuditConclusion(int adminId,int user_id,int auditType) throws JSONException;
 }

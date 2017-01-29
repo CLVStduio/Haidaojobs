@@ -1,7 +1,12 @@
 package com.clv.model.resume;
 
+/**
+ * 用户基本信息映射类
+ * @author evanglist
+ *
+ */
 public class Information {
-	private int Information;
+	private int InformationId;
 	private int userId;
 	private String name;
 	private String gender;
@@ -9,11 +14,11 @@ public class Information {
 	private String dateBirth;
 	private String email;
 	
-	public int getInformation() {
-		return Information;
+	public int getInformationId() {
+		return InformationId;
 	}
-	public void setInformation(int information) {
-		Information = information;
+	public void setInformationId(int InformationId) {
+		this.InformationId = InformationId;
 	}
 	public int getUserId() {
 		return userId;
@@ -53,7 +58,7 @@ public class Information {
 	}
 	@Override
 	public String toString() {
-		return "Information [Information=" + Information + ", userId=" + userId + ", name=" + name + ", gender="
+		return "Information [InformationId=" + InformationId + ", userId=" + userId + ", name=" + name + ", gender="
 				+ gender + ", height=" + height + ", dateBirth=" + dateBirth + ", email=" + email + "]";
 	}
 	
