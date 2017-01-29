@@ -149,11 +149,11 @@ public class UserDaoImpl implements UserDao{
 			System.out.println(":帐号或密码错误");
 			return new JsonFormat("101","fail").toString();
 		}
-		if(user.getUser_password().equals(dePassword)){
+		if(user.getUserPassword().equals(dePassword)){
 			System.out.println(dePhone+":登录");
 			String securityKey = factory.getBKey().builderSecurityKey(dePhone);
 			userMapper.modifySecurity(dePhone, securityKey,factory.getBKey().builderComplementKey(dePhone));
-			user.setSecurity_key(securityKey);
+			user.setSecurityKey(securityKey);
 			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
 		}else{
 			System.out.println(":帐号或密码错误");
@@ -173,15 +173,15 @@ public class UserDaoImpl implements UserDao{
 				sb.delete(0,42);
 				User user = userMapper.selectUserById(Integer.parseInt(sb.toString()));
 				if(user!=null){
-					if(user.getSecurity_key().equals(skey)){
-						StringBuilder keySb = new StringBuilder(user.getComplement_key());
+					if(user.getSecurityKey().equals(skey)){
+						StringBuilder keySb = new StringBuilder(user.getComplementKey());
 						String oldTime = keySb.substring(16);
 						if(Long.parseLong(newTime)-Long.parseLong(oldTime)>15*24*60*60*1000){
 							System.out.println("安全码已经过期，请重新登录");
 							return -1;
 						}
 						
-						return user.getUser_id();
+						return user.getUserId();
 						
 					}
 					System.out.println("安全码不正确");
@@ -199,14 +199,14 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserName(String enmessage, int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String name = factory.getCrypto().DecrypMessage(enmessage, user.getUser_phoneNo(), user.getSecurity_key());
+			String name = factory.getCrypto().DecrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(name) || name == null){
 				return new JsonFormat("401","fail").toString();
 			}
 			if(name.length()<=15){
 				System.out.println(name);
 				userMapper.modifyUserName(id, name);
-				user.setUser_name(name);
+				user.setUserName(name);
 				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
 			}
 			return new JsonFormat("101","fail").toString();
@@ -219,13 +219,13 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserPhone(String enmessage, int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String phone = factory.getCrypto().DecrypMessage(enmessage, user.getUser_phoneNo(), user.getSecurity_key());
+			String phone = factory.getCrypto().DecrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(phone) || phone == null){
 				return new JsonFormat("401","fail").toString();
 			}
 			
 			userMapper.modifyUserPhone(id, phone);
-			user.setUser_phoneNo(phone);
+			user.setUserPhoneNo(phone);
 			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
 		}else{
 			return new JsonFormat("20"+Math.abs(id),"fail").toString();
@@ -236,12 +236,12 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserPassword(String enOldPassword, String enNewPassword,int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String deoldPassword = factory.getCrypto().DecrypMessage(enOldPassword, user.getUser_phoneNo(), user.getSecurity_key());
-			String denewPassword = factory.getCrypto().DecrypMessage(enNewPassword, user.getUser_phoneNo(), user.getSecurity_key());
+			String deoldPassword = factory.getCrypto().DecrypMessage(enOldPassword, user.getUserPhoneNo(), user.getSecurityKey());
+			String denewPassword = factory.getCrypto().DecrypMessage(enNewPassword, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(deoldPassword) || deoldPassword == null || "fail".equals(denewPassword) || denewPassword == null){
 				return new JsonFormat("401","fail").toString();
 			}
-			if(deoldPassword.equals(user.getUser_password())){
+			if(deoldPassword.equals(user.getUserPassword())){
 				userMapper.modifyUserPassword(id, denewPassword);
 				return new JsonFormat("success").toString();
 			}else{
@@ -261,7 +261,7 @@ public class UserDaoImpl implements UserDao{
 		}
 		User user = userMapper.selectUserByPhoneNo(dePhone);
 		if(user != null){
-			userMapper.modifyUserPassword(user.getUser_id(), dePassword);
+			userMapper.modifyUserPassword(user.getUserId(), dePassword);
 			return new JsonFormat("success").toString();
 		}else{
 			System.out.println("该手机未注册");
@@ -276,8 +276,8 @@ public class UserDaoImpl implements UserDao{
 			return new JsonFormat("20"+Math.abs(id),"fail").toString();
 		}
 		User user = userMapper.selectUserById(id);
-		if(user.getHeadPortraitPath()!=null){
-			factory.getPhotoProcessing().deleteFile(File.separator+"images"+File.separator+"HeadPortrait"+File.separator+user.getHeadPortraitPath());
+		if(user.getHeadPortraitName()!=null){
+			factory.getPhotoProcessing().deleteFile(File.separator+"images"+File.separator+"HeadPortrait"+File.separator+user.getHeadPortraitName());
 		}
 		if(!file.isEmpty()){
 			//生成uuid作为文件名称

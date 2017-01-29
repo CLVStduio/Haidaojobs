@@ -45,7 +45,7 @@ public interface UserMapper {
 	 * @param user_id
 	 * @return
 	 */
-    public User selectUserById(int user_id);  
+    public User selectUserById(int userId);  
     /**
      *根据用户phone查询用户信息
      * @param phone
@@ -64,7 +64,7 @@ public interface UserMapper {
      * 			:注册日期
      * @return
      */
-    public void addUser(@Param("password") String password,@Param("phone") String phone,@Param("security_key") String security_key,@Param("complement_key") String complement_key,@Param("date") Date date);
+    public void addUser(@Param("password") String password,@Param("phone") String phone,@Param("securityKey") String securityKey,@Param("complementKey") String complementKey,@Param("date") Date date);
     /**
      * 查询指定密码
      * @param phone
@@ -78,7 +78,7 @@ public interface UserMapper {
      * @param complement_key
      * @return
      */
-    public String modifySecurity(@Param("phone") String phone,@Param("security_key") String security_key,@Param("complement_key") String complement_key);
+    public String modifySecurity(@Param("phone") String phone,@Param("securityKey") String securityKey,@Param("complementKey") String complementKey);
     /*****************用户信息****************/
     /*****************用户信息修改****************/
     /**
@@ -87,24 +87,24 @@ public interface UserMapper {
      * @param name
      * @return
      */
-    public void modifyUserName(@Param("user_id")int id,@Param("user_name")String name);
+    public void modifyUserName(@Param("userId")int id,@Param("userName")String name);
     /**
      * 修改用户手机号
      * @param id
      * @param phone
      */
-    public void modifyUserPhone(@Param("user_id")int id,@Param("user_phoneNo")String phone);
+    public void modifyUserPhone(@Param("userId")int id,@Param("userPhoneNo")String phone);
     /**
      * 修改用户密码
      * @param id
      * @param password
      */
-    public void modifyUserPassword(@Param("user_id")int id,@Param("user_password")String password);
+    public void modifyUserPassword(@Param("userId")int id,@Param("userPassword")String password);
     /**
      * 修改用户头像
      * @param id
      * @param path
      */
-    public void modifyUserHeadPortrait(@Param("user_id")int id,@Param("path")String path);
+    public void modifyUserHeadPortrait(@Param("userId")int id,@Param("photoName")String path);
     /*****************用户信息修改****************/
 }  

@@ -8,103 +8,67 @@ import java.sql.Date;
  * @time 2016.12.31
  */
 public class User {
-	private Integer user_id;
-	private String user_name;
-	private String user_password;
-	private String user_phoneNo;
-	private String security_key;
-	private String complement_key;
-	private Date registered_date;
-	private String HeadPortraitPath;
-
-	
-	public User() {
-		super();
+	private Integer userId;
+	private String userName;
+	private String userPassword;
+	private String userPhoneNo;
+	private String securityKey;
+	private String complementKey;
+	private Date registeredDate;
+	private String headPortraitName;
+	public Integer getUserId() {
+		return userId;
 	}
-
-	public Integer getUser_id() {
-		return user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-
-
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public String getUserName() {
+		return userName;
 	}
-
-
-	public String getUser_name() {
-		return user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public String getUserPassword() {
+		return userPassword;
 	}
-
-
-	public String getUser_password() {
-		return user_password;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-
-
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public String getUserPhoneNo() {
+		return userPhoneNo;
 	}
-
-
-	public String getUser_phoneNo() {
-		return user_phoneNo;
+	public void setUserPhoneNo(String userPhoneNo) {
+		this.userPhoneNo = userPhoneNo;
 	}
-
-
-	public void setUser_phoneNo(String user_phoneNo) {
-		this.user_phoneNo = user_phoneNo;
+	public String getSecurityKey() {
+		return securityKey;
 	}
-
-
-	public String getSecurity_key() {
-		return security_key;
+	public void setSecurityKey(String securityKey) {
+		this.securityKey = securityKey;
 	}
-
-
-	public void setSecurity_key(String security_key) {
-		this.security_key = security_key;
+	public String getComplementKey() {
+		return complementKey;
 	}
-
-
-	public Date getRegistered_date() {
-		return registered_date;
+	public void setComplementKey(String complementKey) {
+		this.complementKey = complementKey;
 	}
-
-
-	public void setRegistered_date(Date registered_date) {
-		this.registered_date = registered_date;
+	public Date getRegisteredDate() {
+		return registeredDate;
 	}
-
-	public String getComplement_key() {
-		return complement_key;
+	public void setRegisteredDate(Date registeredDate) {
+		this.registeredDate = registeredDate;
 	}
-
-	public void setComplement_key(String complement_key) {
-		this.complement_key = complement_key;
+	public String getHeadPortraitName() {
+		return headPortraitName;
 	}
-
-	public String getHeadPortraitPath() {
-		return HeadPortraitPath;
+	public void setHeadPortraitName(String headPortraitName) {
+		this.headPortraitName = headPortraitName;
 	}
-
-	public void setHeadPortraitPath(String headPortraitName) {
-		HeadPortraitPath = headPortraitName;
-	}
-
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", user_name=" + user_name + ", user_phoneNo=" + user_phoneNo
-				+ ", security_key=" + security_key + ", complement_key=" + complement_key + ", registered_date="
-				+ registered_date + ", HeadPortraitPath=" + HeadPortraitPath + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userPhoneNo="
+				+ userPhoneNo + ", securityKey=" + securityKey + ", complementKey=" + complementKey
+				+ ", registeredDate=" + registeredDate + ", headPortraitName=" + headPortraitName + "]";
 	}
-
-
-
-
+	
 }
