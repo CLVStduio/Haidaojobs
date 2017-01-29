@@ -154,7 +154,7 @@ public class UserDaoImpl implements UserDao{
 			String securityKey = factory.getBKey().builderSecurityKey(dePhone);
 			userMapper.modifySecurity(dePhone, securityKey,factory.getBKey().builderComplementKey(dePhone));
 			user.setSecurityKey(securityKey);
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
 		}else{
 			System.out.println(":帐号或密码错误");
 			return  new JsonFormat("101","fail").toString();
@@ -207,7 +207,7 @@ public class UserDaoImpl implements UserDao{
 				System.out.println(name);
 				userMapper.modifyUserName(id, name);
 				user.setUserName(name);
-				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
+				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
 			}
 			return new JsonFormat("101","fail").toString();
 		}else{
@@ -226,7 +226,7 @@ public class UserDaoImpl implements UserDao{
 			
 			userMapper.modifyUserPhone(id, phone);
 			user.setUserPhoneNo(phone);
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
 		}else{
 			return new JsonFormat("20"+Math.abs(id),"fail").toString();
 		}
