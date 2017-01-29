@@ -12,7 +12,13 @@ public class Identity {
 	 */
 	private int userId;
 	private String name;
-	private String gender;
+	private String gender;	
+	/**
+	 * 用户提交的身份证号
+	 */
+	private String idNum;
+	private String dateBirth;
+	private int adminId;
 	/**
 	 * 认证情况
 	 * 0：认证中
@@ -25,12 +31,6 @@ public class Identity {
 	 * 7：其他原因
 	 */
 	private int auditType;
-	/**
-	 * 用户提交的身份证号
-	 */
-	private String idNum;
-	private String dateBirth;
-	private int adminId;
 	public int getIdentityId() {
 		return IdentityId;
 	}
