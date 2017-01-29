@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao{
 	public String getUser(int id) throws JSONException{
 		User user = userMapper.selectUserById(id);
 		if(user != null){
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"user_password","registered_date","complement_key"))).toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
 		}
 		return  new JsonFormat("101","fail").toString();
 	}
