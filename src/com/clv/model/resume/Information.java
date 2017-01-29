@@ -1,12 +1,20 @@
 package com.clv.model.resume;
 
 public class Information {
+	private int Information;
 	private int userId;
 	private String name;
 	private String gender;
 	private String height;
 	private String dateBirth;
 	private String email;
+	
+	public int getInformation() {
+		return Information;
+	}
+	public void setInformation(int information) {
+		Information = information;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -45,8 +53,9 @@ public class Information {
 	}
 	@Override
 	public String toString() {
-		return "Information [userId=" + userId +  ", name=" + name + ", gender=" + gender
-				+ ", height=" + height + ", dateBirth=" + dateBirth + ", email=" + email + "]";
+		return "Information [Information=" + Information + ", userId=" + userId + ", name=" + name + ", gender="
+				+ gender + ", height=" + height + ", dateBirth=" + dateBirth + ", email=" + email + "]";
 	}
+	
 	
 }
