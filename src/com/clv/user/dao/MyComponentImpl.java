@@ -15,6 +15,11 @@ import com.clv.model.mycomponent.SigninGift;
 
 import cn.clvstudio.tool.Factory;
 
+/**
+ * “我的”中的各小部件实现类
+ * @author evanglist
+ *
+ */
 @Component
 public class MyComponentImpl implements MyComponent {
 	@Autowired
