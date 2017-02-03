@@ -57,7 +57,7 @@ public interface ResumeInformation {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String uploadCertificatePhoto(int id,int type,MultipartFile file,HttpServletRequest reques) throws JSONException;	
+	public String uploadCertificatePhoto(int id,int type,MultipartFile file,HttpServletRequest request) throws JSONException;	
 	/**
 	 * 查询用户身份审核结论
 	 * @param id
@@ -112,7 +112,7 @@ public interface ResumeInformation {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectIdentity(int adminId,int user_id) throws JSONException;
+	public String selectIdentity(int adminId,int userId) throws JSONException;
 	/**
 	 * 给出用户认证结果
 	 * @param adminId
@@ -124,5 +124,5 @@ public interface ResumeInformation {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String setAuditConclusion(int adminId,int user_id,int auditType) throws JSONException;
+	public String setAuditConclusion(int adminId,int userId,int auditType) throws JSONException;
 }
