@@ -101,11 +101,11 @@ public class ResumeOtherImpl implements ResumeOther {
 			if(list != null){
 				for(Skill l : list){
 					jsonArray.put(factory.getJson().toJson(l,"user_id"));
-					System.out.println("skill"+factory.getJson().toJson(l).toString());
+//					System.out.println("skill"+factory.getJson().toJson(l).toString());
 				}
 				return new JsonFormat("success",jsonArray).toString();
 			}
-			System.out.println("selectSkill id:"+id+" skill is null");
+//			System.out.println("selectSkill id:"+id+" skill is null");
 			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(id),"fail").toString();
@@ -115,7 +115,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	public String deleteSkill(int user_id,String enskill_id) throws JSONException {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
-			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUserPhoneNo(), user.getSecurityKey());
+			String skill_id = factory.getCrypto().decrypMessage(enskill_id, user.getUserPhoneNo(), user.getSecurityKey());
 			if(skill_id != null){
 				resumeMapper.deleteSkill(Integer.parseInt(skill_id));
 				return new JsonFormat("success").toString();
@@ -129,7 +129,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	public String modifySkill(int user_id,String enskill_id, String skill_content) throws JSONException {
 		if(user_id>0){
 			User user = resumeMapper.selectUserById(user_id);
-			String skill_id = factory.getCrypto().DecrypMessage(enskill_id, user.getUserPhoneNo(), user.getSecurityKey());
+			String skill_id = factory.getCrypto().decrypMessage(enskill_id, user.getUserPhoneNo(), user.getSecurityKey());
 			if(skill_id!=null){
 				if(skill_content !=null){
 					resumeMapper.modifySkill(Integer.parseInt(skill_id), skill_content);

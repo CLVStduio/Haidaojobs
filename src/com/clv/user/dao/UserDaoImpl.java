@@ -118,8 +118,8 @@ public class UserDaoImpl implements UserDao{
 	 }
 	@Override
 	public String addUser(String enPhone, String enPassword) throws JSONException {
-		String phone = factory.getCrypto().DecryptTime(enPhone);
-		String password = factory.getCrypto().DecryptTime(enPassword);
+		String phone = factory.getCrypto().decryptTime(enPhone);
+		String password = factory.getCrypto().decryptTime(enPassword);
 		if("fail".equals(phone) || "fail".equals(password) || phone == null || password==null){
 			return new JsonFormat("204","fail").toString();
 		}
@@ -137,8 +137,8 @@ public class UserDaoImpl implements UserDao{
 	public String signIn(String enPhone,String enPassword) throws JSONException {
 		//登录
 
-		String dePhone = factory.getCrypto().DecryptTime(enPhone);
-		String dePassword = factory.getCrypto().DecryptTime(enPassword);
+		String dePhone = factory.getCrypto().decryptTime(enPhone);
+		String dePassword = factory.getCrypto().decryptTime(enPassword);
 		if("fail".equals(dePhone) || "fail".equals(dePassword) || dePhone == null || dePassword==null){
 			return  new JsonFormat("102","fail").toString();
 		}
@@ -163,7 +163,7 @@ public class UserDaoImpl implements UserDao{
 
 	public int IdAuthentication(String enId){
 		System.out.println("enId: "+enId);
-		String deIdmessage = factory.getCrypto().DecryptTime(enId);
+		String deIdmessage = factory.getCrypto().decryptTime(enId);
 //		System.out.println(deIdmessage);
 		if(deIdmessage!=null ){
 			if(deIdmessage.length() >=42){
@@ -199,7 +199,7 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserName(String enmessage, int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String name = factory.getCrypto().DecrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
+			String name = factory.getCrypto().decrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(name) || name == null){
 				return new JsonFormat("401","fail").toString();
 			}
@@ -219,7 +219,7 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserPhone(String enmessage, int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String phone = factory.getCrypto().DecrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
+			String phone = factory.getCrypto().decrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(phone) || phone == null){
 				return new JsonFormat("401","fail").toString();
 			}
@@ -236,8 +236,8 @@ public class UserDaoImpl implements UserDao{
 	public String modifyUserPassword(String enOldPassword, String enNewPassword,int id) throws JSONException {
 		if(id>0){
 			User user = userMapper.selectUserById(id);
-			String deoldPassword = factory.getCrypto().DecrypMessage(enOldPassword, user.getUserPhoneNo(), user.getSecurityKey());
-			String denewPassword = factory.getCrypto().DecrypMessage(enNewPassword, user.getUserPhoneNo(), user.getSecurityKey());
+			String deoldPassword = factory.getCrypto().decrypMessage(enOldPassword, user.getUserPhoneNo(), user.getSecurityKey());
+			String denewPassword = factory.getCrypto().decrypMessage(enNewPassword, user.getUserPhoneNo(), user.getSecurityKey());
 			if("fail".equals(deoldPassword) || deoldPassword == null || "fail".equals(denewPassword) || denewPassword == null){
 				return new JsonFormat("401","fail").toString();
 			}
@@ -254,8 +254,8 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public String resetUserPassword(String enPhone, String enPassword) throws JSONException {
-		String dePhone = factory.getCrypto().DecryptTime(enPhone);
-		String dePassword = factory.getCrypto().DecryptTime(enPassword);
+		String dePhone = factory.getCrypto().decryptTime(enPhone);
+		String dePassword = factory.getCrypto().decryptTime(enPassword);
 		if("fail".equals(dePhone) || "fail".equals(dePassword) || dePhone == null || dePassword==null){
 			return new JsonFormat("401","fail").toString();
 		}
