@@ -24,10 +24,10 @@
 	<!-- Information  end  -->
 	<!--  Identiry   strat -->
 		<insert id="addIdentity">
-			INSERT INTO user_Identity (userId,name,gender,audiType,idNum,dateBirth,adminId) VALUES (#{userId},#{name},#{gender},0,#{idNum},#{dateBirth},0);
+			INSERT INTO user_Identity (userId,name,gender,auditType,idNum,dateBirth,adminId) VALUES (#{userId},#{name},#{gender},0,#{idNum},#{dateBirth},0);
 		</insert>
 		<select id="modifyIdentity">
-			UPDATE user_Identity SET name=#{name},gender=#{gender},audiType=0,idNum=#{idNum},dateBirth=#{dateBirth} WHERE userId=#{userId};
+			UPDATE user_Identity SET name=#{name},gender=#{gender},auditType=0,idNum=#{idNum},dateBirth=#{dateBirth} WHERE userId=#{userId};
 		</select>
 		<select id="modifyAuditTypeOfIdentity">
 			UPDATE user_Identity SET adminId=#{adminId},auditType=#{auditType} WHERE userId=#{userId};
