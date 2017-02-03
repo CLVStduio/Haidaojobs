@@ -165,8 +165,10 @@ public class ResumeInformationImpl implements ResumeInformation {
 			if(information!=null){
 				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(information,"InformationId"))).toString();
 			}
+			resumeMapper.addInformation(id);
+			information = resumeMapper.selectInformation(id);
 			//无该用户的基本信息
-			return new JsonFormat("101","fail").toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(information,"InformationId"))).toString();
 		}
 		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
