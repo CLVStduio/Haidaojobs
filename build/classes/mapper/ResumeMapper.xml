@@ -5,8 +5,50 @@
     <select id="selectUserById" parameterType="int" resultType="com.clv.user.model.User">    
          select * from user where userId = #{userId}  
     </select>  
-
-	<!-- skill strat-->
+	<!-- Information strat -->
+		<insert id="addInformation">
+			INSERT INTO user_Information (userId) values(#{userId}); 
+		</insert>
+		<select id="modifyHeightOfInformation">
+			UPDATE user_Information SET height=#{height} WHERE userId=#{userId};
+		</select>
+		<select id="modifyEmailOfInformation">
+			UPDATE user_Information SET email=#{email} WHERE userId=#{userId};
+		</select>
+		<select id="modifyIdentityOfInformation">
+			UPDATE user_Information SET name=#{name},gender=#{gender},dateBirth=#{dateBirth} WHERE userId=#{userId};
+		</select>
+		<select id="selectInformation" resultType="com.clv.model.resume.Information">
+			SELECT * FROM user_Information WHERE userId=#{userId};
+		</select>
+	<!-- Information  end  -->
+	<!--  Identiry   strat -->
+		<insert id="addIdentity">
+			INSERT INTO user_Identiry (userId,name,gender,audiType,idNum,dateBirth,adminId) VALUES (#{userId},#{name},#{gender},0,#{idNum},#{dateBirth},0);
+		</insert>
+		<select id="modifyIdentity">
+			UPDATE user_Identiry SET name=#{name},gender=#{gender},audiType=0,idNum=#{idNum},dateBirth=#{dateBirth} WHERE userId=#{userId};
+		</select>
+		<select id="modifyAuditTypeOfIdentity">
+			UPDATE user_Identiry SET adminId=#{adminId},auditType=#{auditType} WHERE userId=#{userId};
+		</select>
+		<select id="selectIdentity" resultType="com.clv.model.resume.Identity">
+			SELECT * FROM user_Identiry WHERE userId=userId;
+		</select>
+		<!-- getAuditQueue strat-->
+		    <resultMap type="com.clv.model.resume.Identity" id="IdentityResult">
+		    	<result column = "userId" property="userId"/>
+		    	<result column = "name" property="name"/>
+		    	<result column = "gender" property="gender"/>
+		    	<result column = "idNum" property="idNum"/>
+		    	<result column = "dateBirth" property="dateBirth"/>
+		    </resultMap>
+		    <select id="getAuditQueue" resultMap="IdentityResult">
+		    	select userId,name,gender,idNum,dateBirth from user_Identiry WHERE auditType = 0;
+		    </select>
+	    <!-- getAuditQueue end -->
+	<!--  Identiry    end  -->
+	<!--   skill     strat -->
 	    <insert id="addSkill" parameterType="com.clv.model.resume.Skill" useGeneratedKeys="true" keyProperty="skill_id" >    
 	       INSERT INTO user_resume_skill (user_id,skill_content)VALUES(#{user_id},#{skill_content});
 	    </insert>
@@ -17,13 +59,13 @@
 	    	UPDATE user_resume_skill SET skill_content = #{skill_content} WHERE skill_id = #{skill_id};
 	    </select>
 	    <!-- select Skill strat-->
-	    <resultMap type="com.clv.model.resume.Skill" id="SkillResult">
-	    	<result column = "skill_id" property="skill_id"/>
-	    	<result column = "skill_content" property="skill_content"/>
-	    </resultMap>
-	    <select id="selectSkill" parameterType="int" resultMap="SkillResult">
-	    	select skill_id,skill_content from user_resume_skill WHERE user_id = #{user_id};
-	    </select>
+		    <resultMap type="com.clv.model.resume.Skill" id="SkillResult">
+		    	<result column = "skill_id" property="skill_id"/>
+		    	<result column = "skill_content" property="skill_content"/>
+		    </resultMap>
+		    <select id="selectSkill" parameterType="int" resultMap="SkillResult">
+		    	select skill_id,skill_content from user_resume_skill WHERE user_id = #{user_id};
+		    </select>
 	    <!-- select skill end -->
- 	<!-- skill end -->
+ 	<!--   skill     end  -->
 </mapper>

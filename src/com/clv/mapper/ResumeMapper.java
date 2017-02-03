@@ -102,6 +102,18 @@ public interface ResumeMapper {
 	 * @return
 	 */
 	public Identity selectIdentity(@Param("userId")int userId);
+	/**
+	 * 获取待审核名单
+	 * @return
+	 */
+	public List<Identity> getAuditQueue();
+	/**
+	 * 查询用户认证结果
+	 * @param userId
+	 * 			用户id
+	 * @return
+	 */
+//	public Identity selectIdentityAuditConclusion(@Param("userId")int userId);
 	/*****************用户认证信息****************/
 	/*****************特长相关****************/	
 	/**
