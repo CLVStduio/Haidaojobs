@@ -21,6 +21,6 @@
        <mapper resource="mapper/UserMapper.xml"/>  
        <mapper resource="mapper/ResumeMapper.xml"/>  
        <mapper resource="mapper/MyComponentMapper.xml"/>  
-       <mapper resource="mapper/ResumeMapper.xml"/>
+       <mapper resource="mapper/AdminMapper.xml"/>
    </mappers>  
 </configuration>  
