@@ -94,7 +94,7 @@ public class ResumeInformationImpl implements ResumeInformation {
 					String photoName = type+"_"+Long.valueOf(System.currentTimeMillis()).toString()+"."+imageName;
 					String path = File.separator+"images"+File.separator+"certificatePhoto"+File.separator+id;
 					factory.getPhotoProcessing().savefile(photoName, path, file);
-					return new JsonFormat("http://images.haidaojobs.cn/certificatePhoto/"+id,new JSONArray().put(new JSONObject().put("photoName",photoName))).toString();
+					return new JsonFormat("success").toString();
 				}else{
 					return new JsonFormat("301","fail").toString();//格式不符
 				}
@@ -111,7 +111,7 @@ public class ResumeInformationImpl implements ResumeInformation {
 			User user = resumeMapper.selectUserById(id);
 			Identity identity = resumeMapper.selectIdentity(id);
 			if(identity!=null){
-				String identityStr = factory.getJson().toJson(identity,"IdentityId","dateBirth","adminId").toString();
+				String identityStr = factory.getJson().toJson(identity,"identityId","dateBirth","adminId").toString();
 				String enIdentity = factory.getCrypto().encryptMessage(identityStr, user.getUserPhoneNo(), user.getSecurityKey());
 				if(!"fail".equals(enIdentity)){
 					return new JsonFormat("success",new JSONArray().put(new JSONObject().put("identity",enIdentity))).toString();
@@ -144,13 +144,17 @@ public class ResumeInformationImpl implements ResumeInformation {
 			User user = resumeMapper.selectUserById(id);
 			String email = factory.getCrypto().decrypMessage(enEMail, user.getUserPhoneNo(), user.getSecurityKey());
 			if(email != null){
-				String regex = "[\\w]+@[A-Za-z0-9]+(\\.[a-zA-Z]+)+";
-				if(email.matches(regex)){
-					resumeMapper.modifyEmailOfInformation(id, email);
-					return new JsonFormat("success").toString();
+				if(email.length()<60){
+					String regex = "[\\w]+@[A-Za-z0-9]+(\\.[a-zA-Z]+)+";
+					if(email.matches(regex)){
+						resumeMapper.modifyEmailOfInformation(id, email);
+						return new JsonFormat("success").toString();
+					}
+					//不符合邮箱格式
+					return new JsonFormat("101","fail").toString();
 				}
-				//不符合邮箱格式
-				return new JsonFormat("101","fail").toString();
+				//邮箱长度过长
+				return new JsonFormat("102","fail").toString();
 			}
 			//解密失败
 			return new JsonFormat("401","fail").toString();
@@ -168,7 +172,7 @@ public class ResumeInformationImpl implements ResumeInformation {
 			resumeMapper.addInformation(id);
 			information = resumeMapper.selectInformation(id);
 			//无该用户的基本信息
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(information,"InformationId"))).toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(information,"informationId"))).toString();
 		}
 		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
