@@ -73,7 +73,8 @@ public class UserDaoImpl implements UserDao{
 		MESSAGEXsend submail = new MESSAGEXsend(config);
 		submail.addTo(phone);
 		submail.setProject("7Ns8O3");
-		submail.addVar(strcode, "10分钟");
+		submail.addVar("code", strcode);
+		submail.addVar("time", "10分钟");
 		submail.xsend();
 		
 		String time = Long.valueOf(System.currentTimeMillis()).toString();
