@@ -38,11 +38,11 @@ public class SignInTool {
 		String signInBin = Long.toBinaryString(Long.parseLong(signInHex, 16));
 		int num=0;
 		int leng = signInBin.length();
-		long hex = 0l;
+		long hex = 0L;
 		for(int i=0;i<leng;i++){
 			num = signInBin.charAt(i)=='1' ? ++num:0;
 			if(num == 7){
-				hex+=(long)Math.pow(2,signInBin.length()-i-1 );
+				hex+=(long)Math.pow(2.0,signInBin.length()-i-1.0 );
 				num=0;
 			}
 		}
