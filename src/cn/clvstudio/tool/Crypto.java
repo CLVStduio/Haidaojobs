@@ -21,6 +21,7 @@ import org.apaches.commons.codec.binary.Base64;
  *
  */
 public class Crypto {
+	private static final String UTF8 = "utf-8";
 	/**
 	 * AES加密
 	 * @param sSrc
@@ -38,13 +39,13 @@ public class Crypto {
             return null;
         }
 		try {
-			byte[] raw = sKey.getBytes("utf-8");
+			byte[] raw = sKey.getBytes(UTF8);
 			SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
 		
         
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
+        byte[] encrypted = cipher.doFinal(sSrc.getBytes(UTF8));
 
         return new Base64().encodeToString(encrypted);
         } catch (UnsupportedEncodingException e) {
@@ -89,14 +90,14 @@ public class Crypto {
                 System.out.print("Key长度不是16位");
                 return null;
             }
-            byte[] raw = sKey.getBytes("utf-8");
+            byte[] raw = sKey.getBytes(UTF8);
 			
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             byte[] encrypted1 = new Base64().decode(sSrc);//先用base64解密
             byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original,"utf-8");
+            String originalString = new String(original,UTF8);
             return originalString;
     	} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
