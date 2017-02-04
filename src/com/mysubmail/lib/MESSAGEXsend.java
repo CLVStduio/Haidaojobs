@@ -54,7 +54,7 @@ public class MESSAGEXsend extends SenderWapper {
 		return new Message(this.config);
 	}
 
-	public void xsend(){
-		getSender().xsend(requestData);
+	public boolean xsend(){
+		return getSender().xsend(requestData);
 	}
 }
