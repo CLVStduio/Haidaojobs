@@ -134,8 +134,6 @@ public class FileProcessing{
             return true;  
         }else if("ico".equals(imagesPattern)){  
             return true;  
-        }else if("bmp".equals(imagesPattern)){  
-            return true;  
         }else if("jpeg".equals(imagesPattern)){  
             return true;  
         }else if("svg".equals(imagesPattern)){  
