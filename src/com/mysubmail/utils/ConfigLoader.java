@@ -27,7 +27,7 @@ public class ConfigLoader {
 	static {
 		pros = new Properties();
 		try {
-			pros.load(ConfigLoader.class.getResourceAsStream("com/mysubmail/app_config.properties"));
+			pros.load(ConfigLoader.class.getResourceAsStream("/com/mysubmail/app_config.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
