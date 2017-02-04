@@ -16,11 +16,15 @@ import com.clv.mapper.UserMapper;
 import com.clv.model.format.JsonFormat;
 import com.clv.user.model.Code;
 import com.clv.user.model.User;
+import com.mysubmail.config.AppConfig;
+import com.mysubmail.lib.MESSAGEXsend;
+import com.mysubmail.utils.ConfigLoader;
 import com.taobao.api.ApiException;
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
+//阿里大于短信服务调用包
+//import com.taobao.api.DefaultTaobaoClient;
+//import com.taobao.api.TaobaoClient;
+//import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+//import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
 import cn.clvstudio.tool.Factory;
 
@@ -55,7 +59,29 @@ public class UserDaoImpl implements UserDao{
 		}
 			
 	}
-	
+	//赛邮短信服务调用接口
+	public String getCode(String phone) throws ApiException, JSONException {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i<6;i++){
+			int code = (int)(Math.random()*8+1);
+			sb.append(Integer.valueOf(code).toString());
+		}
+		sb.delete(0, 1);
+		String strcode = sb.toString();
+		
+		AppConfig config = ConfigLoader.load(ConfigLoader.ConfigType.Message);
+		MESSAGEXsend submail = new MESSAGEXsend(config);
+		submail.addTo(phone);
+		submail.setProject("7Ns8O3");
+		submail.addVar(strcode, "10分钟");
+		submail.xsend();
+		
+		String time = Long.valueOf(System.currentTimeMillis()).toString();
+		userMapper.modifyCode(phone, strcode, time);
+		return new JsonFormat("success").toString();
+	}
+	/**
+	 * 阿里大于短信服务调用接口
 	@Override
 	public String getCode(String phone) throws ApiException, JSONException {
 		StringBuilder sb = new StringBuilder();
@@ -66,6 +92,7 @@ public class UserDaoImpl implements UserDao{
 		sb.delete(0, 1);
 		
 		String strcode = sb.toString();
+		
 		System.out.println("code:"+strcode);
 		String url = "http://gw.api.taobao.com/router/rest";
 		String appkey = " 23561829";
@@ -94,6 +121,7 @@ public class UserDaoImpl implements UserDao{
 			return new JsonFormat("101","fail").toString();
 		}
 	}
+	*/
 	public String checkCode(String phone,String code) throws JSONException{
 		 Code Code = userMapper.selectCode(phone);
 		 if(Code == null){
