@@ -78,7 +78,6 @@ public class Crypto {
      * @throws Exception
      */
     public String decrypt(String sSrc, String sKey) {
-//    	System.out.println("AES...: "+sSrc);
     	try {
             // 判断Key是否正确
             if (sKey == null) {
@@ -97,27 +96,21 @@ public class Crypto {
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             byte[] encrypted1 = new Base64().decode(sSrc);//先用base64解密
             byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original,UTF8);
-            return originalString;
+            return new String(original,UTF8);
     	} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				return null;
+			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
 			e.printStackTrace();
-			return null;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
-			return null;
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
-			return null;
 		} catch (IllegalBlockSizeException e) {
 			e.printStackTrace();
-			return null;
 		} catch (BadPaddingException e) {
 			e.printStackTrace();
-			return null;
 		}
+    	return null;
     }
     /**
      * 解密经过AES"时间钥匙"加密的信息
@@ -126,11 +119,11 @@ public class Crypto {
      */
     public String decryptTime(String message){
     	long time = System.currentTimeMillis();
-		StringBuilder IdKeysb = new StringBuilder(getMD5(getMD5(Long.valueOf(time/100000*100000).toString())));
+		StringBuilder idKeysb = new StringBuilder(getMD5(getMD5(Long.toString(time/100000*100000))));
 		
-		String IdKey = IdKeysb.substring(0, 16);
+		String idKey = idKeysb.substring(0, 16);
     	try {
-    		return decrypt(message,IdKey);
+    		return decrypt(message,idKey);
 		} catch (Exception e) {
 			System.out.println("解密身份号失败");
 			e.printStackTrace();
@@ -167,17 +160,17 @@ public class Crypto {
 		for(char c: ch){
 			sum += (int) c;
 		}
-		sb.append(Integer.valueOf(sum%9).toString());
+		sb.append(Integer.toString(sum%9));
 		
-		long Num = Long.parseLong(phone);
-		sb.append(Integer.valueOf((int)sum(Num)%7).toString());
+		long num = Long.parseLong(phone);
+		sb.append(Integer.toString((int)sum(num)%7));
 		
 		int count = 0;
-		while(Num>10){
-			count += Num%10%2==0?1:0;
-			Num /= 10;
+		while(num>10){
+			count += num%10%2==0?1:0;
+			num /= 10;
 		}
-		sb.append(Integer.valueOf(count).toString());
+		sb.append(Integer.toString(count));
 		return sb.toString();
     }
 	public static long sum(long num){
