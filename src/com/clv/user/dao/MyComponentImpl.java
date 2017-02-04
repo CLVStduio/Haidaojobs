@@ -46,14 +46,14 @@ public class MyComponentImpl implements MyComponent {
 				if(signIn!=null){
 					String binary = Long.toBinaryString(Long.parseLong(signIn.getSignIn_date(), 16));
 					if( date<33-binary.length() || binary.charAt(binary.length()-33+date) != '1'){
-						String newDate = Long.toHexString((long) Math.pow(2, 32-date)+Long.parseLong(signIn.getSignIn_date(), 16));
+						String newDate = Long.toHexString((long) Math.pow(2.0, 32.0-date)+Long.parseLong(signIn.getSignIn_date(), 16));
 						myCMapper.modifySignIn(tableNameSignIn, signIn.getSignIn_id(), "'"+newDate+"'");
 						return new JsonFormat("success",factory.getSignIn().getDate(newDate)).toString();
 					}
 //					System.out.println("已经签过到了");
 					return new JsonFormat("101","fail").toString();
 				}
-				long dec = (long) Math.pow(2, 32-date);
+				long dec = (long) Math.pow(2.0, 32.0-date);
 				myCMapper.addSignIn(tableNameSignIn, month,"'"+Long.toHexString(dec)+"'", user_id);
 				return new JsonFormat("success",factory.getSignIn().getDate(Long.toHexString(dec))).toString();
 			}
@@ -104,7 +104,7 @@ public class MyComponentImpl implements MyComponent {
 					SigninGift giftRecord = myCMapper.selectSignInGiftBag(tableNameSignInGift, user_id, month);
 					long giftRLong = giftRecord == null ? 0L : Long.parseLong(giftRecord.getSignInGift_date(), 16);
 					if(factory.getSignIn().isGift(signIn.getSignIn_date(),giftRLong, date)){
-						giftRLong += (long)Math.pow(2, 32-date);
+						giftRLong += (long)Math.pow(2.0, 32.0-date);
 						if(giftRecord == null)
 							myCMapper.addSignInGiftBag(tableNameSignInGift, month, Long.toHexString(giftRLong), user_id);
 						else
