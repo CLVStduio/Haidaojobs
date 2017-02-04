@@ -75,11 +75,12 @@ public class UserDaoImpl implements UserDao{
 		submail.setProject("7Ns8O3");
 		submail.addVar("code", strcode);
 		submail.addVar("time", "10分钟");
-//		submail.xsend();
-		System.out.println(submail.xsend());
-		String time = Long.valueOf(System.currentTimeMillis()).toString();
-		userMapper.modifyCode(phone, strcode, time);
-		return new JsonFormat("success").toString();
+		if(submail.xsend()){
+			String time = Long.valueOf(System.currentTimeMillis()).toString();
+			userMapper.modifyCode(phone, strcode, time);
+			return new JsonFormat("success").toString();
+		}
+		return new JsonFormat("101","fail").toString();
 	}
 	/**
 	 * 阿里大于短信服务调用接口
