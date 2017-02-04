@@ -17,7 +17,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.protocol.HTTP;
+//import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.mysubmail.utils.RequestEncoder;
@@ -40,6 +40,7 @@ public class Sender implements ISender {
 	public static final String TIMESTAMP = "timestamp";
 	public static final String SIGN_TYPE = "sign_type";
 	public static final String SIGNATURE = "signature";
+	public static final String UTF = "UTF-8";
 	private CloseableHttpClient closeableHttpClient = null;
 
 	public Sender() {
@@ -48,25 +49,21 @@ public class Sender implements ISender {
 
 	@Override
 	public boolean send(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean xsend(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean subscribe(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean unsubscribe(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -80,7 +77,7 @@ public class Sender implements ISender {
 		try {
 			response = closeableHttpClient.execute(httpget);
 			HttpEntity httpEntity = response.getEntity();
-			String jsonStr = EntityUtils.toString(httpEntity, "UTF-8");
+			String jsonStr = EntityUtils.toString(httpEntity, UTF);
 			if (jsonStr != null) {
 				JSONObject json = JSONObject.fromObject(jsonStr);
 				return json.getString("timestamp");
@@ -133,13 +130,13 @@ public class Sender implements ISender {
 	 * */
 	protected boolean request(String url, Map<String, Object> data) {
 		HttpPost httppost = new HttpPost(url);
-		httppost.addHeader("charset", "UTF-8");
+		httppost.addHeader("charset", UTF);
 		httppost.setEntity(build(data));
 		try {
 			HttpResponse response = closeableHttpClient.execute(httppost);
 			HttpEntity httpEntity = response.getEntity();
 			if (httpEntity != null) {
-				String jsonStr = EntityUtils.toString(httpEntity, "UTF-8");
+				String jsonStr = EntityUtils.toString(httpEntity, UTF);
 				System.out.println(jsonStr);
 				return jsonStr.contains("success");
 			}
@@ -168,7 +165,7 @@ public class Sender implements ISender {
 		data.put(APPID, config.getAppId());
 		data.put(TIMESTAMP, this.getTimestamp());
 		data.put(SIGN_TYPE, config.getSignType());
-		ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8); 
+		ContentType contentType = ContentType.create("text/plain", UTF); 
 		builder.addTextBody(SIGNATURE,
 				createSignature(RequestEncoder.formatRequest(data)), contentType);
 		for (Map.Entry<String, Object> entry : data.entrySet()) {
