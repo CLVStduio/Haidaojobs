@@ -38,6 +38,10 @@
        <property name="mapperInterface" value="com.clv.mapper.MyComponentMapper" />  
        <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
     </bean> 
+     <bean id="adminMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+       <property name="mapperInterface" value="com.clv.mapper.AdminMapper" />  
+       <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
+    </bean> 
 	<!-- 自动扫描注解的bean -->
 	<context:component-scan base-package="com.clv.user.dao" />
 	<context:component-scan base-package="com.clv.admin.dao" />
