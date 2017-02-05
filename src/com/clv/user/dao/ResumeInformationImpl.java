@@ -213,10 +213,10 @@ public class ResumeInformationImpl implements ResumeInformation {
 	}
 
 	@Override
-	public String setAuditConclusion(int adminId, int enUserId, int auditType) throws JSONException {
+	public String setAuditConclusion(int adminId, String enUserId, int auditType) throws JSONException {
 		if(adminId>0){
 			Admin admin = resumeMapper.selectAdminById(adminId);
-			String userIdStr = factory.getCrypto().decrypMessage(Integer.toString(enUserId), admin.getAdminPhoneNo(), admin.getSecurityKey());
+			String userIdStr = factory.getCrypto().decrypMessage(enUserId, admin.getAdminPhoneNo(), admin.getSecurityKey());
 			if(!"fail".equals(userIdStr)){
 				int userId = Integer.parseInt(userIdStr);
 				Identity identity = resumeMapper.selectIdentity(userId);

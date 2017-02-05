@@ -18,6 +18,5 @@
 			String auditType=(String)request.getParameter("auditType");
 			
 			int adminId = adminDao.IdAuthentication(enAdminId);
-			int userId = userDao.IdAuthentication(enUserId);
 		%>
-<%=resumeInformation.setAuditConclusion(adminId,userId,Integer.parseInt(auditType)) %>
+	<%=resumeInformation.setAuditConclusion(adminId,enUserId,Integer.parseInt(auditType)) %>

@@ -124,5 +124,5 @@ public interface ResumeInformation {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String setAuditConclusion(int adminId,int userId,int auditType) throws JSONException;
+	public String setAuditConclusion(int adminId,String enUserId,int auditType) throws JSONException;
 }
