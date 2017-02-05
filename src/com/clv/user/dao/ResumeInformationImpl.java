@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.clv.mapper.ResumeMapper;
+import com.clv.model.admin.Admin;
 import com.clv.model.format.JsonFormat;
 import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
@@ -212,13 +213,25 @@ public class ResumeInformationImpl implements ResumeInformation {
 	}
 
 	@Override
-	public String setAuditConclusion(int adminId, int userId, int auditType) throws JSONException {
+	public String setAuditConclusion(int adminId, int enUserId, int auditType) throws JSONException {
 		if(adminId>0){
-			if(userId>0){
-				resumeMapper.modifyAuditTypeOfIdentity(userId, adminId, auditType);
-				return new JsonFormat("success").toString();
+			Admin admin = resumeMapper.selectAdminById(adminId);
+			String userIdStr = factory.getCrypto().decrypMessage(Integer.toString(enUserId), admin.getAdminPhoneNo(), admin.getSecurityKey());
+			if(!"fail".equals(userIdStr)){
+				int userId = Integer.parseInt(userIdStr);
+				Identity identity = resumeMapper.selectIdentity(userId);
+				if(identity != null){
+					resumeMapper.modifyAuditTypeOfIdentity(userId, adminId, auditType);
+					if(auditType == 1){
+						resumeMapper.modifyIdentityOfInformation(userId, identity.getName(), identity.getGender(), identity.getDateBirth());
+					}
+					return new JsonFormat("success").toString();
+				}
+				//不存在相关认证信息
+				return new JsonFormat("401","fail").toString();
 			}
-			return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+			//信息解密失败
+			return new JsonFormat("401","fail").toString();
 		}
 		return new JsonFormat("21"+Math.abs(adminId),"fail").toString();
 	}

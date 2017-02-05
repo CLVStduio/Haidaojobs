@@ -5,6 +5,9 @@
     <select id="selectUserById" parameterType="int" resultType="com.clv.user.model.User">    
          select * from user where userId = #{userId}  
     </select>  
+    <select id="selectAdminById" parameterType="int" resultType="com.clv.model.admin.Admin">    
+       select * from admin where adminId = #{adminId}    
+    </select> 
 	<!-- Information strat -->
 		<insert id="addInformation">
 			INSERT INTO user_Information (userId) values(#{userId}); 

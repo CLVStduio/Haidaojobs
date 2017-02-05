@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.clv.model.admin.Admin;
 import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
 import com.clv.model.resume.Skill;
@@ -21,6 +22,12 @@ public interface ResumeMapper {
 	 * @return
 	 */
     public User selectUserById(int user_id); 
+    /**
+  	 * 根据用户ID查询管理员信息
+  	 * @param user_id
+  	 * @return
+  	 */
+      public Admin selectAdminById(int adminId);  
 	/*****************用户基本信息****************/
 	/**
 	 * 添加用户基本信息
