@@ -77,7 +77,11 @@ public class UserDaoImpl implements UserDao{
 		submail.addVar("time", "10分钟");
 		if(submail.xsend()){
 			String time = Long.valueOf(System.currentTimeMillis()).toString();
-			userMapper.modifyCode(phone, strcode, time);
+			if(userMapper.selectCode(phone) !=null){
+				userMapper.modifyCode(phone, strcode, time);
+				return new JsonFormat("success").toString();
+			}
+			userMapper.addCode(phone, strcode,time);
 			return new JsonFormat("success").toString();
 		}
 		return new JsonFormat("101","fail").toString();
