@@ -44,7 +44,7 @@
 		    	<result column = "dateBirth" property="dateBirth"/>
 		    </resultMap>
 		    <select id="getAuditQueue" resultMap="IdentityResult">
-		    	select userId,name,gender,idNum,dateBirth from user_Identiry WHERE auditType = 0;
+		    	select userId,name,gender,idNum,dateBirth from user_Identity WHERE auditType = 0;
 		    </select>
 	    <!-- getAuditQueue end -->
 	<!--  Identiry    end  -->
