@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.clv.mapper.MyComponentMapper">
-    <select id="selectUserById" parameterType="int" resultType="com.clv.user.model.User">    
+    <select id="selectUserById" parameterType="int" resultType="com.clv.model.user.User">    
           select * from user where userId = #{userId}
     </select>  
 
