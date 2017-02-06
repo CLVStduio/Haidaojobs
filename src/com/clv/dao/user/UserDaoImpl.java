@@ -138,17 +138,15 @@ public class UserDaoImpl implements UserDao{
 		 long codeTime = Long.parseLong(Code.getTime());
 		
 		 if(Code.getCode().equals(code)){
-			 System.out.println("验证码正确");
+			  if(Math.abs(codeTime-time)>60000){
+				 System.out.println("验证码过期");
+				 return new JsonFormat("102","fail").toString();
+			  }
+			  System.out.println("验证码正确");
 			 return new JsonFormat("success").toString();
 		 }
-		 if(Math.abs(codeTime-time)>600000){
-			 userMapper.deleteCode(phone);
-			 System.out.println("验证码过期");
-			 return new JsonFormat("102","fail").toString();
-		 }else{
-			 System.out.println("验证码错误");
-			 return new JsonFormat("101","fail").toString();
-		 }
+		 System.out.println("验证码错误");
+		 return new JsonFormat("101","fail").toString();
 	 }
 	@Override
 	public String addUser(String enPhone, String enPassword) throws JSONException {
