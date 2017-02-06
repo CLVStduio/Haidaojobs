@@ -43,6 +43,6 @@
        <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
     </bean> 
 	<!-- 自动扫描注解的bean -->
-	<context:component-scan base-package="com.clv.user.dao" />
-	<context:component-scan base-package="com.clv.admin.dao" />
+	<context:component-scan base-package="com.clv.dao.user" />
+	<context:component-scan base-package="com.clv.dao.admin" />
 </beans>

@@ -3,8 +3,8 @@
 <configuration>  
    <!-- 配置映射类的别名 -->  
     <typeAliases>  
-      <typeAlias alias="User" type="com.clv.user.model.User"/>   
-      <typeAlias alias="Code" type="com.clv.user.model.Code"/>   
+      <typeAlias alias="User" type="com.clv.model.user.User"/>   
+      <typeAlias alias="Code" type="com.clv.model.user.Code"/>   
       
       <typeAlias alias="Signin" type="com.clv.model.mycomponent.Signin"/>
       <typeAlias alias="SigninGift" type="com.clv.model.mycomponent.SigninGift"/>
