@@ -1,5 +1,5 @@
-<%@page import="com.clv.admin.dao.AdminDao"%>
-<%@page import="com.clv.user.dao.ResumeInformation"%>
+<%@page import="com.clv.dao.admin.AdminDao"%>
+<%@page import="com.clv.dao.user.ResumeInformation"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html"

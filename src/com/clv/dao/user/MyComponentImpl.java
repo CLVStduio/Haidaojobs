@@ -1,4 +1,4 @@
-package com.clv.user.dao;
+package com.clv.dao.user;
 
 import java.util.Calendar;
 

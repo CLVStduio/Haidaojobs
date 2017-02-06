@@ -8,7 +8,7 @@ import com.clv.model.admin.Admin;
 import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
 import com.clv.model.resume.Skill;
-import com.clv.user.model.User;
+import com.clv.model.user.User;
 
 /** 
  * Mapper用户简历数据库操作映射类

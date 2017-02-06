@@ -1,4 +1,4 @@
-package com.clv.user.model;
+package com.clv.model.user;
 
 import java.sql.Date;
 

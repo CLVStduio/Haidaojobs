@@ -1,4 +1,4 @@
-package com.clv.user.dao;
+package com.clv.dao.user;
 
 import java.io.File;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.clv.model.admin.Admin;
 import com.clv.model.format.JsonFormat;
 import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
-import com.clv.user.model.User;
+import com.clv.model.user.User;
 
 import cn.clvstudio.tool.Factory;
 @Component

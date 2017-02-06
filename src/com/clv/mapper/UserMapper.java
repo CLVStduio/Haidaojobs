@@ -4,8 +4,8 @@ import java.sql.Date;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.clv.user.model.Code;
-import com.clv.user.model.User;  
+import com.clv.model.user.Code;
+import com.clv.model.user.User;  
 /** 
  * Mapper用户数据库操作映射类
  * @author Evanglist

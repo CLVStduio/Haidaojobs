@@ -1,4 +1,4 @@
-package com.clv.user.dao;
+package com.clv.dao.user;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.clv.mapper.ResumeMapper;
 import com.clv.model.format.JsonFormat;
 import com.clv.model.resume.Skill;
-import com.clv.user.model.User;
+import com.clv.model.user.User;
 
 import cn.clvstudio.tool.Factory;
 /**

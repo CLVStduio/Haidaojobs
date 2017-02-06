@@ -1,11 +1,11 @@
-package com.clv.user.dao;
+package com.clv.dao.user;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.taobao.api.ApiException;
+//import com.taobao.api.ApiException;
 /**
  * 用户DAO接口
  * @author Evanglist
@@ -33,7 +33,7 @@ public interface UserDao {
 	 * @return
 	 * @throws ApiException 
 	 */
-	public String getCode(String phone) throws ApiException, JSONException;
+	public String getCode(String phone) throws JSONException;
 	
 	/**
 	 * 添加用户

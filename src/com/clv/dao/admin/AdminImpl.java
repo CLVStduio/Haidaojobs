@@ -1,4 +1,4 @@
-package com.clv.admin.dao;
+package com.clv.dao.admin;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;

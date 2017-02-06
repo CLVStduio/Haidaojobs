@@ -1,4 +1,4 @@
-package com.clv.user.dao;
+package com.clv.dao.user;
 
 import java.io.File;
 import java.sql.Date;
@@ -14,13 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.clv.mapper.UserMapper;
 import com.clv.model.format.JsonFormat;
-import com.clv.user.model.Code;
-import com.clv.user.model.User;
+import com.clv.model.user.Code;
+import com.clv.model.user.User;
 import com.mysubmail.config.AppConfig;
 import com.mysubmail.lib.MESSAGEXsend;
 import com.mysubmail.utils.ConfigLoader;
-import com.taobao.api.ApiException;
 //阿里大于短信服务调用包
+//import com.taobao.api.ApiException;
 //import com.taobao.api.DefaultTaobaoClient;
 //import com.taobao.api.TaobaoClient;
 //import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao{
 			
 	}
 	//赛邮短信服务调用接口
-	public String getCode(String phone) throws ApiException, JSONException {
+	public String getCode(String phone) throws JSONException {
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0;i<6;i++){
 			int code = (int)(Math.random()*8+1);

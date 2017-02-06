@@ -1,4 +1,4 @@
-package com.clv.user.model;
+package com.clv.model.user;
 
 /**
  * 验证码映射类
