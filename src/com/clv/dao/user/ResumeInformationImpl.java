@@ -57,28 +57,33 @@ public class ResumeInformationImpl implements ResumeInformation {
 	@Override
 	public String modifyIdentityAuthentication(int id, String enName, String enGender, String enIdNum) throws JSONException {
 		if(id>0){
-			User user = resumeMapper.selectUserById(id);
-			String name = factory.getCrypto().decrypMessage(enName, user.getUserPhoneNo(), user.getSecurityKey());
-			String gender = factory.getCrypto().decrypMessage(enGender, user.getUserPhoneNo(), user.getSecurityKey());
-			String idNum = factory.getCrypto().decrypMessage(enIdNum, user.getUserPhoneNo(), user.getSecurityKey());
-			if(name!=null &&  gender!=null &&  idNum!=null ){
-				if(name.length()<30){
-					if("男".equals(gender)||"女".equals(gender)){
-						if(idNum.length()==18){
-							String dateBirth = idNum.substring(6, 10)+"."+idNum.substring(10, 12)+"."+idNum.substring(12, 14);
-							resumeMapper.modifyIdentity(id, name, gender, idNum, dateBirth);
-							return new JsonFormat("success").toString();
+			Identity identity = resumeMapper.selectIdentity(id);
+			if(identity.getAuditType()!=1){
+				User user = resumeMapper.selectUserById(id);
+				String name = factory.getCrypto().decrypMessage(enName, user.getUserPhoneNo(), user.getSecurityKey());
+				String gender = factory.getCrypto().decrypMessage(enGender, user.getUserPhoneNo(), user.getSecurityKey());
+				String idNum = factory.getCrypto().decrypMessage(enIdNum, user.getUserPhoneNo(), user.getSecurityKey());
+				if(name!=null &&  gender!=null &&  idNum!=null ){
+					if(name.length()<30){
+						if("男".equals(gender)||"女".equals(gender)){
+							if(idNum.length()==18){
+								String dateBirth = idNum.substring(6, 10)+"."+idNum.substring(10, 12)+"."+idNum.substring(12, 14);
+								resumeMapper.modifyIdentity(id, name, gender, idNum, dateBirth);
+								return new JsonFormat("success").toString();
+							}
+							//身份证号长度不符
+							return new JsonFormat("103","fail").toString();
 						}
-						//身份证号长度不符
-						return new JsonFormat("103","fail").toString();
+						//性别格式不符
+						return new JsonFormat("102","fail").toString();
 					}
-					//性别格式不符
-					return new JsonFormat("102","fail").toString();
+					//真实姓名过长
+					return new JsonFormat("101","fail").toString();
 				}
-				//真实姓名过长
-				return new JsonFormat("101","fail").toString();
+				return new JsonFormat("401","fail").toString();
 			}
-			return new JsonFormat("401","fail").toString();
+			//已经认证成功，禁止修改
+			return new JsonFormat("104","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
@@ -168,7 +173,9 @@ public class ResumeInformationImpl implements ResumeInformation {
 		if(id>0){
 			Information information = resumeMapper.selectInformation(id);
 			if(information!=null){
-				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(information,"InformationId"))).toString();
+				User user = resumeMapper.selectUserById(id);
+				String enIdentity = factory.getCrypto().encryptMessage(factory.getJson().toJson(information,"InformationId").toString(), user.getUserPhoneNo(), user.getSecurityKey());
+				return new JsonFormat("success",new JSONArray().put(enIdentity)).toString();
 			}
 			resumeMapper.addInformation(id);
 			information = resumeMapper.selectInformation(id);
@@ -221,11 +228,15 @@ public class ResumeInformationImpl implements ResumeInformation {
 				int userId = Integer.parseInt(userIdStr);
 				Identity identity = resumeMapper.selectIdentity(userId);
 				if(identity != null){
-					resumeMapper.modifyAuditTypeOfIdentity(userId, adminId, auditType);
-					if(auditType == 1){
-						resumeMapper.modifyIdentityOfInformation(userId, identity.getName(), identity.getGender(), identity.getDateBirth());
+					if(identity.getAuditType()!=1){
+						resumeMapper.modifyAuditTypeOfIdentity(userId, adminId, auditType);
+						if(auditType == 1){
+							resumeMapper.modifyIdentityOfInformation(userId, identity.getName(), identity.getGender(), identity.getDateBirth());
+						}
+						return new JsonFormat("success").toString();
 					}
-					return new JsonFormat("success").toString();
+					//已经认证成功不能修改
+					return new JsonFormat("101","fail").toString();
 				}
 				//不存在相关认证信息
 				return new JsonFormat("401","fail").toString();
@@ -233,7 +244,7 @@ public class ResumeInformationImpl implements ResumeInformation {
 			//信息解密失败
 			return new JsonFormat("401","fail").toString();
 		}
-		return new JsonFormat("21"+Math.abs(adminId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(adminId),"fail").toString();
 	}
 
 }
