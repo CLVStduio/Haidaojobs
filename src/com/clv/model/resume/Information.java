@@ -6,7 +6,7 @@ package com.clv.model.resume;
  *
  */
 public class Information {
-	private int InformationId;
+	private int informationId;
 	private int userId;
 	private String name;
 	private String gender;
@@ -15,10 +15,10 @@ public class Information {
 	private String email;
 	
 	public int getInformationId() {
-		return InformationId;
+		return informationId;
 	}
-	public void setInformationId(int InformationId) {
-		this.InformationId = InformationId;
+	public void setInformationId(int informationId) {
+		this.informationId = informationId;
 	}
 	public int getUserId() {
 		return userId;
@@ -58,7 +58,7 @@ public class Information {
 	}
 	@Override
 	public String toString() {
-		return "Information [InformationId=" + InformationId + ", userId=" + userId + ", name=" + name + ", gender="
+		return "Information [informationId=" + informationId + ", userId=" + userId + ", name=" + name + ", gender="
 				+ gender + ", height=" + height + ", dateBirth=" + dateBirth + ", email=" + email + "]";
 	}
 	
