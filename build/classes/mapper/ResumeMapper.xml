@@ -36,7 +36,7 @@
 			UPDATE user_Identity SET adminId=#{adminId},auditType=#{auditType} WHERE userId=#{userId};
 		</select>
 		<select id="selectIdentity" resultType="com.clv.model.resume.Identity">
-			SELECT * FROM user_Identity WHERE userId=userId;
+			SELECT * FROM user_Identity WHERE userId=#{userId};
 		</select>
 		<!-- getAuditQueue strat-->
 		    <resultMap type="com.clv.model.resume.Identity" id="IdentityResult">

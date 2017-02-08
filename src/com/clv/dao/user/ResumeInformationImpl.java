@@ -117,8 +117,7 @@ public class ResumeInformationImpl implements ResumeInformation {
 			User user = resumeMapper.selectUserById(id);
 			Identity identity = resumeMapper.selectIdentity(id);
 			if(identity!=null){
-				System.out.println(identity.toString());
-				String identityStr = factory.getJson().toJson(identity,"IdentityId","dateBirth","adminId").toString();
+				String identityStr = factory.getJson().toJson(identity,"identityId","dateBirth","adminId").toString();
 				String enIdentity = factory.getCrypto().encryptMessage(identityStr, user.getUserPhoneNo(), user.getSecurityKey());
 				if(!"fail".equals(enIdentity)){
 					return new JsonFormat("success",new JSONArray().put(new JSONObject().put("identity",enIdentity))).toString();

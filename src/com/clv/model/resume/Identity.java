@@ -6,7 +6,7 @@ package com.clv.model.resume;
  *
  */
 public class Identity {
-	private int IdentityId;
+	private int identityId;
 	/**
 	 * 用户id
 	 */
@@ -32,10 +32,10 @@ public class Identity {
 	 */
 	private int auditType;
 	public int getIdentityId() {
-		return IdentityId;
+		return identityId;
 	}
 	public void setIdentityId(int identityId) {
-		IdentityId = identityId;
+		this.identityId = identityId;
 	}
 	public int getUserId() {
 		return userId;
@@ -81,7 +81,7 @@ public class Identity {
 	}
 	@Override
 	public String toString() {
-		return "Identity [IdentityId=" + IdentityId + ", userId=" + userId + ", name=" + name + ", gender=" + gender
+		return "Identity [identityId=" + identityId + ", userId=" + userId + ", name=" + name + ", gender=" + gender
 				+ ", auditType=" + auditType + ", idNum=" + idNum + ", dateBirth=" + dateBirth + ", adminId=" + adminId
 				+ "]";
 	}
