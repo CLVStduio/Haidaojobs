@@ -28,27 +28,13 @@ public interface UserDao {
 	public String isUserPhoneNo(String phone)throws JSONException;
 	
 	/**
-	 * 获取验证码
-	 * @param phone
-	 * @return
-	 * @throws ApiException 
-	 */
-	public String getCode(String phone) throws JSONException;
-	
-	/**
 	 * 添加用户
 	 * @param phone
 	 * @param password
 	 * @return
 	 */
 	 public String addUser(String phone,String password)throws JSONException;
-	 /**
-	  * 效对验证码
-	  * @param phone
-	  * @param code
-	  * @return
-	  */
-	 public String checkCode(String phone,String code)throws JSONException;
+	
 	 /**
 	  * 登录
 	  * @param phone

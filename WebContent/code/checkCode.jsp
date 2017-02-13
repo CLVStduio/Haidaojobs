@@ -1,11 +1,10 @@
-<%@page import="com.clv.dao.user.UserDao"%>
+<%@page import="com.clv.dao.tool.MessageDao"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 		<%
-			WebApplicationContext wac = WebApplicationContextUtils
-					.getWebApplicationContext(this.getServletContext());
-			UserDao userDao = (UserDao) wac.getBean("userDaoImpl");
+			WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		MessageDao messageDao = (MessageDao) wac.getBean("messageDaoImpl");
 			
 			String phone=(String)request.getParameter("checkPhone");
 			String code =(String)request.getParameter("checkCode"); 
@@ -17,7 +16,7 @@
 			//String phone = str[0];
 			//String code = str[1];
 			//String phone = (String)request.getParameter("checkPhone");
-		System.out.println("验证码phone："+phone);
-		System.out.println("code:"+code);
+		//System.out.println("验证码phone："+phone);
+		//System.out.println("code:"+code);
 		%>
-<%=userDao.checkCode(phone,code) %>
+<%=messageDao.checkCode(phone,code) %>

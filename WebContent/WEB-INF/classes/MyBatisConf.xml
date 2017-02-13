@@ -22,5 +22,6 @@
        <mapper resource="mapper/ResumeMapper.xml"/>  
        <mapper resource="mapper/MyComponentMapper.xml"/>  
        <mapper resource="mapper/AdminMapper.xml"/>
+       <mapper resource="mapper/MessageMapper.xml"/>
    </mappers>  
 </configuration>  

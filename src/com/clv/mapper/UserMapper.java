@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.clv.model.user.Code;
 import com.clv.model.user.User;  
 /** 
  * Mapper用户数据库操作映射类
@@ -12,33 +11,7 @@ import com.clv.model.user.User;
  * @time 2016.12.31
  */  
 public interface UserMapper {  
-	/*****************验证码相关****************/
-    /**
-     * 保存验证码
-     * @param phone
-     * @param code
-     * @param time
-     */
-    public void addCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
-    /**
-     * 删除指定验证码
-     * @param phone
-     */
-    public void deleteCode(@Param("phone")String phone);
-    /**
-     * 更新验证码
-     * @param phone
-     * @param code
-     * @param time
-     */
-    public void modifyCode(@Param("phone")String phone,@Param("code")String code,@Param("time")String time);
-    /**
-     * 查询指定验证码
-     * @param phone
-     * @return
-     */
-    public Code selectCode(@Param("phone")String phone);
-    /*****************验证码相关****************/
+
     /*****************用户信息****************/
 	/**
 	 * 根据用户ID查询用户信息
