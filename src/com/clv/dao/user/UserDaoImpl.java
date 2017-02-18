@@ -26,8 +26,10 @@ import cn.clvstudio.tool.Factory;
  */
 @Component
 public class UserDaoImpl implements UserDao{
-    @Autowired
-	private UserMapper userMapper;
+	
+	@Autowired 
+	UserMapper userMapper;
+
 	private Factory factory = new Factory();
     
 	public String getUser(int id) throws JSONException{
