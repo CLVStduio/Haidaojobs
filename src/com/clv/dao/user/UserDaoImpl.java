@@ -28,7 +28,7 @@ import cn.clvstudio.tool.Factory;
 public class UserDaoImpl implements UserDao{
 	
 	@Autowired 
-	UserMapper userMapper;
+	private UserMapper userMapper;
 
 	private Factory factory = new Factory();
     
