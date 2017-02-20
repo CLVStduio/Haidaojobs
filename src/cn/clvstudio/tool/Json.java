@@ -1,5 +1,9 @@
 package cn.clvstudio.tool;
 
+import java.util.List;
+
+import org.json.JSONArray;
+
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
@@ -29,5 +33,13 @@ public class Json {
 		JSONObject object = JSONObject.fromObject(obj,config);
 //		String str=object.toString();
 		return object;
+	}
+	
+	public <T> JSONArray listToJsonArray(List<T> list,String ...strings){
+		JSONArray jsonArray = new JSONArray();
+		for(T o : list){
+			jsonArray.put(toJson(o,strings));
+		}
+		return jsonArray;
 	}
 }
