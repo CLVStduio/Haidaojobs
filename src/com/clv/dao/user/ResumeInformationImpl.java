@@ -101,12 +101,10 @@ public class ResumeInformationImpl implements ResumeInformation {
 					String path = File.separator+"images"+File.separator+"certificatePhoto"+File.separator+id;
 					factory.getPhotoProcessing().savefile(photoName, path, file);
 					return new JsonFormat("success").toString();
-				}else{
-					return new JsonFormat("301","fail").toString();//格式不符
 				}
-			}else{
-				return  new JsonFormat("302","fail").toString();//上传的图片为空
+				return new JsonFormat("301","fail").toString();//格式不符
 			}
+			return  new JsonFormat("302","fail").toString();//上传的图片为空
 		}
 		return new JsonFormat("20"+Math.abs(id),"fail").toString();
 	}
@@ -189,15 +187,10 @@ public class ResumeInformationImpl implements ResumeInformation {
 	public String getAuditQueue(int adminId) throws JSONException {
 		if(adminId>0){
 			List<Identity> auditQueue = resumeMapper.getAuditQueue();
-			JSONArray jsonArray = new JSONArray();
 			if(auditQueue != null){
-				for(Identity identity : auditQueue){
-					jsonArray.put(factory.getJson().toJson(identity));
-//					System.out.println("skill"+factory.getJson().toJson(l).toString());
-				}
+				JSONArray jsonArray = factory.getJson().listToJsonArray(auditQueue);
 				return new JsonFormat("success",jsonArray).toString();
 			}
-//			System.out.println("selectSkill id:"+id+" skill is null");
 			return new JsonFormat("101","fail").toString();
 		}
 		return new JsonFormat("20"+Math.abs(adminId),"fail").toString();
