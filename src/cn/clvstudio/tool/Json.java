@@ -37,8 +37,8 @@ public class Json {
 	
 	public <T> JSONArray listToJsonArray(List<T> list,String ...strings){
 		JSONArray jsonArray = new JSONArray();
-		for(T o : list){
-			jsonArray.put(toJson(o,strings));
+		for(T t : list){
+			jsonArray.put(toJson(t,strings));
 		}
 		return jsonArray;
 	}
