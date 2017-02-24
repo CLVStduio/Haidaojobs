@@ -9,7 +9,6 @@ public class PartTimeDescription {
 	private int descriptionId;
 	private String title;
 	private String content;
-	private int partTimeId;
 	public int getDescriptionId() {
 		return descriptionId;
 	}
@@ -28,16 +27,10 @@ public class PartTimeDescription {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getPartTimeId() {
-		return partTimeId;
-	}
-	public void setPartTimeId(int partTimeId) {
-		this.partTimeId = partTimeId;
-	}
 	@Override
 	public String toString() {
 		return "PartTimeDescription [descriptionId=" + descriptionId + ", title=" + title + ", content=" + content
-				+ ", partTimeId=" + partTimeId + "]";
+				+"]";
 	}
 	
 }

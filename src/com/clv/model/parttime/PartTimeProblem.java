@@ -13,11 +13,9 @@ public class PartTimeProblem {
 	 * 1、问答题
 	 * 2、单选题
 	 * 3、多选题
-	 * 
 	 */
 	private int type;
 	private String content;
-	private int partTimeId;
 	public int getProblemId() {
 		return problemId;
 	}
@@ -42,16 +40,10 @@ public class PartTimeProblem {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getPartTimeId() {
-		return partTimeId;
-	}
-	public void setPartTimeId(int partTimeId) {
-		this.partTimeId = partTimeId;
-	}
 	@Override
 	public String toString() {
 		return "PartTimeProblem [problemId=" + problemId + ", topic=" + topic + ", type=" + type + ", content="
-				+ content + ", partTimeId=" + partTimeId + "]";
+				+ content + "]";
 	}
 	
 }

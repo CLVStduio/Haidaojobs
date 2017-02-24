@@ -2,8 +2,6 @@ package com.clv.model.parttime;
 
 import java.util.List;
 
-import org.json.JSONArray;
-
 import cn.clvstudio.tool.Factory;
 
 public class PartTimeShow {
@@ -69,8 +67,8 @@ public class PartTimeShow {
 	 * 4：完成
 	 */
 	private int partTimeStatus;
-	private JSONArray description;
-	private JSONArray problem;
+	private List<PartTimeDescription> description;
+	private List<PartTimeProblem> problem;
 	
 	private Factory factory = new Factory();
 	public PartTimeShow(PartTimeInformation information,List<PartTimeDescription> description,List<PartTimeProblem> problem){
@@ -89,8 +87,8 @@ public class PartTimeShow {
 		this.jobDescription = information.getJobDescription();
 		this.claim = information.getClaim();
 		this.partTimeStatus = information.getPartTimeStatus();
-		this.description = factory.getJson().listToJsonArray(description, "partTimeId","descriptionId");
-		this.problem = factory.getJson().listToJsonArray(problem, "partTimeId");;
+		this.description = description;
+		this.problem = problem;
 	}
 	public int getPartTimeId() {
 		return partTimeId;
@@ -137,10 +135,10 @@ public class PartTimeShow {
 	public int getPartTimeStatus() {
 		return partTimeStatus;
 	}
-	public JSONArray getDescription() {
+	public List<PartTimeDescription> getDescription() {
 		return description;
 	}
-	public JSONArray getProblem() {
+	public List<PartTimeProblem> getProblem() {
 		return problem;
 	}
 	public Factory getFactory() {
@@ -153,8 +151,6 @@ public class PartTimeShow {
 				+ ", workDate=" + workDate + ", location=" + location + ", companyId=" + companyId + ", needNumber="
 				+ needNumber + ", numberOfapplicants=" + numberOfapplicants + ", jobDescription=" + jobDescription
 				+ ", claim=" + claim + ", partTimeStatus=" + partTimeStatus + ", description=" + description
-				+ ", problem=" + problem + ", factory=" + factory + "]";
+				+ ", problem=" + problem + "]";
 	}
-	
-	
 }
