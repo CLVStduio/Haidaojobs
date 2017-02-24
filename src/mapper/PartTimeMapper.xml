@@ -34,10 +34,9 @@
 		    	<result column = "descriptionId" property="descriptionId"/>
 		    	<result column = "title" property="title"/>
 		    	<result column = "content" property="content"/>
-		    	<result column = "partTimeId" property="partTimeId"/>
 		    </resultMap>
 		    <select id="getPartTimeDescription" resultMap="PartTimeDescription">
-		    	SELECT descriptionId,title,content,partTimeId from parttime_description WHERE partTimeId=#{partTimeId} ;
+		    	SELECT descriptionId,title,content from parttime_description WHERE partTimeId=#{partTimeId} ;
 		    </select>
  		<!-- getPartTimeDescription end-->
  		<!-- getPartTimeProblem strat-->
@@ -46,7 +45,6 @@
 		    	<result column = "topic" property="topic"/>
 		    	<result column = "type" property="type"/>
 		    	<result column = "content" property="content"/>
-		    	<result column = "partTimeId" property="partTimeId"/>
 		    </resultMap>
 		    <select id="getPartTimeProblem" resultMap="PartTimeProblem">
 		    	SELECT problemId,topic,type,content from parttime_problem WHERE partTimeId=#{partTimeId} ;
