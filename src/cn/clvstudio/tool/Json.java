@@ -29,9 +29,8 @@ public class Json {
 			config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);     
 			config.setExcludes(strings);//只要设置这个数组，指定过滤哪些字段。    
 		}
-        		  
+        System.out.println("tojson");
 		JSONObject object = JSONObject.fromObject(obj,config);
-//		String str=object.toString();
 		return object;
 	}
 	

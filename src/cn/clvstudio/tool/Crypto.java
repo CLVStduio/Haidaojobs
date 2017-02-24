@@ -59,6 +59,13 @@ public class Crypto {
 		}
 		return null;
     }
+    /**
+     * AES信息匙加密
+     * @param message
+     * @param phone
+     * @param securityKey
+     * @return
+     */
     public String encryptMessage(String message,String phone,String securityKey){
     	String encrypt = encrypt(message,builderMessage(phone,securityKey));
     	if(encrypt != null ){
