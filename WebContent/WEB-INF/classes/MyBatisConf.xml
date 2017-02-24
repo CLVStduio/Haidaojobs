@@ -6,14 +6,18 @@
       <typeAlias alias="User" type="com.clv.model.user.User"/>   
       <typeAlias alias="Code" type="com.clv.model.user.Code"/>   
       
-      <typeAlias alias="Signin" type="com.clv.model.mycomponent.Signin"/>
+      <typeAlias alias="Signin"     type="com.clv.model.mycomponent.Signin"/>
       <typeAlias alias="SigninGift" type="com.clv.model.mycomponent.SigninGift"/>
       
-      <typeAlias alias="Skill" type="com.clv.model.resume.Skill"/>
+      <typeAlias alias="Skill"       type="com.clv.model.resume.Skill"/>
       <typeAlias alias="Information" type="com.clv.model.resume.Information"/>
-      <typeAlias alias="Identity" type="com.clv.model.resume.Identity"/>
+      <typeAlias alias="Identity"    type="com.clv.model.resume.Identity"/>
       
       <typeAlias alias="Admin" type="com.clv.model.admin.Admin"/>
+      
+      <typeAlias alias="PartTimeInformation" type="com.clv.model.parttime.PartTimeInformation"/>
+      <typeAlias alias="PartTimeDescription" type="com.clv.model.parttime.PartTimeDescription"/>
+      <typeAlias alias="PartTimeProblem"     type="com.clv.model.parttime.PartTimeProblem"/>
    </typeAliases>    
    
    <!-- 配置Mapper文件的路径 -->  
@@ -23,5 +27,7 @@
        <mapper resource="mapper/MyComponentMapper.xml"/>  
        <mapper resource="mapper/AdminMapper.xml"/>
        <mapper resource="mapper/MessageMapper.xml"/>
+       <mapper resource="mapper/MerchantMapper.xml"/>
+       <mapper resource="mapper/PartTimeMapper.xml"/>
    </mappers>  
 </configuration>  

@@ -73,15 +73,12 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public String signIn(String enPhone,String enPassword) throws JSONException {
 		//登录
-
 		String dePhone = factory.getCrypto().decryptTime(enPhone);
 		String dePassword = factory.getCrypto().decryptTime(enPassword);
 		if("fail".equals(dePhone) || "fail".equals(dePassword) || dePhone == null || dePassword==null){
 			return  new JsonFormat("102","fail").toString();
 		}
 		User user = userMapper.selectUserByPhoneNo(dePhone);
-//		System.out.print(dePhone);
-//		String password = userMapper.signIn(dePhone);
 		if( user == null){
 			System.out.println(":帐号或密码错误");
 			return new JsonFormat("101","fail").toString();
@@ -99,9 +96,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	public int IdAuthentication(String enId){
-		System.out.println("enId: "+enId);
 		String deIdmessage = factory.getCrypto().decryptTime(enId);
-//		System.out.println(deIdmessage);
 		if(deIdmessage!=null ){
 			if(deIdmessage.length() >=42){
 				StringBuilder sb = new StringBuilder(deIdmessage);
@@ -114,23 +109,17 @@ public class UserDaoImpl implements UserDao{
 						StringBuilder keySb = new StringBuilder(user.getComplementKey());
 						String oldTime = keySb.substring(16);
 						if(Long.parseLong(newTime)-Long.parseLong(oldTime)>15*24*60*60*1000){
-							System.out.println("安全码已经过期，请重新登录");
 							return -1;
 						}
-						
 						return user.getUserId();
-						
 					}
-					System.out.println("安全码不正确");
 					return -2;
 				}
-				System.out.println("该ID号不存在");
 				return -3;
 			}
 			return -5;
 		}
-			System.out.println("解密失败");
-			return -4;
+		return -4;
 	}
 	@Override
 	public String modifyUserName(String enmessage, int id) throws JSONException {

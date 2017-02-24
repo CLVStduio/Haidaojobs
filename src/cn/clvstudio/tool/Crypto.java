@@ -31,18 +31,14 @@ public class Crypto {
 	 */
     public String encrypt(String sSrc, String sKey) {
         if (sKey == null) {
-            System.out.print("Key值为空");
             return null;
         }
         if (sKey.length() != 16) {
-            System.out.print("Key不是16的倍数");
             return null;
         }
 		try {
 			byte[] raw = sKey.getBytes(UTF8);
 			SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-		
-        
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(sSrc.getBytes(UTF8));

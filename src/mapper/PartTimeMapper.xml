@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.clv.mapper.PartTimeMapper">  
+ 	<!-- Client strat -->
+ 		<!-- getPartTimeList strat-->
+ 			 <resultMap type="com.clv.model.parttime.PartTimeSummary" id="PartTimeSummary">
+		    	<result column = "partTimeId" property="partTimeId"/>
+		    	<result column = "photoName" property="photoName"/>
+		    	<result column = "title" property="title"/>
+		    	<result column = "locationProvince" property="locationProvince"/>
+		    	<result column = "locationCity" property="locationCity"/>
+		    	<result column = "locationDistrict" property="locationDistrict"/>
+		    	<result column = "locationDetailed" property="locationDetailed"/>
+		    	<result column = "workDate" property="workDate"/>
+		    	<result column = "salary" property="salary"/>
+		    	<result column = "partTimeQualification" property="partTimeQualification"/>
+		    	<result column = "lastTime" property="lastTime"/>
+		    </resultMap>
+		    <select id="getPartTimeList" resultMap="PartTimeSummary">
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime from parttime_Information WHERE (partTimeStatus=0 OR partTimeStatus=1) AND lastTime>=#{lastTime} ;
+		    </select>
+ 		<!-- getPartTimeList end-->
+ 		<!-- getPartTimeListAll strat-->
+		    <select id="getPartTimeListAll" resultMap="PartTimeSummary">
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime from parttime_Information WHERE lastTime>=UNIX_TIMESTAMP(DATE_SUB(#{lastTime},INTERVAL 1 DAY)) ;
+		    </select>
+ 		<!-- getPartTimeListAll end-->
+ 		<select id="getPartTimeInformation" resultType="com.clv.model.parttime.PartTimeInformation">
+			SELECT partTimeId,photoName,title,type,settlementMethod,salary,deadline,workDate,locationProvince,locationCity,locationDistrict,locationDetailed,companyId,needNumber,numberOfapplicants,jobDescription,claim,partTimeStatus FROM parttime_Information WHERE partTimeId=#{partTimeId};
+		</select>
+		<!-- getPartTimeDescription strat-->
+ 			 <resultMap type="com.clv.model.parttime.PartTimeDescription" id="PartTimeDescription">
+		    	<result column = "descriptionId" property="descriptionId"/>
+		    	<result column = "title" property="title"/>
+		    	<result column = "content" property="content"/>
+		    	<result column = "partTimeId" property="partTimeId"/>
+		    </resultMap>
+		    <select id="getPartTimeDescription" resultMap="PartTimeDescription">
+		    	SELECT descriptionId,title,content,partTimeId from parttime_description WHERE partTimeId=#{partTimeId} ;
+		    </select>
+ 		<!-- getPartTimeDescription end-->
+ 		<!-- getPartTimeProblem strat-->
+ 			 <resultMap type="com.clv.model.parttime.PartTimeProblem" id="PartTimeProblem">
+		    	<result column = "problemId" property="problemId"/>
+		    	<result column = "topic" property="topic"/>
+		    	<result column = "type" property="type"/>
+		    	<result column = "content" property="content"/>
+		    	<result column = "partTimeId" property="partTimeId"/>
+		    </resultMap>
+		    <select id="getPartTimeProblem" resultMap="PartTimeProblem">
+		    	SELECT problemId,topic,type,content from parttime_problem WHERE partTimeId=#{partTimeId} ;
+		    </select>
+ 		<!-- getPartTimeProblem end-->
+	<!-- Client  end  -->
+</mapper>

@@ -14,7 +14,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	 
 	<center>
 		<form action="user/getUser" method="post">
 			请输入用户ID(json):<input type="text" name="id">
