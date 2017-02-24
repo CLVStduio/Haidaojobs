@@ -51,7 +51,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 			List<PartTimeDescription> description = partTimeMapper.getPartTimeDescription(partTimeId);
 			List<PartTimeProblem> problem = partTimeMapper.getPartTimeProblem(partTimeId);
 			PartTimeShow partTimeShow = new PartTimeShow(information,description,problem);
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(partTimeShow))).toString();
+			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(partTimeShow,"factory"))).toString();
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
