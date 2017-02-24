@@ -1,7 +1,5 @@
 package com.clv.model.parttime;
 
-import java.sql.Timestamp;
-
 /**
  * 兼职概要
  * @author evanglist

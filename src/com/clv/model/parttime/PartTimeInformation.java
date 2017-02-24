@@ -1,7 +1,5 @@
 package com.clv.model.parttime;
 
-import java.sql.Timestamp;
-
 /**
  * 兼职信息
  * @author evanglist
@@ -73,7 +71,7 @@ public class PartTimeInformation {
 	 * 4：完成
 	 */
 	private int partTimeStatus;
-	private Timestamp lastTime;
+	private String lastTime;
 	private int partTimeQualification;
 	private int publisherId;
 	public int getPartTimeId() {
@@ -184,10 +182,10 @@ public class PartTimeInformation {
 	public void setPartTimeStatus(int partTimeStatus) {
 		this.partTimeStatus = partTimeStatus;
 	}
-	public Timestamp getLastTime() {
+	public String getLastTime() {
 		return lastTime;
 	}
-	public void setLastTime(Timestamp lastTime) {
+	public void setLastTime(String lastTime) {
 		this.lastTime = lastTime;
 	}
 	public int getPartTimeQualification() {
