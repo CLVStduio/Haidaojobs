@@ -18,7 +18,7 @@ public class PartTimeSummary {
 	private String workDate;
 	private String salary;
 	private int partTimeQualification;
-	private Timestamp lastTime;
+	private String lastTime;
 	public int getPartTimeId() {
 		return partTimeId;
 	}
@@ -80,7 +80,7 @@ public class PartTimeSummary {
 		this.partTimeQualification = partTimeQualification;
 	}
 	
-	public Timestamp getLastTime() {
+	public String getLastTime() {
 		return lastTime;
 	}
 	@Override
