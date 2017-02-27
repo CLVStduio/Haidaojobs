@@ -2,6 +2,11 @@ package com.clv.dao.tool;
 
 import org.json.JSONException;
 
+/**
+ * 短信相关工具类
+ * @author evanglist
+ *
+ */
 public interface MessageDao {
 	/**
 	 * 获取验证码
