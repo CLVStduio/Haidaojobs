@@ -47,9 +47,9 @@ public interface UserDao {
 	  * @param enId
 	  * 		：经过加密的身份信息
 	  * @return
-	  * 		：解密后可用的id或则是错误信息
+	  * 		：解密后可用的id或者是报错信息
 	  */
-	 public int IdAuthentication(String enId)throws JSONException;
+	 public int IdAuthentication(String enId);
 	 /**
 	  * 修改用户名
 	  * @param message
@@ -91,5 +91,10 @@ public interface UserDao {
 	  */
 	 public String modifyUserHeadPortrait(int id, MultipartFile file,HttpServletRequest request) throws JSONException;
 	 
-	 public String selectHeadPortraitURL() throws JSONException;
+	 /**
+	  * 获取头像图片链接
+	 * @return
+	 * @throws JSONException
+	 */
+	public String selectHeadPortraitURL() throws JSONException;
 }

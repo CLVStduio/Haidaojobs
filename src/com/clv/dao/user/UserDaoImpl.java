@@ -65,8 +65,7 @@ public class UserDaoImpl implements UserDao{
 			userMapper.addUser(password,phone,factory.getBKey().builderSecurityKey(phone),factory.getBKey().builderComplementKey(phone),date);
 			return new JsonFormat("success").toString();
 		}
-		
-		System.out.println(phone+"  手机号已经 注册");
+		//手机号已经注册
 		return new JsonFormat("101","fail").toString();
 	}
 
@@ -80,17 +79,17 @@ public class UserDaoImpl implements UserDao{
 		}
 		User user = userMapper.selectUserByPhoneNo(dePhone);
 		if( user == null){
-			System.out.println(":帐号或密码错误");
+			//帐号或密码错误
 			return new JsonFormat("101","fail").toString();
 		}
 		if(user.getUserPassword().equals(dePassword)){
-			System.out.println(dePhone+":登录");
+			//登录
 			String securityKey = factory.getBKey().builderSecurityKey(dePhone);
 			userMapper.modifySecurity(dePhone, securityKey,factory.getBKey().builderComplementKey(dePhone));
 			user.setSecurityKey(securityKey);
 			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
 		}else{
-			System.out.println(":帐号或密码错误");
+			//帐号或密码错误
 			return  new JsonFormat("101","fail").toString();
 		}
 	}
@@ -109,16 +108,21 @@ public class UserDaoImpl implements UserDao{
 						StringBuilder keySb = new StringBuilder(user.getComplementKey());
 						String oldTime = keySb.substring(16);
 						if(Long.parseLong(newTime)-Long.parseLong(oldTime)>15*24*60*60*1000){
+							//安全码过期
 							return -1;
 						}
 						return user.getUserId();
 					}
+					//安全码不正确
 					return -2;
 				}
+				//不存在相关信息
 				return -3;
 			}
+			//解密结果不合规范
 			return -5;
 		}
+		//解密失败
 		return -4;
 	}
 	@Override
@@ -130,7 +134,6 @@ public class UserDaoImpl implements UserDao{
 				return new JsonFormat("401","fail").toString();
 			}
 			if(name.length()<=15){
-				System.out.println(name);
 				userMapper.modifyUserName(id, name);
 				user.setUserName(name);
 				return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(user,"userPassword","registeredDate","complementKey"))).toString();
@@ -190,14 +193,12 @@ public class UserDaoImpl implements UserDao{
 			userMapper.modifyUserPassword(user.getUserId(), dePassword);
 			return new JsonFormat("success").toString();
 		}else{
-			System.out.println("该手机未注册");
+			//该手机未注册
 			return new JsonFormat("101","fail").toString();
 		}
 	}
 
 	public String modifyUserHeadPortrait(int id,MultipartFile file,HttpServletRequest request) throws JSONException{
-		//获得物理路径webapp所在路径
-		
 		if(id<=0){
 			return new JsonFormat("20"+Math.abs(id),"fail").toString();
 		}
