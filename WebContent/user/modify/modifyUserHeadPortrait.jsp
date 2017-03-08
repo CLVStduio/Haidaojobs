@@ -1,4 +1,4 @@
-<%@page import="com.clv.dao.user.UserDao"%>
+<%@page import="com.clv.server.user.UserDao"%>
 <%@page import="org.springframework.web.multipart.MultipartFile"%>
 <%@page import="org.springframework.web.multipart.MultipartHttpServletRequest"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>

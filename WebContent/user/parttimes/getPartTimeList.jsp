@@ -1,4 +1,4 @@
-<%@page import="com.clv.dao.job.PartTimeJobsClientVersionDao"%>
+<%@page import="com.clv.server.job.PartTimeJobsClientVersionDao"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>

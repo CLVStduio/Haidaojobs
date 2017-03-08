@@ -1,4 +1,4 @@
-<%@page import="com.clv.dao.admin.AdminDao"%>
+<%@page import="com.clv.server.admin.AdminDao"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html"

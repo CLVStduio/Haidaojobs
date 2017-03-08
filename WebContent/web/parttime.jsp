@@ -16,16 +16,25 @@
 <body>
 	 
 	<center>
+		兼职列表
 		<form action="user/parttimes/getPartTimeList" method="post">
-			兼职列表：<input type="text" name="lastTime">
+			最后查看时间：<input type="text" name="lastTime">
 			 <input type="submit" value="确定">  
 		</form>
 	</center>
 	<center>
+		获取兼职详情
 		<form action="user/parttimes/getPartTimeInformation" method="post">
-			兼职详情:<input type="text" name="partTimeId">
+			兼职id:<input type="text" name="partTimeId">
 			 <input type="submit" value="确定">  
 		</form>
 	</center>
-	
+	<center>
+		撤销报名
+		<form action="user/parttimes/cancelTheRegistration" method="post">
+			用户id：<input type="text" name="enUserId">
+			兼职id:<input type="text" name="enpartTimeId">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
 </body>

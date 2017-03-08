@@ -1,4 +1,4 @@
-<%@page import="com.clv.dao.tool.MessageDao"%>
+<%@page import="com.clv.server.tool.MessageDao"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
