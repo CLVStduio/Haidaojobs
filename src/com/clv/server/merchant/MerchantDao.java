@@ -1,4 +1,4 @@
-package com.clv.dao.merchant;
+package com.clv.server.merchant;
 
 
 /**

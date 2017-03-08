@@ -1,4 +1,4 @@
-package com.clv.dao.tool;
+package com.clv.server.tool;
 
 import org.json.JSONException;
 

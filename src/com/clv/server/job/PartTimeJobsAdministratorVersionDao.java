@@ -1,4 +1,4 @@
-package com.clv.dao.job;
+package com.clv.server.job;
 
 public interface PartTimeJobsAdministratorVersionDao {
 	/****************管理版****************/

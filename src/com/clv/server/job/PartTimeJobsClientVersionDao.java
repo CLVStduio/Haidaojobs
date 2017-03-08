@@ -1,4 +1,4 @@
-package com.clv.dao.job;
+package com.clv.server.job;
 
 import java.sql.Timestamp;
 
@@ -17,12 +17,22 @@ public interface PartTimeJobsClientVersionDao {
 
 	/**
 	 * 获取兼职详细信息
-	 * @param enparttimeId
-	 * 			信息匙加密的兼职id
+	 * @param parttimeId
+	 * 			兼职id
 	 * @return
 	 * @throws JSONException
 	 */
 	public String getPartTimeInformation(int partTimeId)throws JSONException;
+	/**
+	 * 获取兼职详细信息
+	 * @param partTimeId
+	 * 			兼职id
+	 * @param userId
+	 * 			用户id
+	 * @return
+	 * @throws JSONException
+	 */
+	public String getPartTimeInformation(int partTimeId,int userId)throws JSONException;
 	/**
 	 * 兼职报名
 	 * @param userId
@@ -34,7 +44,7 @@ public interface PartTimeJobsClientVersionDao {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String partTimeRegistration(int userId,String enparttimeId,String enAnswer) throws JSONException;
+	public String partTimeRegistration(int userId,String enparttimeId) throws JSONException;
 	/**
 	 * 撤销报名
 	 * @param userId
