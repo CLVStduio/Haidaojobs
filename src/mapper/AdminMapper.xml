@@ -8,4 +8,19 @@
 	 <select id="selectAdminById" parameterType="int" resultType="com.clv.model.admin.Admin">    
        select * from admin where adminId = #{adminId}    
     </select>    
+    <!-- getAuditQueue strat-->
+		    <resultMap type="com.clv.model.resume.Identity" id="IdentityResult">
+		    	<result column = "userId" property="userId"/>
+		    	<result column = "name" property="name"/>
+		    	<result column = "gender" property="gender"/>
+		    	<result column = "idNum" property="idNum"/>
+		    	<result column = "dateBirth" property="dateBirth"/>
+		    </resultMap>
+		    <select id="getAuditQueue" resultMap="IdentityResult">
+		    	select userId,name,gender,idNum,dateBirth from user_Identity WHERE auditType = 0;
+		    </select>
+	<!-- getAuditQueue end -->
+		<select id="modifyAuditTypeOfIdentity">
+			UPDATE user_Identity SET adminId=#{adminId},auditType=#{auditType} WHERE userId=#{userId};
+		</select>
 </mapper>

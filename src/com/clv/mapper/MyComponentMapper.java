@@ -46,7 +46,7 @@ public interface MyComponentMapper {
 	 * @param id
 	 * @param date
 	 */
-	public void modifySignInGiftBag(@Param("tableName")String tableName,@Param("signIn_id") int id,@Param("signInGift_date") String date);
+	public void modifySignInGiftBag(@Param("tableName")String tableName,@Param("signIn_id")int id,@Param("signInGift_date") String date);
 	/**
 	 * 查询用户该月礼包领取情况
 	 * @param tableName

@@ -1,8 +1,11 @@
 package com.clv.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.clv.model.admin.Admin;
+import com.clv.model.resume.Identity;
 
 /**
  * 管理员数据库操作映射类
@@ -51,5 +54,20 @@ public interface AdminMapper {
      * @return
      */
   //  public String modifySecurity(@Param("phone") String phone,@Param("securityKey") String securityKey,@Param("complementKey") String complementKey);
-    
+	/**
+	 * 修改用户认证状态
+	 * @param userId
+	 * 		用户id
+	 * @param adminId
+	 * 		管理员id
+	 * @param auditType
+	 * 		用户认证状态
+	 */
+	public void modifyAuditTypeOfIdentity(@Param("userId")int userId,@Param("adminId")int adminId,@Param("auditType")int auditType);
+	
+	/**
+	 * 获取待审核名单
+	 * @return
+	 */
+	public List<Identity> getAuditQueue();
 }

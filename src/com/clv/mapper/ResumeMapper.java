@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.clv.model.admin.Admin;
 import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
 import com.clv.model.resume.Skill;
-import com.clv.model.user.User;
 
 /** 
  * Mapper用户简历数据库操作映射类
@@ -16,18 +14,6 @@ import com.clv.model.user.User;
  * @time 2017.1.2
  */  
 public interface ResumeMapper { 
-	/**
-	 * 根据用户ID查询用户信息
-	 * @param user_id
-	 * @return
-	 */
-    public User selectUserById(int user_id); 
-    /**
-  	 * 根据用户ID查询管理员信息
-  	 * @param user_id
-  	 * @return
-  	 */
-      public Admin selectAdminById(int adminId);  
 	/*****************用户基本信息****************/
 	/**
 	 * 添加用户基本信息
@@ -93,27 +79,13 @@ public interface ResumeMapper {
 	 */
 	public void modifyIdentity(@Param("userId")int userId,@Param("name")String name,@Param("gender")String gender,@Param("idNum")String idNum,@Param("dateBirth")String dateBirth);
 	/**
-	 * 修改用户认证状态
-	 * @param userId
-	 * 		用户id
-	 * @param adminId
-	 * 		管理员id
-	 * @param auditType
-	 * 		用户认证状态
-	 */
-	public void modifyAuditTypeOfIdentity(@Param("userId")int userId,@Param("adminId")int adminId,@Param("auditType")int auditType);
-	/**
 	 * 查询用户认证信息
 	 * @param userId
 	 * 		用户id
 	 * @return
 	 */
 	public Identity selectIdentity(@Param("userId")int userId);
-	/**
-	 * 获取待审核名单
-	 * @return
-	 */
-	public List<Identity> getAuditQueue();
+
 	/**
 	 * 查询用户认证结果
 	 * @param userId

@@ -2,12 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.clv.mapper.ResumeMapper">
-    <select id="selectUserById" parameterType="int" resultType="com.clv.model.user.User">    
-         select * from user where userId = #{userId}  
-    </select>  
-    <select id="selectAdminById" parameterType="int" resultType="com.clv.model.admin.Admin">    
-       select * from admin where adminId = #{adminId}    
-    </select> 
 	<!-- Information strat -->
 		<insert id="addInformation">
 			INSERT INTO user_Information (userId) values(#{userId}); 
@@ -32,24 +26,10 @@
 		<select id="modifyIdentity">
 			UPDATE user_Identity SET name=#{name},gender=#{gender},auditType=0,idNum=#{idNum},dateBirth=#{dateBirth} WHERE userId=#{userId};
 		</select>
-		<select id="modifyAuditTypeOfIdentity">
-			UPDATE user_Identity SET adminId=#{adminId},auditType=#{auditType} WHERE userId=#{userId};
-		</select>
 		<select id="selectIdentity" resultType="com.clv.model.resume.Identity">
 			SELECT * FROM user_Identity WHERE userId=#{userId};
 		</select>
-		<!-- getAuditQueue strat-->
-		    <resultMap type="com.clv.model.resume.Identity" id="IdentityResult">
-		    	<result column = "userId" property="userId"/>
-		    	<result column = "name" property="name"/>
-		    	<result column = "gender" property="gender"/>
-		    	<result column = "idNum" property="idNum"/>
-		    	<result column = "dateBirth" property="dateBirth"/>
-		    </resultMap>
-		    <select id="getAuditQueue" resultMap="IdentityResult">
-		    	select userId,name,gender,idNum,dateBirth from user_Identity WHERE auditType = 0;
-		    </select>
-	    <!-- getAuditQueue end -->
+		
 	<!--  Identiry    end  -->
 	<!--   skill     strat -->
 	    <insert id="addSkill" parameterType="com.clv.model.resume.Skill" useGeneratedKeys="true" keyProperty="skill_id" >    
