@@ -1,5 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.clv.server.user.UserDao"%>
-<%@page import="com.clv.server.user.ResumeOther"%>
+<%@page import="com.clv.server.user.ResumeOtherServer"%>
 <%@page import="org.springframework.web.multipart.MultipartFile"%>
 <%@page import="org.springframework.web.multipart.MultipartHttpServletRequest"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
@@ -10,12 +11,12 @@
 			WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		
 			UserDao userDao = (UserDao) wac.getBean("userDaoImpl");
-			ResumeOther resumeOther = (ResumeOther) wac.getBean("resumeOtherImpl");
+			ResumeOtherServer resumeOther = (ResumeOtherServer) wac.getBean("resumeOtherImpl");
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile file = multipartRequest.getFile("file");
 			
 			String enId = multipartRequest.getParameter("enId");
-			int id = userDao.IdAuthentication(enId);
+			Map<String,String> userMap = userDao.IdAuthentication(enId);
 		%>
-<%=resumeOther.addPhoto(id, file, request) %>
+<%=resumeOther.addPhoto(userMap, file, request) %>
 	
