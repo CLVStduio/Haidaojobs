@@ -38,7 +38,7 @@ public class AdminImpl implements AdminDao {
 	}
 */
 	@Override
-	public int IdAuthentication(String enId) throws JSONException {
+	public Map<String,String> idAuthentication(String enId) throws JSONException {
 //		System.out.println("enId: "+enId);
 		String deIdmessage = factory.getCrypto().decryptTime(enId);
 		if(deIdmessage!=null ){

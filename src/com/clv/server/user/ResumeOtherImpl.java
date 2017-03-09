@@ -3,6 +3,7 @@ package com.clv.server.user;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,12 +25,12 @@ import cn.clvstudio.tool.Factory;
  * @time 2017.1.3
  */
 @Component
-public class ResumeOtherImpl implements ResumeOther {
+public class ResumeOtherImpl implements ResumeOtherServer {
 	@Autowired
 	private ResumeMapper resumeMapper;
 	private Factory factory = new Factory();
 	@Override
-	public String addPhoto(int id, MultipartFile file, HttpServletRequest request) throws JSONException {
+	public String addPhoto(Map<String,String> id, MultipartFile file, HttpServletRequest request) throws JSONException {
 		//获得物理路径webapp所在路径
 		if(id>0){
 			User user = resumeMapper.selectUserById(id);
@@ -56,7 +57,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	}
 
 	@Override
-	public String deletePhoto(int id, String photoName) throws JSONException {
+	public String deletePhoto(Map<String,String> id, String photoName) throws JSONException {
 		if(id>0){
 			String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+Integer.valueOf(id).toString()+File.separator+photoName;
 			factory.getPhotoProcessing().deleteFile(path);
@@ -66,7 +67,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	}
 
 	@Override
-	public String selectPhoto(int id) throws JSONException {
+	public String selectPhoto(Map<String,String> id) throws JSONException {
 		if(id>0){
 			String path = File.separator+"images"+File.separator+"photoAlhum"+File.separator+Integer.valueOf(id).toString();
 			JSONArray jArray = factory.getPhotoProcessing().selectFileForDir(path,"Image");
@@ -79,7 +80,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	}
 
 	@Override
-	public String addSkill(int id, String skill_content) throws JSONException {
+	public String addSkill(Map<String,String> id, String skill_content) throws JSONException {
 		if(id>0){
 			if(skill_content!=null){
 				Skill skill = new Skill(id,skill_content);
@@ -93,7 +94,7 @@ public class ResumeOtherImpl implements ResumeOther {
 	}
 
 	@Override
-	public String selectSkill(int id) throws JSONException {
+	public String selectSkill(Map<String,String> id) throws JSONException {
 		if(id>0){
 			List<Skill> list =new ArrayList<Skill>();
 			list = resumeMapper.selectSkill(id);

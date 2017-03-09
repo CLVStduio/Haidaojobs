@@ -1,16 +1,20 @@
 package com.clv.server.user;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.clv.server.ServerFather;
 
 /**
  * 我的-->简历-->教育经历、技能特长、个人风采
  * @author Evanglist
  * @time 2016.12.31
  */
-public interface ResumeOther {
+public interface ResumeOtherServer extends ServerFather{
 	
 	/**
 	 * 往个人风采中添加照片
@@ -22,7 +26,7 @@ public interface ResumeOther {
 	 * 		http服务
 	 * @return
 	 */
-	public String addPhoto(int id, MultipartFile file,HttpServletRequest request)throws JSONException;
+	public String addPhoto(Map<String,String> id, MultipartFile file,HttpServletRequest request)throws JSONException;
 	/**
 	 * 删除照片
 	 * @param id
@@ -31,7 +35,7 @@ public interface ResumeOther {
 	 * 		照片名
 	 * @return
 	 */
-	public String deletePhoto(int id,String photoName)throws JSONException;
+	public String deletePhoto(Map<String,String> id,String photoName)throws JSONException;
 	/**
 	 * 获取全部照片名字
 	 * @param id
@@ -41,7 +45,7 @@ public interface ResumeOther {
 	 * @return
 	 * @throws JSONException 
 	 */
-	public String selectPhoto(int id) throws JSONException;
+	public String selectPhoto(Map<String,String> id) throws JSONException;
 
 	/**
 	 * 添加用户技能特长

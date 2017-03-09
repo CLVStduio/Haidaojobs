@@ -31,5 +31,5 @@ public interface AdminDao {
 	  * @return
 	  * 		：解密后可用的id或则是错误信息
 	  */
-	public int IdAuthentication(String enId)throws JSONException;
+	public Map<String,String> idAuthentication(String enId)throws JSONException;
 }
