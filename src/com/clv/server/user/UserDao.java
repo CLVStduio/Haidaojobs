@@ -16,12 +16,6 @@ import com.clv.server.ServerFather;
  * @time 2017.1.3
  */
 public interface UserDao  extends ServerFather{
-	/**
-	 * 根据ID获取用户信息
-	 * @param id
-	 * @return
-	 */
-//	public User findUserById(Map<String,String> id);
 	
 	public String getUser(int id)throws JSONException;
 	/**
@@ -58,7 +52,8 @@ public interface UserDao  extends ServerFather{
 	  * 修改用户名
 	  * @param message
 	  * 		:新的用户名
-	  * @param Id
+	  * @param userMap
+	  * 		用户信息
 	  * @return
 	  */
 	 public String modifyUserName(String message,Map<String,String> userMap)throws JSONException;
@@ -66,7 +61,8 @@ public interface UserDao  extends ServerFather{
 	  * 在登录状态下，且经过验证码认证过修改手机号
 	  * @param message
 	  * 		:新的手机号
-	  * @param Id
+	  * @param userMap
+	  * 		用户信息
 	  * @return
 	  */
 	 public String modifyUserPhone(String message,Map<String,String> userMap)throws JSONException;
@@ -74,7 +70,8 @@ public interface UserDao  extends ServerFather{
 	  * 修改密码
 	  * @param oldPassword
 	  * @param newPassword
-	  * @param Id
+	  * @param userMap
+	  * 		用户信息
 	  * @return
 	  */
 	 public String modifyUserPassword(String oldPassword,String newPassword,Map<String,String> userMap)throws JSONException;
@@ -88,7 +85,8 @@ public interface UserDao  extends ServerFather{
 	 public String resetUserPassword(String Phone,String password)throws JSONException;
 	 /**
 	  * 上传头像
-	  * @param id
+	  * @param userMap
+	  * 		用户信息
 	  * @param file
 	  * @param request
 	  * @return
