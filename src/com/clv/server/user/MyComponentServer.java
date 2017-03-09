@@ -1,6 +1,10 @@
 package com.clv.server.user;
 
+import java.util.Map;
+
 import org.json.JSONException;
+
+import com.clv.server.ServerFather;
 
 /**
  * “我的”中的各小部件
@@ -9,7 +13,7 @@ import org.json.JSONException;
  * 		日后建立补签制度的时候，设立签到信息表中，增加补签次数一列
  * 		
  */
-public interface MyComponent {
+public interface MyComponentServer extends ServerFather {
 	/**
 	 * 补签
 	 * @提示
@@ -22,7 +26,7 @@ public interface MyComponent {
 
 	 * @throws JSONException
 	 */
-	public String retroactive(int user_id ,int date) throws JSONException;
+	public String retroactive(Map<String,String> user_id ,int date) throws JSONException;
 	
 	/**
 	 * 查询签到情况
@@ -35,7 +39,7 @@ public interface MyComponent {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectSignIn(int user_id,int year,String month) throws JSONException;
+	public String selectSignIn(Map<String,String> user_id,int year,String month) throws JSONException;
 	/**
 	 * 查询礼包领取情况
 	 * @param user_id
@@ -47,7 +51,7 @@ public interface MyComponent {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectGiftBag(int user_id,int year,String month) throws JSONException;
+	public String selectGiftBag(Map<String,String> user_id,int year,String month) throws JSONException;
 	
 	/**
 	 * 判断用户的这个日期是否符合领取条件
@@ -60,6 +64,6 @@ public interface MyComponent {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String skillGiftBag(int user_id,int date)throws JSONException;
+	public String skillGiftBag(Map<String,String> user_id,int date)throws JSONException;
 	
 }

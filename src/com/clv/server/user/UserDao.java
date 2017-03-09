@@ -1,9 +1,13 @@
 package com.clv.server.user;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.clv.server.ServerFather;
 
 //import com.taobao.api.ApiException;
 /**
@@ -11,13 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Evanglist
  * @time 2017.1.3
  */
-public interface UserDao {
+public interface UserDao  extends ServerFather{
 	/**
 	 * 根据ID获取用户信息
 	 * @param id
 	 * @return
 	 */
-//	public User findUserById(int id);
+//	public User findUserById(Map<String,String> id);
 	
 	public String getUser(int id)throws JSONException;
 	/**
@@ -49,7 +53,7 @@ public interface UserDao {
 	  * @return
 	  * 		：解密后可用的id或者是报错信息
 	  */
-	 public int IdAuthentication(String enId);
+	 public Map<String,String> IdAuthentication(String enId);
 	 /**
 	  * 修改用户名
 	  * @param message
@@ -57,7 +61,7 @@ public interface UserDao {
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserName(String message,int id)throws JSONException;
+	 public String modifyUserName(String message,Map<String,String> id)throws JSONException;
 	 /**
 	  * 在登录状态下，且经过验证码认证过修改手机号
 	  * @param message
@@ -65,7 +69,7 @@ public interface UserDao {
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserPhone(String message,int id)throws JSONException;
+	 public String modifyUserPhone(String message,Map<String,String> id)throws JSONException;
 	 /**
 	  * 修改密码
 	  * @param oldPassword
@@ -73,7 +77,7 @@ public interface UserDao {
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserPassword(String oldPassword,String newPassword,int id)throws JSONException;
+	 public String modifyUserPassword(String oldPassword,String newPassword,Map<String,String> id)throws JSONException;
 	 /**
 	  * 忘记密码
 	  * @param Phone
@@ -89,7 +93,7 @@ public interface UserDao {
 	  * @param request
 	  * @return
 	  */
-	 public String modifyUserHeadPortrait(int id, MultipartFile file,HttpServletRequest request) throws JSONException;
+	 public String modifyUserHeadPortrait(Map<String,String> userMap, MultipartFile file,HttpServletRequest request) throws JSONException;
 	 
 	 /**
 	  * 获取头像图片链接
