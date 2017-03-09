@@ -11,8 +11,5 @@
 			
 			String phone=(String)request.getParameter("enPhone");
 			String password=(String)request.getParameter("enPassword");
-			
-			System.out.println("添加用户名"+phone);
-			System.out.println("添加用户密码"+password);
 		%>
 <%=userDao.resetUserPassword(phone, password) %>

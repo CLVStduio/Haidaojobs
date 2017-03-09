@@ -1,4 +1,5 @@
 <%@page import="com.clv.server.user.UserDao"%>
+<%@page import="java.util.Map"%>
 <%@page import="org.springframework.web.multipart.MultipartFile"%>
 <%@page import="org.springframework.web.multipart.MultipartHttpServletRequest"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
@@ -14,7 +15,7 @@
 			MultipartFile file = multipartRequest.getFile("file");
 			
 			String enId = multipartRequest.getParameter("enId");
-			int id = userDao.IdAuthentication(enId);
+			Map<String,String> userMap = userDao.IdAuthentication(enId);
 		%>
-<%=userDao.modifyUserHeadPortrait(id,file,request) %>
+<%=userDao.modifyUserHeadPortrait(userMap,file,request) %>
 	
