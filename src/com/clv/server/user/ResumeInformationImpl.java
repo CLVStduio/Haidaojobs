@@ -22,7 +22,6 @@ import cn.clvstudio.tool.Factory;
 public class ResumeInformationImpl implements ResumeInformationServer {
 	@Autowired
 	private ResumeMapper resumeMapper;
-	@Autowired
 	private Factory factory = new Factory();
 	@Override
 	public String identityAuthentication(Map<String,String> userMap, String enName, String enGender, String enIdNum) throws JSONException {

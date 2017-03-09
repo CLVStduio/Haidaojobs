@@ -29,7 +29,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String identityAuthentication(Map<String,String> id,String name,String gender,String idNum) throws JSONException;
+	public String identityAuthentication(Map<String,String> userMap,String name,String gender,String idNum) throws JSONException;
 	/**
 	 * 重新提交身份验证信息
 		 * @param id
@@ -43,7 +43,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String modifyIdentityAuthentication(Map<String,String> id,String name,String gender,String idNum) throws JSONException;
+	public String modifyIdentityAuthentication(Map<String,String> userMap,String name,String gender,String idNum) throws JSONException;
 	/**
 	 * 证件照片上传
 	 * @param id
@@ -61,7 +61,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String uploadCertificatePhoto(Map<String,String> id,int type,MultipartFile file,HttpServletRequest request) throws JSONException;	
+	public String uploadCertificatePhoto(Map<String,String> userMap,int type,MultipartFile file,HttpServletRequest request) throws JSONException;	
 	/**
 	 * 查询用户身份审核结论
 	 * @param id
@@ -69,7 +69,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectIdentityAuditConclusion(Map<String,String> id) throws JSONException;
+	public String selectIdentityAuditConclusion(Map<String,String> userMap) throws JSONException;
 	/**
 	 * 修改身高
 	 * @param id
@@ -79,7 +79,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String modifyHeight(Map<String,String> id,int height) throws JSONException;
+	public String modifyHeight(Map<String,String> userMap,int height) throws JSONException;
 	/**
 	 * 修改电子邮件
 	 * @param id
@@ -89,7 +89,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String modifyEmail(Map<String,String> id,String eMail) throws JSONException;
+	public String modifyEmail(Map<String,String> userMap,String eMail) throws JSONException;
 	/**
 	 * 获取用户简历的基本信息
 	 * @param id
@@ -97,7 +97,7 @@ public interface ResumeInformationServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String getInformation(Map<String,String> id) throws JSONException;
+	public String getInformation(Map<String,String> userMap) throws JSONException;
 	
 	
 }
