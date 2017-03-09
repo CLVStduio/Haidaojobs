@@ -1,5 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.clv.server.user.UserDao"%>
-<%@page import="com.clv.server.user.ResumeInformation"%>
+<%@page import="com.clv.server.user.ResumeInformationServer"%>
 <%@page import="org.springframework.web.multipart.MultipartFile"%>
 <%@page import="org.springframework.web.multipart.MultipartHttpServletRequest"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
@@ -10,13 +11,13 @@
 			WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		
 			UserDao userDao = (UserDao) wac.getBean("userDaoImpl");
-			ResumeInformation resumeInformation = (ResumeInformation) wac.getBean("resumeInformationImpl");
+			ResumeInformationServer resumeInformation = (ResumeInformationServer) wac.getBean("resumeInformationImpl");
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile file = multipartRequest.getFile("file");
 			
 			String type = multipartRequest.getParameter("type");
 			String enId = multipartRequest.getParameter("enId");
-			int id = userDao.IdAuthentication(enId);
+			Map<String,String> id = userDao.IdAuthentication(enId);
 		%>
 <%=resumeInformation.uploadCertificatePhoto(id,Integer.parseInt(type), file, request) %>
 	
