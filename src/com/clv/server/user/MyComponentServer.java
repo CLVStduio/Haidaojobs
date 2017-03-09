@@ -18,8 +18,8 @@ public interface MyComponentServer extends ServerFather {
 	 * 补签
 	 * @提示
 	 * 		日后补签时需要扣除补签次数
-	 * @param user_id
-	 * 			用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param date
 	 * 			补签日期（7天内方可补签）
 	 * @return
@@ -30,8 +30,8 @@ public interface MyComponentServer extends ServerFather {
 	
 	/**
 	 * 查询签到情况
-	 * @param user_id
-	 * 			用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param year
 	 * 			查询的年份
 	 * @param Month
@@ -42,8 +42,8 @@ public interface MyComponentServer extends ServerFather {
 	public String selectSignIn(Map<String,String> userMap,int year,String month) throws JSONException;
 	/**
 	 * 查询礼包领取情况
-	 * @param user_id
-	 * 			用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param year
 	 * 			查询的年份
 	 * @param month
@@ -57,8 +57,8 @@ public interface MyComponentServer extends ServerFather {
 	 * 判断用户的这个日期是否符合领取条件
 	 * 并随机返回领取的礼包内容
 	 * 仅本月有效
-	 * @param user_id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param date
 	 * 		用户询问的日期
 	 * @return

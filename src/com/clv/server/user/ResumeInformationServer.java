@@ -18,8 +18,8 @@ public interface ResumeInformationServer extends ServerFather{
 	//用户提交身份认证相关
 	/**
 	 * 身份认证基本信息填写
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param name
 	 * 		真实姓名
 	 * @param gender
@@ -32,8 +32,8 @@ public interface ResumeInformationServer extends ServerFather{
 	public String identityAuthentication(Map<String,String> userMap,String name,String gender,String idNum) throws JSONException;
 	/**
 	 * 重新提交身份验证信息
-		 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param name
 	 * 		真实姓名
 	 * @param gender
@@ -46,8 +46,8 @@ public interface ResumeInformationServer extends ServerFather{
 	public String modifyIdentityAuthentication(Map<String,String> userMap,String name,String gender,String idNum) throws JSONException;
 	/**
 	 * 证件照片上传
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param type
 	 * 		照片种类
 	 * 		101：身份证正面照片
@@ -64,16 +64,16 @@ public interface ResumeInformationServer extends ServerFather{
 	public String uploadCertificatePhoto(Map<String,String> userMap,int type,MultipartFile file,HttpServletRequest request) throws JSONException;	
 	/**
 	 * 查询用户身份审核结论
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @return
 	 * @throws JSONException
 	 */
 	public String selectIdentityAuditConclusion(Map<String,String> userMap) throws JSONException;
 	/**
 	 * 修改身高
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param height
 	 * 		用户身高
 	 * @return
@@ -82,8 +82,8 @@ public interface ResumeInformationServer extends ServerFather{
 	public String modifyHeight(Map<String,String> userMap,int height) throws JSONException;
 	/**
 	 * 修改电子邮件
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @param eMail
 	 * 		提交的电子邮件
 	 * @return
@@ -92,8 +92,8 @@ public interface ResumeInformationServer extends ServerFather{
 	public String modifyEmail(Map<String,String> userMap,String eMail) throws JSONException;
 	/**
 	 * 获取用户简历的基本信息
-	 * @param id
-	 * 		用户id
+	 * @param userMap
+	 * 		用户信息
 	 * @return
 	 * @throws JSONException
 	 */
