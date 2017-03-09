@@ -6,6 +6,5 @@
 			WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		MessageDao messageDao = (MessageDao) wac.getBean("messageDaoImpl");
 			String phone=(String)request.getParameter("phoneGetCode");
-		System.out.println("请求验证码："+phone);
 		%>
 <%=messageDao.getCode(phone) %>

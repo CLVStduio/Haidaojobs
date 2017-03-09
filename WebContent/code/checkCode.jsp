@@ -8,15 +8,5 @@
 			
 			String phone=(String)request.getParameter("checkPhone");
 			String code =(String)request.getParameter("checkCode"); 
-			
-			//System.out.println("code:"+code1);
-			
-			//System.out.println("验证码zifu"+zifu);
-			//String[] str = zifu.split("[$]");
-			//String phone = str[0];
-			//String code = str[1];
-			//String phone = (String)request.getParameter("checkPhone");
-		//System.out.println("验证码phone："+phone);
-		//System.out.println("code:"+code);
 		%>
 <%=messageDao.checkCode(phone,code) %>
