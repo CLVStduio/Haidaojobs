@@ -1,8 +1,12 @@
 package com.clv.server.admin;
 
+import java.util.Map;
+
 import org.json.JSONException;
 
-public interface AdminDao {
+import com.clv.server.ServerFather;
+
+public interface AdminDao extends ServerFather{
 	/**
 	 * 添加管理员
 	 * @param phone

@@ -1,5 +1,8 @@
 package com.clv.server.admin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,8 +42,8 @@ public class AdminImpl implements AdminDao {
 */
 	@Override
 	public Map<String,String> idAuthentication(String enId) throws JSONException {
-//		System.out.println("enId: "+enId);
 		String deIdmessage = factory.getCrypto().decryptTime(enId);
+		Map<String,String> adminMap = new HashMap<String,String>();
 		if(deIdmessage!=null ){
 			if(deIdmessage.length() >=42){
 				StringBuilder sb = new StringBuilder(deIdmessage);
@@ -53,25 +56,32 @@ public class AdminImpl implements AdminDao {
 						StringBuilder keySb = new StringBuilder(admin.getComplementKey());
 						String oldTime = keySb.substring(16);
 						if(Long.parseLong(newTime)-Long.parseLong(oldTime)>15*24*60*60*1000){
-							System.out.println("安全码已经过期，请重新登录");
-							return -1;
+							//安全码已经过期，请重新登录
+							adminMap.put(ADMINID, "-1");
+							return adminMap;
 						}
-						
-						return admin.getAdminId();
-						
+						adminMap.put(ADMINID, ""+admin.getAdminId());
+						adminMap.put(ADMINIDPHONENO, admin.getAdminPhoneNo());
+						adminMap.put(ADMINIDPASSWORD, admin.getAdminPassword());
+						adminMap.put(SECURITYKEY, admin.getSecurityKey());
+						adminMap.put(HEADPORTRAITPATH, admin.getHeadPortritPath());
+						return adminMap;
 					}
-					System.out.println("安全码不正确");
-					return -2;
+					//安全码不正确
+					adminMap.put(ADMINID, "-2");
+					return adminMap;
 				}
-				System.out.println("该ID号不存在");
-				return -3;
+				//不存在相关信息
+				adminMap.put(ADMINID, "-3");
+				return adminMap;
 			}
-			return -5;
+			//解密结果不合规范
+			adminMap.put(ADMINID, "-5");
+			return adminMap;
 		}
-		System.out.println("解密失败");
-		return -4;
+		//解密失败
+		adminMap.put(ADMINID, "-4");
+		return adminMap;
 	}
-
-	
 
 }
