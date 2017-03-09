@@ -26,7 +26,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * 		http服务
 	 * @return
 	 */
-	public String addPhoto(Map<String,String> id, MultipartFile file,HttpServletRequest request)throws JSONException;
+	public String addPhoto(Map<String,String> userMap, MultipartFile file,HttpServletRequest request)throws JSONException;
 	/**
 	 * 删除照片
 	 * @param id
@@ -35,7 +35,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * 		照片名
 	 * @return
 	 */
-	public String deletePhoto(Map<String,String> id,String photoName)throws JSONException;
+	public String deletePhoto(Map<String,String> userMap,String photoName)throws JSONException;
 	/**
 	 * 获取全部照片名字
 	 * @param id
@@ -45,7 +45,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * @return
 	 * @throws JSONException 
 	 */
-	public String selectPhoto(Map<String,String> id) throws JSONException;
+	public String selectPhoto(Map<String,String> userMap) throws JSONException;
 
 	/**
 	 * 添加用户技能特长
@@ -56,7 +56,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String addSkill(int user_id,String skill_content) throws JSONException;
+	public String addSkill(Map<String,String> userMap,String skill_content) throws JSONException;
 	
 	/**
 	 * 删除用户指定技能特长
@@ -65,7 +65,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String deleteSkill(int user_id,String skill_id) throws JSONException;
+	public String deleteSkill(Map<String,String> userMap,String skill_id) throws JSONException;
 	/**
 	 * 获取指定用户所有技能信息
 	 * @param user_id
@@ -73,7 +73,7 @@ public interface ResumeOtherServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectSkill(int user_id) throws JSONException;
+	public String selectSkill(Map<String,String> userMap) throws JSONException;
 	/**
 	 * 修改用户指定技能内容
 	 * @param skill_id
@@ -83,5 +83,5 @@ public interface ResumeOtherServer extends ServerFather{
 	 * @return
 	 * @throws JSONException
 	 */
-	public String modifySkill(int user_id,String enskill_id, String skill_content) throws JSONException;
+	public String modifySkill(Map<String,String> userMap,String enskill_id, String skill_content) throws JSONException;
 }
