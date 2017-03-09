@@ -1,6 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.clv.server.admin.AdminDao"%>
-<%@page import="com.clv.server.user.ResumeInformation"%>
-<%@page import="com.clv.server.user.UserDao"%>
+<%@page import="com.clv.server.admin.UserIdentityServer"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html"
@@ -10,13 +10,11 @@
 					.getWebApplicationContext(this.getServletContext());
 		
 			AdminDao adminDao = (AdminDao) wac.getBean("adminImpl");
-			ResumeInformation resumeInformation = (ResumeInformation) wac.getBean("resumeInformationImpl");
-			UserDao userDao = (UserDao)  wac.getBean("userDaoImpl");
+			UserIdentityServer userIdentityServer = (UserIdentityServer)  wac.getBean("userIdentityImpl");
 			
 			String enAdminId=(String)request.getParameter("adminId");
 			String enUserId=(String)request.getParameter("userId");
 			
-			int adminId = adminDao.IdAuthentication(enAdminId);
-			int userId = userDao.IdAuthentication(enUserId);
+			Map<String,String> adminMap = adminDao.idAuthentication(enAdminId);
 		%>
-<%=resumeInformation.selectIdentity(adminId, userId) %>
+<%=userIdentityServer.selectIdentity(adminMap, enUserId) %>

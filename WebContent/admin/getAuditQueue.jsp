@@ -1,5 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.clv.server.admin.AdminDao"%>
-<%@page import="com.clv.server.user.ResumeInformation"%>
+<%@page import="com.clv.server.admin.UserIdentityServer"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html"
@@ -9,11 +10,11 @@
 					.getWebApplicationContext(this.getServletContext());
 		
 			AdminDao adminDao = (AdminDao) wac.getBean("adminImpl");
-			ResumeInformation resumeInformation = (ResumeInformation) wac.getBean("resumeInformationImpl");
+			UserIdentityServer userIdentityServer = (UserIdentityServer)  wac.getBean("userIdentityImpl");
 			
 			String enId=(String)request.getParameter("adminId");
 
-			int adminId = adminDao.IdAuthentication(enId);
+			Map<String,String> adminMap = adminDao.idAuthentication(enId);
 		%>
 
-<%=resumeInformation.getAuditQueue(adminId) %>
+<%=userIdentityServer.getAuditQueue(adminMap) %>

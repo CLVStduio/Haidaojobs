@@ -1,6 +1,6 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.clv.server.admin.AdminDao"%>
-<%@page import="com.clv.server.user.ResumeInformation"%>
-<%@page import="com.clv.server.user.UserDao"%>
+<%@page import="com.clv.server.admin.UserIdentityServer"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html"
@@ -10,13 +10,12 @@
 					.getWebApplicationContext(this.getServletContext());
 		
 			AdminDao adminDao = (AdminDao) wac.getBean("adminImpl");
-			ResumeInformation resumeInformation = (ResumeInformation) wac.getBean("resumeInformationImpl");
-			UserDao userDao = (UserDao)  wac.getBean("userDaoImpl");
+			UserIdentityServer userIdentityServer = (UserIdentityServer)  wac.getBean("userIdentityImpl");
 			
 			String enAdminId=(String)request.getParameter("adminId");
 			String enUserId=(String)request.getParameter("userId");
 			String auditType=(String)request.getParameter("auditType");
 			
-			int adminId = adminDao.IdAuthentication(enAdminId);
+			Map<String,String> adminMap = adminDao.idAuthentication(enAdminId);
 		%>
-	<%=resumeInformation.setAuditConclusion(adminId,enUserId,Integer.parseInt(auditType)) %>
+	<%=userIdentityServer.setAuditConclusion(adminMap,enUserId,Integer.parseInt(auditType)) %>
