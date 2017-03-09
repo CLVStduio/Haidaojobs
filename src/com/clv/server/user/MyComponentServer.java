@@ -26,7 +26,7 @@ public interface MyComponentServer extends ServerFather {
 
 	 * @throws JSONException
 	 */
-	public String retroactive(Map<String,String> user_id ,int date) throws JSONException;
+	public String retroactive(Map<String,String> userMap ,int date) throws JSONException;
 	
 	/**
 	 * 查询签到情况
@@ -39,7 +39,7 @@ public interface MyComponentServer extends ServerFather {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectSignIn(Map<String,String> user_id,int year,String month) throws JSONException;
+	public String selectSignIn(Map<String,String> userMap,int year,String month) throws JSONException;
 	/**
 	 * 查询礼包领取情况
 	 * @param user_id
@@ -51,7 +51,7 @@ public interface MyComponentServer extends ServerFather {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String selectGiftBag(Map<String,String> user_id,int year,String month) throws JSONException;
+	public String selectGiftBag(Map<String,String> userMap,int year,String month) throws JSONException;
 	
 	/**
 	 * 判断用户的这个日期是否符合领取条件
@@ -64,6 +64,6 @@ public interface MyComponentServer extends ServerFather {
 	 * @return
 	 * @throws JSONException
 	 */
-	public String skillGiftBag(Map<String,String> user_id,int date)throws JSONException;
+	public String skillGiftBag(Map<String,String> userMap,int date)throws JSONException;
 	
 }
