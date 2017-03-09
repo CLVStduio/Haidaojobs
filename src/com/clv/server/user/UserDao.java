@@ -61,7 +61,7 @@ public interface UserDao  extends ServerFather{
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserName(String message,Map<String,String> id)throws JSONException;
+	 public String modifyUserName(String message,Map<String,String> userMap)throws JSONException;
 	 /**
 	  * 在登录状态下，且经过验证码认证过修改手机号
 	  * @param message
@@ -69,7 +69,7 @@ public interface UserDao  extends ServerFather{
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserPhone(String message,Map<String,String> id)throws JSONException;
+	 public String modifyUserPhone(String message,Map<String,String> userMap)throws JSONException;
 	 /**
 	  * 修改密码
 	  * @param oldPassword
@@ -77,7 +77,7 @@ public interface UserDao  extends ServerFather{
 	  * @param Id
 	  * @return
 	  */
-	 public String modifyUserPassword(String oldPassword,String newPassword,Map<String,String> id)throws JSONException;
+	 public String modifyUserPassword(String oldPassword,String newPassword,Map<String,String> userMap)throws JSONException;
 	 /**
 	  * 忘记密码
 	  * @param Phone
