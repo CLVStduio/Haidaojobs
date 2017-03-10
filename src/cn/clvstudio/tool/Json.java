@@ -64,15 +64,11 @@ public class Json {
     	try {
 	    	t = cla.newInstance();
 	    	for(int j=0;j<fb.length;j++){
-	    		System.out.println("***"+j+"***");
 	    	    String fieldName = fb[j].getName();
-	    	    System.out.println("*fieldName: "+fieldName);
 	    	    String fieldNameU=fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
-	    	    System.out.println("*fieldNameU: "+fieldNameU);
 	    	    Method method=cla.getMethod("set"+fieldNameU, fb[j].getType());
 	    	    method.invoke(t, jsonObject.get(fieldName));
 	    	}
-	    	System.out.println(t.toString());
     	    return t;
     	} catch (SecurityException e) {
     		e.printStackTrace();
