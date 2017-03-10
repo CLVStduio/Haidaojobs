@@ -19,6 +19,7 @@ import com.clv.model.format.JsonFormat;
 import com.clv.model.resume.Skill;
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 /**
  * 我的-->简历-->教育经历、技能特长、个人风采
  * 实现类
@@ -104,7 +105,7 @@ public class ResumeOtherImpl implements ResumeOtherServer {
 			JSONArray jsonArray = new JSONArray();
 			if(list != null){
 				for(Skill l : list){
-					jsonArray.put(factory.getJson().toJson(l,"user_id"));
+					jsonArray.put(Json.toJson(l,"user_id"));
 				}
 				return new JsonFormat(SUCCESS,jsonArray).toString();
 			}

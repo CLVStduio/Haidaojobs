@@ -20,6 +20,7 @@ import com.clv.model.user.User;
 
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 
 /**
  * 用户DAO实现类
@@ -34,19 +35,10 @@ public class UserDaoImpl implements UserDao{
 
 	private Factory factory = new Factory();
 	
-//	private static final String userPassword = "userPassword";
-//	private static final String registeredDate = "registeredDate";
-//	private static final String complementKey = "complementKey";
-//	private static final String securityKey = "securityKey";
-//	private static final String USERID = "userId";
-//	private static final String phoneNo = "phoneNo";
-//	private static final String headPortraitName = "headPortraitName";
-	
-	
 	public String getUser(int id) throws JSONException{
 		User user = userMapper.selectUserById(id);
 		if(user != null){
-			return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
+			return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
 		}
 		return  new JsonFormat("101",FAIL).toString();
 	}
@@ -98,7 +90,7 @@ public class UserDaoImpl implements UserDao{
 			String securityKey = factory.getBKey().builderSecurityKey(dePhone);
 			userMapper.modifySecurity(dePhone, securityKey,factory.getBKey().builderComplementKey(dePhone));
 			user.setSecurityKey(securityKey);
-			return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
+			return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
 		}else{
 			//帐号或密码错误
 			return  new JsonFormat("101",FAIL).toString();
@@ -160,7 +152,7 @@ public class UserDaoImpl implements UserDao{
 			if(name.length()<=15){
 				userMapper.modifyUserName(id, name);
 				user.setUserName(name);
-				return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
+				return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
 			}
 			return new JsonFormat("101",FAIL).toString();
 		}else{
@@ -180,7 +172,7 @@ public class UserDaoImpl implements UserDao{
 			
 			userMapper.modifyUserPhone(id, phone);
 			user.setUserPhoneNo(phone);
-			return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
+			return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(user,USERPASSWORD,REGISTEREDATE,COMPLEMENTKEY))).toString();
 		}else{
 			return new JsonFormat("20"+Math.abs(id),FAIL).toString();
 		}

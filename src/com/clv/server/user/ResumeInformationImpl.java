@@ -18,6 +18,7 @@ import com.clv.model.resume.Identity;
 import com.clv.model.resume.Information;
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 @Component
 public class ResumeInformationImpl implements ResumeInformationServer {
 	@Autowired
@@ -114,7 +115,7 @@ public class ResumeInformationImpl implements ResumeInformationServer {
 		if(id>0){
 			Identity identity = resumeMapper.selectIdentity(id);
 			if(identity!=null){
-				String identityStr = factory.getJson().toJson(identity,"identityId","dateBirth","adminId").toString();
+				String identityStr = Json.toJson(identity,"identityId","dateBirth","adminId").toString();
 				String enIdentity = factory.getCrypto().encryptMessage(identityStr, userMap.get(PHONENO), userMap.get(SECURITYKEY));
 				if(!FAIL.equals(enIdentity)){
 					return new JsonFormat(SUCCESS,new JSONArray().put(new JSONObject().put("identity",enIdentity))).toString();
@@ -172,13 +173,13 @@ public class ResumeInformationImpl implements ResumeInformationServer {
 		if(id>0){
 			Information information = resumeMapper.selectInformation(id);
 			if(information!=null){
-				String enIdentity = factory.getCrypto().encryptMessage(factory.getJson().toJson(information,"informationId").toString(), userMap.get(PHONENO), userMap.get(SECURITYKEY));
+				String enIdentity = factory.getCrypto().encryptMessage(Json.toJson(information,"informationId").toString(), userMap.get(PHONENO), userMap.get(SECURITYKEY));
 				return new JsonFormat(SUCCESS,new JSONArray().put(new JSONObject().put("informaion", enIdentity))).toString();
 			}
 			resumeMapper.addInformation(id);
 			information = resumeMapper.selectInformation(id);
 			//无该用户的基本信息
-			return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(information,"informationId"))).toString();
+			return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(information,"informationId"))).toString();
 		}
 		return new JsonFormat("20"+Math.abs(id),FAIL).toString();
 	}
