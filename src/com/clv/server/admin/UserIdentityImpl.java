@@ -14,6 +14,7 @@ import com.clv.model.format.JsonFormat;
 import com.clv.model.resume.Identity;
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 
 /**
  * 用户身份审核相关实现
@@ -34,7 +35,7 @@ public class UserIdentityImpl implements UserIdentityServer{
 		if(adminId>0){
 			List<Identity> auditQueue = adminMapper.getAuditQueue();
 			if(auditQueue != null){
-				JSONArray jsonArray = factory.getJson().listToJsonArray(auditQueue);
+				JSONArray jsonArray = Json.listToJsonArray(auditQueue);
 				return new JsonFormat(SUCCESS,jsonArray).toString();
 			}
 			return new JsonFormat("101",FAIL).toString();
@@ -51,7 +52,7 @@ public class UserIdentityImpl implements UserIdentityServer{
 				int userId = Integer.parseInt(userIdStr);
 				Identity identity = resumeMapper.selectIdentity(userId);
 				if(identity != null){
-					return new JsonFormat(SUCCESS,new JSONArray().put(factory.getJson().toJson(identity))).toString();
+					return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(identity))).toString();
 				}
 				//不存在相关信息
 				return new JsonFormat("101",FAIL).toString();

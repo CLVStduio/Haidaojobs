@@ -12,6 +12,7 @@ import com.clv.model.admin.Admin;
 import com.clv.model.format.JsonFormat;
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 @Component
 public class AdminImpl implements AdminDao {
 	@Autowired
@@ -32,7 +33,7 @@ public class AdminImpl implements AdminDao {
 	@Override
 	public String selectAdmin(int adminId) {
 		Admin admin = adminMapper.selectAdminById(adminId);
-		return factory.getJson().toJson(admin, "complementKey","adminPassword").toString();
+		return Json.toJson(admin, "complementKey","adminPassword").toString();
 	}
 /*
 	@Override
