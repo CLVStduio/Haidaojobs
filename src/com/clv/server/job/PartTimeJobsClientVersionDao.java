@@ -24,8 +24,8 @@ public interface PartTimeJobsClientVersionDao extends ServerFather {
 
 	/**
 	 * 获取兼职详细信息
-	 * @param parttimeId
-	 * 			兼职id
+	 * @param userMap
+	 * 			用户信息
 	 * @return
 	 * @throws JSONException
 	 */
@@ -34,27 +34,27 @@ public interface PartTimeJobsClientVersionDao extends ServerFather {
 	 * 获取兼职详细信息
 	 * @param partTimeId
 	 * 			兼职id
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @return
 	 * @throws JSONException
 	 */
-	public String getPartTimeInformation(String partTimeId,Map<String,String> userId)throws JSONException;
+	public String getPartTimeInformation(String partTimeId,Map<String,String> userMap)throws JSONException;
 	/**
 	 * 兼职报名
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @param enparttimeId
 	 * 			信息匙加密的兼职id
 	 * @return
 	 * 			若商家未设置问题，则可直接报名
 	 * @throws JSONException
 	 */
-	public String partTimeRegistration(Map<String,String> userId,String enparttimeId) throws JSONException;
+	public String partTimeRegistration(Map<String,String> userMap,String enparttimeId) throws JSONException;
 	/**
 	 * 兼职报名
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @param enparttimeId
 	 * 			信息匙加密的兼职id
 	 * @param enAnswer
@@ -63,44 +63,44 @@ public interface PartTimeJobsClientVersionDao extends ServerFather {
 	 * 		在商家设计问题时，可直接报名
 	 * @throws JSONException
 	 */
-	public String partTimeRegistration(Map<String,String> userId,String enparttimeId,String enAnswer) throws JSONException;
+	public String partTimeRegistration(Map<String,String> userMap,String enparttimeId,String enAnswer) throws JSONException;
 	/**
 	 * 撤销报名
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @param enparttimeId
 	 * 			信息匙加密的兼职id
 	 * @return
 	 * @throws JSONException
 	 */
-	public String cancelTheRegistration(Map<String,String> userId,String enparttimeId) throws JSONException;
+	public String cancelTheRegistration(Map<String,String> userMap,String enparttimeId) throws JSONException;
 	/**
 	 * 获取待审核列表
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @return
 	 * @throws JSONException
 	 */
-	public String getPendingList(Map<String,String> userId) throws JSONException;
+	public String getPendingList(Map<String,String> userMap) throws JSONException;
 	//查看兼职保名结果
 	/**
 	 * 获取兼职报名结果
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @param enparttimeId
 	 * 			信息匙加密的兼职id
 	 * @return
 	 * @throws JSONException
 	 */
-	public String getEnrollmentResults(Map<String,String> userId,String enparttimeId) throws JSONException;
+	public String getEnrollmentResults(Map<String,String> userMap,String enparttimeId) throws JSONException;
 	/**
 	 * 获取已录取列表
-	 * @param userId
-	 * 			用户id
+	 * @param userMap
+	 * 			用户信息
 	 * @return
 	 * @throws JSONException
 	 */
-	public String getPartTimeAdmission(Map<String,String> userId) throws JSONException;
+	public String getPartTimeAdmission(Map<String,String> userMap) throws JSONException;
 	//获取待结算列表
 	//确认收到款项
 	//获取待评论列表

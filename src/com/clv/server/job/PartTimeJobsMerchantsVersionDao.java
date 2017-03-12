@@ -1,7 +1,5 @@
 package com.clv.server.job;
 
-import org.json.JSONException;
-
 public interface PartTimeJobsMerchantsVersionDao {
 	/****************商家版****************/
 	//发布指定兼职

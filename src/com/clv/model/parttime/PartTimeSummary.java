@@ -9,6 +9,7 @@ public class PartTimeSummary {
 	private int partTimeId;
 	private String photoName;
 	private String title;
+	private String location;
 	private String locationProvince;
 	private String locationCity;
 	private String locationDistrict;
@@ -80,6 +81,16 @@ public class PartTimeSummary {
 	
 	public String getLastTime() {
 		return lastTime;
+	}
+	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation() {
+		this.location = getLocationProvince()+getLocationCity()+getLocationDistrict()+getLocationDetailed();
+	}
+	public void setLastTime(String lastTime) {
+		this.lastTime = lastTime;
 	}
 	@Override
 	public String toString() {

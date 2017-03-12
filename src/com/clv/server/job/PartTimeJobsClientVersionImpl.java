@@ -21,6 +21,7 @@ import com.clv.model.parttime.PartTimeShow;
 import com.clv.model.parttime.PartTimeSummary;
 
 import cn.clvstudio.tool.Factory;
+import cn.clvstudio.tool.Json;
 import net.sf.json.JSONObject;
 @Service
 public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionDao{
@@ -35,19 +36,19 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 			for(PartTimeSummary summary: partTimeList){
 				summary.setLocation();
 			}
-			JSONArray partTimeArray = factory.getJson().listToJsonArray(partTimeList,"locationProvince","locationCity","locationDistrict","locationDetailed");
-			return new JsonFormat("success",partTimeArray).toString();
+			JSONArray partTimeArray = Json.listToJsonArray(partTimeList,"locationProvince","locationCity","locationDistrict","locationDetailed");
+			return new JsonFormat(SUCCESS,partTimeArray).toString();
 		}
 		List<PartTimeSummary> partTimeListAll = partTimeMapper.getPartTimeListAll(lastTime);
 		if(partTimeListAll != null){
 			for(PartTimeSummary summary: partTimeListAll){
 				summary.setLocation();
 			}
-			JSONArray partTimeArray = factory.getJson().listToJsonArray(partTimeListAll,"locationProvince","locationCity","locationDistrict","locationDetailed");
-			return new JsonFormat("success",partTimeArray).toString();
+			JSONArray partTimeArray = Json.listToJsonArray(partTimeListAll,"locationProvince","locationCity","locationDistrict","locationDetailed");
+			return new JsonFormat(SUCCESS,partTimeArray).toString();
 		}
 		//没有新的兼职
-		return new JsonFormat("101","fail").toString();
+		return new JsonFormat("101",FAIL).toString();
 	}
 
 	@Override
@@ -55,85 +56,90 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 			PartTimeInformation information = partTimeMapper.getPartTimeInformation(partTimeId);
 			List<PartTimeDescription> description = partTimeMapper.getPartTimeDescription(partTimeId);
 			PartTimeShow partTimeShow = new PartTimeShow(information,description);
-			return new JsonFormat("success",new JSONArray().put(factory.getJson().toJson(partTimeShow))).toString();
+			return new JsonFormat(SUCCESS,new JSONArray().put(Json.toJson(partTimeShow))).toString();
 	}
 	@Override
 	public String getPartTimeInformation(String enpartTimeId,Map<String,String> userMap) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
 			String partTimeIdStr = factory.getCrypto().decrypMessage(enpartTimeId, userMap.get(PHONENO), userMap.get(SECURITYKEY));
-			if(!"fail".equals(partTimeIdStr)){
+			if(!FAIL.equals(partTimeIdStr)){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
 				PartTimeInformation information = partTimeMapper.getPartTimeInformation(partTimeId);
 				List<PartTimeDescription> description = partTimeMapper.getPartTimeDescription(partTimeId);
 				PartTimeShow partTimeShow = new PartTimeShow(information,description);
 				Integer registration = partTimeMapper.selectUserRegistration(userId,partTimeId);
-				JSONObject showJson = factory.getJson().toJson(partTimeShow);
+				JSONObject showJson = Json.toJson(partTimeShow);
 				showJson.put("registrationType", registration!=null?registration:0);
-				return new JsonFormat("success",new JSONArray().put(showJson)).toString();
+				return new JsonFormat(SUCCESS,new JSONArray().put(showJson)).toString();
 			}
-			return new JsonFormat("401","fail").toString();
+			return new JsonFormat("401",FAIL).toString();
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
 	public String partTimeRegistration(Map<String,String> userMap, String enparttimeId) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
 			String partTimeIdStr = factory.getCrypto().decrypMessage(enparttimeId, userMap.get(PHONENO), userMap.get(SECURITYKEY));
-			if("fail".equals(partTimeIdStr)){
+			if(!FAIL.equals(partTimeIdStr)){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
 				List<PartTimeProblem> problem = partTimeMapper.getPartTimeProblem(partTimeId);
 				if(problem!=null){
-					return new JsonFormat("success",factory.getJson().listToJsonArray(problem)).toString();
+					return new JsonFormat(SUCCESS,Json.listToJsonArray(problem)).toString();
 				}
-				int type = partTimeMapper.selectUserRegistration(userId,partTimeId);
-				if(type == 0 || type == 2){
+				Integer type = partTimeMapper.selectUserRegistration(userId,partTimeId);
+				if(type == null || type == 2){
 					partTimeMapper.registration(userId, partTimeId);
-					return new JsonFormat("success").toString();
+					return new JsonFormat(SUCCESS).toString();
 				}
 				//已处于报名或被录取或被拒绝的状态
-				return new JsonFormat("101","fail").toString();
+				return new JsonFormat("101",FAIL).toString();
 			}
-			return new JsonFormat("401","fail").toString();
+			return new JsonFormat("401",FAIL).toString();
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
+	@Transactional(rollbackFor=Exception.class,readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
 	public String partTimeRegistration(Map<String,String> userMap, String enparttimeId, String enAnswer) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
 			String partTimeIdStr = factory.getCrypto().decrypMessage(enparttimeId, userMap.get(PHONENO), userMap.get(SECURITYKEY));
 			String answer = factory.getCrypto().decrypMessage(enAnswer, userMap.get(PHONENO), userMap.get(SECURITYKEY));
-			if(!"fail".equals(partTimeIdStr) && !"fail".equals(answer) ){
+			if(!FAIL.equals(partTimeIdStr) && !FAIL.equals(answer) ){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
-				int type = partTimeMapper.selectUserRegistration(userId,partTimeId);
-				if(type == 0 || type == 2){
-					partTimeMapper.registration(userId, partTimeId);
-					List<PartTimeAnswer> list = factory.getJson().jsonArrayToList(answer, PartTimeAnswer.class);
-					partTimeMapper.addAnswer(list);
-					return new JsonFormat("success").toString();
+				Integer type = partTimeMapper.selectUserRegistration(userId,partTimeId);
+				if(type == null || type == 2){
+					List<PartTimeAnswer> list = Json.convertToList(answer, PartTimeAnswer.class);
+					System.out.println("*****list:"+list.toString());
+//					try{
+						partTimeMapper.addAnswer(list);
+						partTimeMapper.registration(userId, partTimeId);
+						return new JsonFormat(SUCCESS).toString();
+//					}catch (Exception e) {
+//						return new JsonFormat("102",FAIL).toString();
+//					}
 				}
 				//已处于报名或被录取或被拒绝的状态
-				return new JsonFormat("101","fail").toString();
+				return new JsonFormat("101",FAIL).toString();
 			}
-			return new JsonFormat("401","fail").toString();
+			return new JsonFormat("401",FAIL).toString();
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 	@Override
 	public String cancelTheRegistration(Map<String,String> userMap, String enparttimeId) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
 			String partTimeIdStr = factory.getCrypto().decrypMessage(enparttimeId, userMap.get(PHONENO), userMap.get(SECURITYKEY));
-			if(!"fail".equals(partTimeIdStr)){
+			if(!FAIL.equals(partTimeIdStr)){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
 				partTimeMapper.cancelTheRegistration(userId, partTimeId);
-				return new JsonFormat("success").toString();
+				return new JsonFormat(SUCCESS).toString();
 			}
-			return new JsonFormat("401","fail").toString();
+			return new JsonFormat("401",FAIL).toString();
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 
 	@Override
@@ -142,7 +148,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 		if(userId>0){
 			
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 
 	@Override
@@ -151,7 +157,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 		if(userId>0){
 			
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 
 	@Override
@@ -160,7 +166,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 		if(userId>0){
 			
 		}
-		return new JsonFormat("20"+Math.abs(userId),"fail").toString();
+		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
 
 }

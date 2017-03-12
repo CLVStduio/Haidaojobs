@@ -2,8 +2,6 @@ package com.clv.model.parttime;
 
 import java.util.List;
 
-import cn.clvstudio.tool.Factory;
-
 public class PartTimeShow {
 	private int partTimeId;
 	/**
@@ -60,18 +58,23 @@ public class PartTimeShow {
 	private String claim;
 	/**
 	 * 兼职状态
-	 * 0：招募中
-	 * 1：招募完成
-	 * 2：进行中
-	 * 3：结算中
-	 * 4：完成
+		101：审核中
+	  	102：审核不通过
+	  	201：审核通过/招募中
+	  	202：招募完成/等待兼职进行
+	  	203：工作中/兼职进行中
+	  	301：待结算
+ 	  	302：结算结束/待评价和工作周期无投诉（8小时内）
+	  	401：已完结
+	  	402：已撤销
+ 	  	403：用户投诉中
+ 	  	405: 投诉处理中
+ 	  	406：投诉处理结束
 	 */
 	private int partTimeStatus;
 	private List<PartTimeDescription> description;
-	private List<PartTimeProblem> problem;
 	
-	private Factory factory = new Factory();
-	public PartTimeShow(PartTimeInformation information,List<PartTimeDescription> description,List<PartTimeProblem> problem){
+	public PartTimeShow(PartTimeInformation information,List<PartTimeDescription> description){
 		this.partTimeId = information.getPartTimeId();
 		this.photoName = information.getPhotoName();
 		this.title = information.getTitle();
@@ -88,7 +91,6 @@ public class PartTimeShow {
 		this.claim = information.getClaim();
 		this.partTimeStatus = information.getPartTimeStatus();
 		this.description = description;
-		this.problem = problem;
 	}
 	public int getPartTimeId() {
 		return partTimeId;
@@ -138,19 +140,13 @@ public class PartTimeShow {
 	public List<PartTimeDescription> getDescription() {
 		return description;
 	}
-	public List<PartTimeProblem> getProblem() {
-		return problem;
-	}
-	public Factory getFactory() {
-		return factory;
-	}
 	@Override
 	public String toString() {
 		return "PartTimeShow [partTimeId=" + partTimeId + ", photoName=" + photoName + ", title=" + title + ", type="
 				+ type + ", settlementMethod=" + settlementMethod + ", salary=" + salary + ", deadline=" + deadline
 				+ ", workDate=" + workDate + ", location=" + location + ", companyId=" + companyId + ", needNumber="
 				+ needNumber + ", numberOfapplicants=" + numberOfapplicants + ", jobDescription=" + jobDescription
-				+ ", claim=" + claim + ", partTimeStatus=" + partTimeStatus + ", description=" + description
-				+ ", problem=" + problem + "]";
+				+ ", claim=" + claim + ", partTimeStatus=" + partTimeStatus + ", description=" + description + "]";
 	}
+	
 }

@@ -18,6 +18,7 @@
       <typeAlias alias="PartTimeInformation" type="com.clv.model.parttime.PartTimeInformation"/>
       <typeAlias alias="PartTimeDescription" type="com.clv.model.parttime.PartTimeDescription"/>
       <typeAlias alias="PartTimeProblem"     type="com.clv.model.parttime.PartTimeProblem"/>
+      <typeAlias alias="PartTimeAnswer" type="com.clv.model.parttime.PartTimeAnswer" />
       <typeAlias alias="ParttimeRegistration" type="com.clv.model.parttime.ParttimeRegistration" />
    </typeAliases>    
    

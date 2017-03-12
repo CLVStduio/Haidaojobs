@@ -64,11 +64,18 @@ public class PartTimeInformation {
 	private String claim;
 	/**
 	 * 兼职状态
-	 * 0：招募中
-	 * 1：招募完成
-	 * 2：进行中
-	 * 3：结算中
-	 * 4：完成
+		101：审核中
+	  	102：审核不通过
+	  	201：审核通过/招募中
+	  	202：招募完成/等待兼职进行
+	  	203：工作中/兼职进行中
+	  	301：待结算
+ 	  	302：结算结束/待评价和工作周期无投诉（8小时内）
+	  	401：已完结
+	  	402：已撤销
+ 	  	403：用户投诉中
+ 	  	405: 投诉处理中
+ 	  	406：投诉处理结束
 	 */
 	private int partTimeStatus;
 	private String lastTime;

@@ -18,12 +18,12 @@
 		    	<result column = "lastTime" property="lastTime"/>
 		    </resultMap>
 		    <select id="getPartTimeList" resultMap="PartTimeSummary">
-		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime from parttime_Information WHERE (partTimeStatus=0 OR partTimeStatus=1) AND lastTime>=#{lastTime} ;
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE (partTimeStatus=202 OR partTimeStatus=201) AND lastTime>=#{lastTime} ;
 		    </select>
  		<!-- getPartTimeList end-->
  		<!-- getPartTimeListAll strat-->
 		    <select id="getPartTimeListAll" resultMap="PartTimeSummary">
-		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime from parttime_Information WHERE lastTime>=UNIX_TIMESTAMP(DATE_SUB(#{lastTime},INTERVAL 1 DAY)) ;
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE lastTime>=UNIX_TIMESTAMP(DATE_SUB(#{lastTime},INTERVAL 1 DAY)) ;
 		    </select>
  		<!-- getPartTimeListAll end-->
  		<select id="getPartTimeInformation" resultType="com.clv.model.parttime.PartTimeInformation">
@@ -36,7 +36,7 @@
 		    	<result column = "content" property="content"/>
 		    </resultMap>
 		    <select id="getPartTimeDescription" resultMap="PartTimeDescription">
-		    	SELECT descriptionId,title,content from parttime_description WHERE partTimeId=#{partTimeId} ;
+		    	SELECT descriptionId,title,content FROM parttime_description WHERE partTimeId=#{partTimeId} ;
 		    </select>
  		<!-- getPartTimeDescription end-->
  		<!-- getPartTimeProblem strat-->
@@ -47,8 +47,46 @@
 		    	<result column = "content" property="content"/>
 		    </resultMap>
 		    <select id="getPartTimeProblem" resultMap="PartTimeProblem">
-		    	SELECT problemId,topic,type,content from parttime_problem WHERE partTimeId=#{partTimeId} ;
+		    	SELECT problemId,topic,type,content FROM parttime_problem WHERE partTimeId=#{partTimeId} ;
 		    </select>
  		<!-- getPartTimeProblem end-->
+ 		<!-- selectUserRegistration strat -->
+ 			<select id="selectUserRegistration" resultType="Integer">
+ 				SELECT registrationType FROM parttime_registration WHERE userId=#{userId} AND parttimeId=#{parttimeId};
+ 			</select>
+ 		<!-- selectUserRegistration  end -->
+ 		<!-- registration strat -->
+ 			<insert id="registration">
+ 				INSERT INTO parttime_registration (registrationType,userId,parttimeId) VALUES (1,#{userId},#{parttimeId}) ON DUPLICATE KEY UPDATE registrationType=1;
+ 			</insert>
+ 		<!-- registration  end  -->
+ 		<!-- answer strat -->
+ 			<resultMap type="com.clv.model.parttime.PartTimeAnswer" id="PartTimeAnswer">
+ 				<result column = "problemId" property="problemId"/>
+ 				<result column = "answerContent" property="answerContent"/>
+ 				<result column = "userId" property="userId"/>
+ 			</resultMap>
+ 			 <insert id="addAnswer" parameterType="java.util.List">  
+			    INSERT INTO parttime_answer (problemId,answerContent,userId)   
+			    VALUES  
+			    <foreach collection="list" item="item" index="index" separator="," >  
+			        (#{item.problemId},#{item.answerContent},#{item.userId})  
+			    </foreach>  
+			</insert>
+			<!--<insert id="addAnswer" parameterType="java.util.List">
+			  <selectKey keyProperty="answerId" order="BEFORE" resultType="java.lang.String">
+				  SELECT CURRENT_TIMESTAMP()
+			  </selectKey>
+				 INSERT INTO parttime_registration (problemId,answerContent,userId) VALUES
+			  <foreach collection="list" item="item" index="index" separator=",">
+				  ( #{item.getProblemId()}, #{item.getAnswerContent()}, #{item.getUserId()})
+			  </foreach>
+			 </insert>  -->
+ 		<!-- answer  end  -->
+ 		<!-- cancelTheRegistration strat -->
+ 			<update id="cancelTheRegistration">
+ 				UPDATE parttime_registration SET registrationType=2 WHERE userId=#{userId} AND parttimeId=#{parttimeId};
+ 			</update>
+ 		<!-- cancelTheRegistration  end  -->
 	<!-- Client  end  -->
 </mapper>

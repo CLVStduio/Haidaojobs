@@ -5,13 +5,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value="/user/parttimes")
 public class ParttimeController {
-	@RequestMapping(value="/user/parttimes/getPartTimeInformation",method = RequestMethod.POST)
+	@RequestMapping(value="/getPartTimeInformation",method = RequestMethod.POST)
 	public String getPartTimeInformation(){
 		return "getPartTimeInformation";
 	}
-	@RequestMapping(value="/user/parttimes/getPartTimeList",method = RequestMethod.POST)
+	@RequestMapping(value="/getPartTimeList",method = RequestMethod.POST)
 	public String getPartTimeList(){
 		return "getPartTimeList";
+	}
+	@RequestMapping(value="/partTimeRegistration",method = RequestMethod.POST)
+	public String partTimeRegistration(){
+		return "partTimeRegistration";
+	}
+	@RequestMapping(value="/cancelTheRegistration",method = RequestMethod.POST)
+	public String cancelTheRegistration(){
+		return "cancelTheRegistration";
 	}
 }

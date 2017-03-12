@@ -23,9 +23,35 @@
 		</form>
 	</center>
 	<center>
-		获取兼职详情
+		获取兼职详情1
 		<form action="user/parttimes/getPartTimeInformation" method="post">
 			兼职id:<input type="text" name="partTimeId">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
+	<center>
+		获取兼职详情2
+		<form action="user/parttimes/getPartTimeInformation" method="post">
+			用户id：<input type="text" name="userId">
+			兼职id:<input type="text" name="partTimeId">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
+	<center>
+		***************************************<br>
+		兼职报名1
+		<form action="user/parttimes/partTimeRegistration" method="post">
+			用户id：<input type="text" name="enUserId">
+			兼职id:<input type="text" name="enpartTimeId">
+			 <input type="submit" value="确定">  
+		</form>
+	</center>
+	<center>
+		兼职报名2
+		<form action="user/parttimes/partTimeRegistration" method="post">
+			用户id：<input type="text" name="enUserId">
+			兼职id:<input type="text" name="enpartTimeId">
+			回答:<input type="text" name="enAnswer">
 			 <input type="submit" value="确定">  
 		</form>
 	</center>
