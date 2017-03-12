@@ -26,7 +26,9 @@ public interface PartTimeMapper {
 	public Integer selectUserRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
 	@Transactional(readOnly = false, timeout = 60)
 	public void registration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
+	public void registrationOfInformation(@Param("parttimeId")int parttimeId);
 	@Transactional(readOnly = false, timeout = 60)
 	public void addAnswer(List<PartTimeAnswer> item);//throws MySQLSyntaxErrorException,BadSqlGrammarException;
 	public void cancelTheRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
+	public void cancelTheRegistrationOfInformation(@Param("parttimeId")int parttimeId);
 }

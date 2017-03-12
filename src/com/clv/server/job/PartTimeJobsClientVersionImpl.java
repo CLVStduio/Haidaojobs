@@ -68,8 +68,8 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 				PartTimeInformation information = partTimeMapper.getPartTimeInformation(partTimeId);
 				List<PartTimeDescription> description = partTimeMapper.getPartTimeDescription(partTimeId);
 				PartTimeShow partTimeShow = new PartTimeShow(information,description);
-				Integer registration = partTimeMapper.selectUserRegistration(userId,partTimeId);
 				JSONObject showJson = Json.toJson(partTimeShow);
+				Integer registration = partTimeMapper.selectUserRegistration(userId,partTimeId);
 				showJson.put("registrationType", registration!=null?registration:0);
 				return new JsonFormat(SUCCESS,new JSONArray().put(showJson)).toString();
 			}
@@ -84,13 +84,14 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 			String partTimeIdStr = factory.getCrypto().decrypMessage(enparttimeId, userMap.get(PHONENO), userMap.get(SECURITYKEY));
 			if(!FAIL.equals(partTimeIdStr)){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
-				List<PartTimeProblem> problem = partTimeMapper.getPartTimeProblem(partTimeId);
-				if(problem!=null){
-					return new JsonFormat(SUCCESS,Json.listToJsonArray(problem)).toString();
-				}
 				Integer type = partTimeMapper.selectUserRegistration(userId,partTimeId);
 				if(type == null || type == 2){
+					List<PartTimeProblem> problem = partTimeMapper.getPartTimeProblem(partTimeId);
+					if(problem!=null){
+						return new JsonFormat(SUCCESS,Json.listToJsonArray(problem)).toString();
+					}
 					partTimeMapper.registration(userId, partTimeId);
+					partTimeMapper.registrationOfInformation(partTimeId);
 					return new JsonFormat(SUCCESS).toString();
 				}
 				//已处于报名或被录取或被拒绝的状态
@@ -112,13 +113,10 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 				if(type == null || type == 2){
 					List<PartTimeAnswer> list = Json.convertToList(answer, PartTimeAnswer.class);
 					System.out.println("*****list:"+list.toString());
-//					try{
-						partTimeMapper.addAnswer(list);
-						partTimeMapper.registration(userId, partTimeId);
-						return new JsonFormat(SUCCESS).toString();
-//					}catch (Exception e) {
-//						return new JsonFormat("102",FAIL).toString();
-//					}
+					partTimeMapper.addAnswer(list);
+					partTimeMapper.registration(userId, partTimeId);
+					partTimeMapper.registrationOfInformation(partTimeId);
+					return new JsonFormat(SUCCESS).toString();
 				}
 				//已处于报名或被录取或被拒绝的状态
 				return new JsonFormat("101",FAIL).toString();
@@ -135,6 +133,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 			if(!FAIL.equals(partTimeIdStr)){
 				int partTimeId = Integer.parseInt(partTimeIdStr);
 				partTimeMapper.cancelTheRegistration(userId, partTimeId);
+				partTimeMapper.cancelTheRegistrationOfInformation(partTimeId);
 				return new JsonFormat(SUCCESS).toString();
 			}
 			return new JsonFormat("401",FAIL).toString();

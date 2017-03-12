@@ -58,8 +58,10 @@
  		<!-- registration strat -->
  			<insert id="registration">
  				INSERT INTO parttime_registration (registrationType,userId,parttimeId) VALUES (1,#{userId},#{parttimeId}) ON DUPLICATE KEY UPDATE registrationType=1;
- 				UPDATE parttime_Information SET numberOfapplicants=numberOfapplicants+1 WHERE parttimeId=#{parttimeId};
  			</insert>
+ 			<update id="registrationOfInformation">
+ 				UPDATE parttime_Information SET numberOfapplicants=numberOfapplicants+1 WHERE parttimeId=#{parttimeId};
+ 			</update>
  		<!-- registration  end  -->
  		<!-- answer strat -->
  			<resultMap type="com.clv.model.parttime.PartTimeAnswer" id="PartTimeAnswer">
@@ -74,19 +76,12 @@
 			        (#{item.problemId},#{item.answerContent},#{item.userId})  
 			    </foreach>  
 			</insert>
-			<!--<insert id="addAnswer" parameterType="java.util.List">
-			  <selectKey keyProperty="answerId" order="BEFORE" resultType="java.lang.String">
-				  SELECT CURRENT_TIMESTAMP()
-			  </selectKey>
-				 INSERT INTO parttime_registration (problemId,answerContent,userId) VALUES
-			  <foreach collection="list" item="item" index="index" separator=",">
-				  ( #{item.getProblemId()}, #{item.getAnswerContent()}, #{item.getUserId()})
-			  </foreach>
-			 </insert>  -->
  		<!-- answer  end  -->
  		<!-- cancelTheRegistration strat -->
  			<update id="cancelTheRegistration">
  				UPDATE parttime_registration SET registrationType=2 WHERE userId=#{userId} AND parttimeId=#{parttimeId};
+ 			</update>
+ 			<update id="cancelTheRegistrationOfInformation">
  				UPDATE parttime_Information SET numberOfapplicants=numberOfapplicants-1 WHERE parttimeId=#{parttimeId};
  			</update>
  		<!-- cancelTheRegistration  end  -->
