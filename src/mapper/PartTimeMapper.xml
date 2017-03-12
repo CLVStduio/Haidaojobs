@@ -58,6 +58,7 @@
  		<!-- registration strat -->
  			<insert id="registration">
  				INSERT INTO parttime_registration (registrationType,userId,parttimeId) VALUES (1,#{userId},#{parttimeId}) ON DUPLICATE KEY UPDATE registrationType=1;
+ 				UPDATE parttime_Information SET numberOfapplicants=numberOfapplicants+1 WHERE parttimeId=#{parttimeId};
  			</insert>
  		<!-- registration  end  -->
  		<!-- answer strat -->
@@ -86,6 +87,7 @@
  		<!-- cancelTheRegistration strat -->
  			<update id="cancelTheRegistration">
  				UPDATE parttime_registration SET registrationType=2 WHERE userId=#{userId} AND parttimeId=#{parttimeId};
+ 				UPDATE parttime_Information SET numberOfapplicants=numberOfapplicants-1 WHERE parttimeId=#{parttimeId};
  			</update>
  		<!-- cancelTheRegistration  end  -->
 	<!-- Client  end  -->
