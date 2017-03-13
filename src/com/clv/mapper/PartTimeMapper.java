@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.clv.model.parttime.PartTimeAnswer;
@@ -25,10 +26,10 @@ public interface PartTimeMapper {
 	public List<PartTimeProblem> getPartTimeProblem(int partTimeId);
 	public Integer selectUserRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
 	@Transactional(readOnly = false, timeout = 60)
-	public void registration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
-	public void registrationOfInformation(@Param("parttimeId")int parttimeId);
+	public void registration(@Param("userId")int userId,@Param("parttimeId")int parttimeId) throws DataAccessException;
+	public void registrationOfInformation(@Param("parttimeId")int parttimeId) throws DataAccessException;
 	@Transactional(readOnly = false, timeout = 60)
-	public void addAnswer(List<PartTimeAnswer> item);//throws MySQLSyntaxErrorException,BadSqlGrammarException;
-	public void cancelTheRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId);
-	public void cancelTheRegistrationOfInformation(@Param("parttimeId")int parttimeId);
+	public void addAnswer(List<PartTimeAnswer> item) throws DataAccessException;
+	public void cancelTheRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId) throws DataAccessException;
+	public void cancelTheRegistrationOfInformation(@Param("parttimeId")int parttimeId) throws DataAccessException;
 }

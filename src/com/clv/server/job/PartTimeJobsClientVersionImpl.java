@@ -77,7 +77,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 		}
 		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
+	@Transactional(rollbackFor=Exception.class,readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
 	public String partTimeRegistration(Map<String,String> userMap, String enparttimeId) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
@@ -125,7 +125,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 		}
 		return new JsonFormat("20"+Math.abs(userId),FAIL).toString();
 	}
-	@Override
+	@Transactional(rollbackFor=Exception.class,readOnly = false, propagation = Propagation.REQUIRES_NEW, timeout = 60)
 	public String cancelTheRegistration(Map<String,String> userMap, String enparttimeId) throws JSONException {
 		int userId = Integer.parseInt(userMap.get(USERID));
 		if(userId>0){
