@@ -18,12 +18,12 @@
 		    	<result column = "lastTime" property="lastTime"/>
 		    </resultMap>
 		    <select id="getPartTimeList" resultMap="PartTimeSummary">
-		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE (partTimeStatus=202 OR partTimeStatus=201) AND lastTime>=#{lastTime} ;
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE lastTime &gt;= #{lastTime} AND (partTimeStatus=202 OR partTimeStatus=201);
 		    </select>
  		<!-- getPartTimeList end-->
  		<!-- getPartTimeListAll strat-->
 		    <select id="getPartTimeListAll" resultMap="PartTimeSummary">
-		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE lastTime>=UNIX_TIMESTAMP(DATE_SUB(#{lastTime},INTERVAL 1 DAY)) ;
+		    	SELECT partTimeId,photoName,title,locationProvince,locationCity,locationDistrict,locationDetailed,workDate,salary,partTimeQualification,lastTime FROM parttime_Information WHERE lastTime &gt;= UNIX_TIMESTAMP(DATE_SUB(#{lastTime},INTERVAL 1 DAY)) AND (partTimeStatus!=101 AND partTimeStatus!=102 AND partTimeStatus	&lt;= 302 );
 		    </select>
  		<!-- getPartTimeListAll end-->
  		<select id="getPartTimeInformation" resultType="com.clv.model.parttime.PartTimeInformation">
