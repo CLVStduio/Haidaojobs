@@ -46,18 +46,23 @@ public class Crypto {
         return new Base64().encodeToString(encrypted);
         } catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
+			return null;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
+			return null;
 		} catch (NoSuchPaddingException e) {
 			e.printStackTrace();
+			return null;
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
+			return null;
 		} catch (IllegalBlockSizeException e) {
 			e.printStackTrace();
+			return null;
 		} catch (BadPaddingException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
     }
     /**
      * AES信息匙加密
@@ -102,18 +107,23 @@ public class Crypto {
             return new String(original,UTF8);
     	} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
+			return null;
 		} catch (NoSuchPaddingException e) {
 			e.printStackTrace();
+			return null;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
+			return null;
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
+			return null;
 		} catch (IllegalBlockSizeException e) {
 			e.printStackTrace();
+			return null;
 		} catch (BadPaddingException e) {
 			e.printStackTrace();
+			return null;
 		}
-    	return null;
     }
     /**
      * 解密经过AES"时间钥匙"加密的信息
