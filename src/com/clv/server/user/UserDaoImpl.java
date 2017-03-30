@@ -78,7 +78,7 @@ public class UserDaoImpl implements UserDao{
 		String dePhone = factory.getCrypto().decryptTime(enPhone);
 		String dePassword = factory.getCrypto().decryptTime(enPassword);
 		if(FAIL.equals(dePhone) || FAIL.equals(dePassword) || dePhone == null || dePassword==null){
-			return  new JsonFormat("102",FAIL).toString();
+			return  new JsonFormat("204",FAIL).toString();
 		}
 		User user = userMapper.selectUserByPhoneNo(dePhone);
 		if( user == null){
