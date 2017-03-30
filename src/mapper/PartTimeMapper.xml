@@ -50,11 +50,11 @@
 		    	SELECT problemId,topic,type,content FROM parttime_problem WHERE partTimeId=#{partTimeId} ;
 		    </select>
  		<!-- getPartTimeProblem end-->
- 		<!-- selectUserRegistration strat -->
- 			<select id="selectUserRegistration" resultType="Integer">
- 				SELECT registrationType FROM parttime_registration WHERE userId=#{userId} AND parttimeId=#{parttimeId};
+ 		<!-- selectUserIsRegistration strat -->
+ 			<select id="selectUserIsRegistration" parameterType="int" resultType="hashmap">
+ 				SELECT r.registrationType,p.partTimeStatus FROM (SELECT  registrationType,parttimeId FROM parttime_registration WHERE userId=#{userId} AND parttimeId=#{parttimeId}) r,parttime_Information p WHERE r.parttimeId=p.parttimeId;
  			</select>
- 		<!-- selectUserRegistration  end -->
+ 		<!-- selectUserIsRegistration  end -->
  		<!-- registration strat -->
  			<insert id="registration">
  				INSERT INTO parttime_registration (registrationType,userId,parttimeId) VALUES (1,#{userId},#{parttimeId}) ON DUPLICATE KEY UPDATE registrationType=1;
