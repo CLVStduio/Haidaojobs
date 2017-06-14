@@ -14,6 +14,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+
+	<center>
+	**************************************************	<br>
+	<a href = "web/admin.jsp">管理员</a><br>
+	<a href = "web/my.jsp">我的</a><br>
+	<a href = "web/parttime.jsp">兼职信息</a><br>
+	<a href = "web/resume.jsp">简历</a><br>
+	<a href = "web/resumeIdentity.jsp">身份认证</a><br>
+	**************************************************<br>
+	</center>
+
 	<center>
 		<form action="user/getUser" method="post">
 			请输入用户ID(json):<input type="text" name="id">

@@ -9,12 +9,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>查找用户信息</title>
+<title>我的</title>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	 
+	<center>
+	**************************************************	<br>
+	<a href = "index.jsp">用户基本信息操作</a>	<br>
+	<a href = "web/admin.jsp">管理员</a><br>
+	<a href = "web/my.jsp">我的</a><br>
+	<a href = "web/parttime.jsp">兼职信息</a><br>
+	<a href = "web/resume.jsp">简历</a><br>
+	<a href = "web/resumeIdentity.jsp">身份认证</a><br>
+	**************************************************
+	</center>		 
 	<center>
 		<form action="user/my/retroactive" method="post">
 			用户id:<input type="text" name="enId">
