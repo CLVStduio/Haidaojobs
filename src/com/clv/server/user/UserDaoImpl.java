@@ -146,7 +146,7 @@ public class UserDaoImpl implements UserDao{
 		if(id>0){
 			User user = userMapper.selectUserById(id);
 			String name = factory.getCrypto().decrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
-			if(FAIL.equals(name) || name == null){
+			if(FAIL.equals(name) || name == null || "".equals(name)){
 				return new JsonFormat("401",FAIL).toString();
 			}
 			if(name.length()<=15){
@@ -166,7 +166,7 @@ public class UserDaoImpl implements UserDao{
 		if(id>0){
 			User user = userMapper.selectUserById(id);
 			String phone = factory.getCrypto().decrypMessage(enmessage, user.getUserPhoneNo(), user.getSecurityKey());
-			if(FAIL.equals(phone) || phone == null){
+			if(FAIL.equals(phone) || phone == null || "".equals(phone)){
 				return new JsonFormat("401",FAIL).toString();
 			}
 			
@@ -184,7 +184,7 @@ public class UserDaoImpl implements UserDao{
 		if(id>0){
 			String deoldPassword = factory.getCrypto().decrypMessage(enOldPassword, userMap.get(PHONENO), userMap.get(SECURITYKEY));
 			String denewPassword = factory.getCrypto().decrypMessage(enNewPassword, userMap.get(PHONENO), userMap.get(SECURITYKEY));
-			if(FAIL.equals(deoldPassword) || deoldPassword == null || FAIL.equals(denewPassword) || denewPassword == null){
+			if(FAIL.equals(deoldPassword) || deoldPassword == null || FAIL.equals(denewPassword) || denewPassword == null  || "".equals(denewPassword)  || "".equals(deoldPassword)){
 				return new JsonFormat("401",FAIL).toString();
 			}
 			if(deoldPassword.equals(userMap.get(USERPASSWORD))){
@@ -202,7 +202,7 @@ public class UserDaoImpl implements UserDao{
 	public String resetUserPassword(String enPhone, String enPassword) throws JSONException {
 		String dePhone = factory.getCrypto().decryptTime(enPhone);
 		String dePassword = factory.getCrypto().decryptTime(enPassword);
-		if(FAIL.equals(dePhone) || FAIL.equals(dePassword) || dePhone == null || dePassword==null){
+		if(FAIL.equals(dePhone) || FAIL.equals(dePassword) || dePhone == null || dePassword==null || "".equals(dePassword) || "".equals(dePhone)){
 			return new JsonFormat("401",FAIL).toString();
 		}
 		User user = userMapper.selectUserByPhoneNo(dePhone);
