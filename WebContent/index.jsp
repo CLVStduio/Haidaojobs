@@ -110,5 +110,11 @@
 			<input type="submit" value="提  交"/>
 		</form>
 	</center>
+		<center>
+		获取头像网址
+		<form action="user/selectHeadPortraitURL" method="post" enctype="multipart/form-data">
+			<input type="submit" value="提  交"/>
+		</form>
+	</center>
 </body>
 </html>
