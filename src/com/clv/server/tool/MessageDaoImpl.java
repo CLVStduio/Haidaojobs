@@ -105,7 +105,7 @@ public class MessageDaoImpl implements MessageDao{
 		 long codeTime = Long.parseLong(Code.getTime());
 		
 		 if(Code.getCode().equals(code)){
-			  if(Math.abs(codeTime-time)>60000){
+			  if(Math.abs(codeTime-time)>600000){
 				//验证码过期
 				 return new JsonFormat("102","fail").toString();
 			  }
