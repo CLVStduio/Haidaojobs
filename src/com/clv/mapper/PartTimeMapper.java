@@ -14,6 +14,7 @@ import com.clv.model.parttime.PartTimeDescription;
 import com.clv.model.parttime.PartTimeInformation;
 import com.clv.model.parttime.PartTimeProblem;
 import com.clv.model.parttime.PartTimeSummary;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 /**
  * 兼职信息数据库操作
@@ -31,7 +32,7 @@ public interface PartTimeMapper {
 	public void registration(@Param("userId")int userId,@Param("parttimeId")int parttimeId) throws DataAccessException,SQLException;
 	public void registrationOfInformation(@Param("parttimeId")int parttimeId) throws DataAccessException,SQLException;
 	@Transactional(readOnly = false, timeout = 60)
-	public void addAnswer(List<PartTimeAnswer> item) throws DataAccessException,SQLException;
+	public void addAnswer(List<PartTimeAnswer> item) throws DataAccessException,SQLException,MySQLSyntaxErrorException;
 	public void cancelTheRegistration(@Param("userId")int userId,@Param("parttimeId")int parttimeId) throws DataAccessException,SQLException;
 	public void cancelTheRegistrationOfInformation(@Param("parttimeId")int parttimeId) throws DataAccessException,SQLException;
 }

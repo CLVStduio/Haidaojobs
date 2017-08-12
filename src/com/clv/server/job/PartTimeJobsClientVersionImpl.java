@@ -93,10 +93,11 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 					JSONObject showJson = Json.toJson(partTimeShow);
 					HashMap<String, Integer> map = new HashMap<String, Integer>();
 					map = partTimeMapper.selectUserIsRegistration(userId,partTimeId);
-					System.out.println(map.toString());
-					System.out.println("partTimeStatus ： "+map.get("partTimeStatus"));
-					System.out.println("registrationType : "+map.get("registrationType"));
-					showJson.put("registrationType", map.get("registrationType")!=null?map.get("registrationType"):0);
+					if(map != null){
+						showJson.put("registrationType", map.get("registrationType")!=null?map.get("registrationType"):0);
+					}else {
+						showJson.put("registrationType", 0);
+					}
 					return new JsonFormat(SUCCESS,new JSONArray().put(showJson)).toString();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -117,10 +118,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 				try{
 					HashMap<String, Integer> map = new HashMap<String, Integer>();
 					map =  partTimeMapper.selectUserIsRegistration(userId,partTimeId);
-					System.out.println(map.toString());
-					System.out.println("partTimeStatus ： "+map.get("partTimeStatus"));
-					System.out.println("registrationType : "+map.get("registrationType"));
-					if(map.get("partTimeStatus") == 201 &&(map.get("registrationType") == null || map.get("registrationType") == 2)){
+					if(null == map || map.get("partTimeStatus") == 201 &&(map.get("registrationType") == null || map.get("registrationType") == 2)){
 						List<PartTimeProblem> problem = partTimeMapper.getPartTimeProblem(partTimeId);
 						if(problem!=null){
 							return new JsonFormat(SUCCESS,Json.listToJsonArray(problem)).toString();
@@ -151,7 +149,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 				try{
 					HashMap<String, Integer> map  = new HashMap<String, Integer>();
 					map =  partTimeMapper.selectUserIsRegistration(userId,partTimeId);
-					if(map.get("partTimeStatus") == 201 &&(map.get("registrationType") == null || map.get("registrationType") == 2)){
+					if(null == map || map.get("partTimeStatus") == 201 &&(map.get("registrationType") == null || map.get("registrationType") == 2)){
 						List<PartTimeAnswer> list = Json.convertToList(answer, PartTimeAnswer.class);
 						partTimeMapper.addAnswer(list);
 						partTimeMapper.registration(userId, partTimeId);
@@ -160,7 +158,7 @@ public class PartTimeJobsClientVersionImpl implements PartTimeJobsClientVersionD
 					}
 					//已处于报名或被录取或被拒绝的状态
 					return new JsonFormat("101",FAIL).toString();
-				}catch(SQLException e){
+				}catch(Exception e){
 					e.printStackTrace();
 					return new JsonFormat("102",FAIL).toString();
 				}
